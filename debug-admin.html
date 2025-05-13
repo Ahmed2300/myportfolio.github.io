@@ -455,6 +455,511 @@
             width: 100%;
             position: relative;
         }
+        
+        /* Modal Dialog for Project Editing */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-dialog {
+            background-color: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+            padding: 0;
+        }
+        
+        .modal-overlay.active .modal-dialog {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background-color: white;
+            z-index: 10;
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 0;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.2s ease;
+        }
+        
+        .modal-close:hover {
+            color: var(--danger);
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .modal-footer {
+            padding: 15px 20px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            position: sticky;
+            bottom: 0;
+            background-color: white;
+            z-index: 10;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .form-row {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(71, 89, 251, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .image-preview {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 10px;
+            max-height: 200px;
+            object-fit: cover;
+            border: 1px solid var(--border);
+        }
+        
+        .tags-input {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-top: 8px;
+        }
+        
+        .tag-item {
+            background-color: rgba(71, 89, 251, 0.1);
+            color: var(--primary);
+            padding: 5px 10px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 13px;
+        }
+        
+        .tag-remove {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            background-color: rgba(71, 89, 251, 0.2);
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .tag-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+            min-width: 100px;
+        }
+        
+        /* Image Upload Styles */
+        .image-upload-container {
+            width: 100%;
+        }
+        
+        .url-input-row {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .url-input-row .form-control {
+            flex: 1;
+        }
+        
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .screenshot-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
+        }
+        
+        .screenshot-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .screenshot-actions {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            display: flex;
+            gap: 5px;
+        }
+        
+        .screenshot-remove {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: var(--danger);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .screenshot-remove:hover {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .screenshot-make-primary {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: var(--text-light);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .screenshot-make-primary:hover {
+            background-color: rgba(71, 89, 251, 0.8);
+            color: white;
+        }
+        
+        .screenshot-make-primary .material-icons {
+            font-size: 14px;
+        }
+        
+        .screenshot-download {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: var(--text-light);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .screenshot-download:hover {
+            background-color: rgba(32, 201, 151, 0.8);
+            color: white;
+        }
+        
+        .screenshot-download .material-icons {
+            font-size: 14px;
+        }
+        
+        .screenshot-item.is-primary {
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 0 2px rgba(71, 89, 251, 0.3);
+        }
+        
+        .screenshot-item.is-primary::before {
+            content: 'Primary';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: var(--primary);
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            z-index: 1;
+        }
+        
+        /* Quick Tags Styling */
+        .quick-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .tag-btn {
+            background-color: rgba(71, 89, 251, 0.1);
+            color: var(--primary);
+            border: 1px solid rgba(71, 89, 251, 0.2);
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tag-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .help-text {
+            color: var(--text-light);
+            font-size: 12px;
+            margin-top: 5px;
+            display: block;
+        }
+        
+        /* Enhanced Screenshots Management Styles */
+        .screenshots-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .screenshots-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .screenshot-count {
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        .screenshots-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+        
+        .upload-status {
+            font-size: 14px;
+            margin: 5px 0 15px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            min-height: 22px;
+        }
+        
+        .upload-status.success {
+            background-color: rgba(32, 201, 151, 0.1);
+            color: var(--success);
+        }
+        
+        .upload-status.error {
+            background-color: rgba(242, 87, 103, 0.1);
+            color: var(--danger);
+        }
+        
+        .upload-status.progress {
+            background-color: rgba(71, 89, 251, 0.1);
+            color: var(--primary);
+        }
+        
+        .empty-screenshots {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.03);
+            border-radius: 8px;
+            border: 1px dashed var(--border);
+        }
+        
+        .empty-screenshots-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(71, 89, 251, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .empty-screenshots-icon .material-icons {
+            font-size: 30px;
+            color: var(--primary);
+        }
+        
+        .empty-screenshots p {
+            margin: 0 0 5px 0;
+            text-align: center;
+        }
+        
+        .url-screenshot-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .url-screenshot-row .form-control {
+            flex: 1;
+        }
+        
+        .drag-drop-area {
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            padding: 30px;
+            margin-top: 15px;
+            background-color: rgba(71, 89, 251, 0.03);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .drag-drop-area.drag-over {
+            background-color: rgba(71, 89, 251, 0.08);
+            border-color: var(--primary);
+        }
+        
+        .drag-drop-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+        }
+        
+        .drag-drop-content .material-icons {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .drag-drop-content p {
+            margin: 0;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .modal-dialog {
+                width: 95%;
+                max-height: 80vh;
+            }
+            
+            .modal-header, .modal-body, .modal-footer {
+                padding: 15px;
+            }
+            
+            .modal-title {
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .modal-dialog {
+                width: 100%;
+                max-height: 95vh;
+                border-radius: 12px 12px 0 0;
+                margin-bottom: 0;
+                position: absolute;
+                bottom: 0;
+                top: auto;
+            }
+            
+            .modal-overlay.active .modal-dialog {
+                transform: translateY(0);
+            }
+            
+            .modal-header, .modal-body, .modal-footer {
+                padding: 12px;
+            }
+            
+            .modal-title {
+                font-size: 16px;
+            }
+            
+            .modal-footer {
+                flex-direction: column;
+            }
+            
+            .modal-footer .btn {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -640,76 +1145,130 @@
                 showError("Firebase initialization failed. Check your firebase-config.js file.");
             }
             
-            function loadProjects() {
+            // Function to update the project counter throughout the interface
+            function updateProjectCounter() {
+                console.log('[updateProjectCounter] Attempting to update project counter.');
+                if (!db) {
+                    console.error('[updateProjectCounter] Firebase db object is not available.');
+                    return;
+                }
+                console.log('[updateProjectCounter] Firebase db object is available.');
+                
+                // Get total count of all projects
+                db.ref('apps').once('value')
+                    .then(snapshot => {
+                        console.log('[updateProjectCounter] Firebase snapshot received.');
+                        let totalCount = 0;
+                        if (snapshot.exists()) {
+                            console.log('[updateProjectCounter] Snapshot exists. Data:', JSON.stringify(snapshot.val(), null, 2));
+                            snapshot.forEach(() => {
+                                totalCount++;
+                            });
+                            console.log('[updateProjectCounter] Calculated totalCount:', totalCount);
+                        } else {
+                            console.log('[updateProjectCounter] Snapshot does not exist or is empty. No projects found at db.ref(\'apps\').');
+                        }
+                        
+                        // Update ALL stats counters with total count
+                        const allStatsElements = document.querySelectorAll('.stat-card h3'); // Fixed selector to match actual HTML
+                        console.log(`[updateProjectCounter] Found ${allStatsElements.length} h3 elements in .stat-card.`);
+                        
+                        allStatsElements.forEach(el => {
+                            const parentCard = el.closest('.stat-card'); // Find the parent .stat-card
+                            if (parentCard) {
+                                const pElement = parentCard.querySelector('p');
+                                if (pElement) {
+                                    const parentText = pElement.textContent?.toLowerCase() || '';
+                                    console.log(`[updateProjectCounter] Checking card with text: "${pElement.textContent}" (lowercase: "${parentText}")`);
+                                    if (parentText.includes('project')) {
+                                        el.textContent = totalCount;
+                                        console.log(`[updateProjectCounter] Updated project counter element to: ${totalCount}. Element:`, el);
+                                    } else {
+                                        console.log(`[updateProjectCounter] Card text "${pElement.textContent}" does not include 'project'. Skipping update for this card.`);
+                                    }
+                                } else {
+                                    console.warn('[updateProjectCounter] No <p> element found in .stats-card for an h3 element:', el.outerHTML);
+                                }
+                            } else {
+                                console.warn('[updateProjectCounter] No .stats-card parent found for an h3 element:', el.outerHTML);
+                            }
+                        });
+
+                        if (totalCount === 0 && !snapshot.exists()) {
+                             // If truly no projects, ensure all project counters are set to 0
+                            document.querySelectorAll('.stat-card h3').forEach(el => {
+                                const pElement = el.closest('.stat-card')?.querySelector('p');
+                                if (pElement && pElement.textContent?.toLowerCase().includes('project')) {
+                                    el.textContent = '0';
+                                }
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error("[updateProjectCounter] Error counting projects:", error);
+                    });
+            }
+            
+            // Function to load recent projects for display
+            function loadRecentProjects() {
                 if (!db) return;
                 
                 const recentProjectsContainer = document.getElementById('recent-projects');
-                const statsElements = document.querySelectorAll('.stats h3');
-                
-                // Clear existing content
                 recentProjectsContainer.innerHTML = '';
                 
-                // Reference to apps in Firebase
+                // Reference to apps in Firebase - for display, only get most recent 4
                 db.ref('apps').limitToLast(4).once('value')
                     .then(snapshot => {
                         if (snapshot.exists()) {
                             let projects = [];
-                            let count = 0;
-                            
                             snapshot.forEach(childSnapshot => {
                                 const project = childSnapshot.val();
                                 project.id = childSnapshot.key;
                                 projects.push(project);
-                                count++;
                             });
                             
-                            // Update stats
-                            if (statsElements.length > 0) {
-                                statsElements[0].textContent = count;
-                            }
-                            
-                            // Sort projects by timestamp (newest first)
-                            projects.sort((a, b) => {
-                                const timestampA = a.timestamp || 0;
-                                const timestampB = b.timestamp || 0;
-                                return timestampB - timestampA;
-                            });
-                            
-                            // Render projects
-                            projects.forEach(project => {
+                            // Reverse to show newest first
+                            projects.reverse().forEach(project => {
                                 const card = createProjectCard(project);
                                 recentProjectsContainer.appendChild(card);
                             });
                             
                             if (projects.length === 0) {
-                                recentProjectsContainer.innerHTML = `
-                                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px;">
-                                        <span class="material-icons" style="font-size: 48px; color: #ccc; margin-bottom: 15px;">info</span>
-                                        <p>No projects found. Add your first project to get started!</p>
-                                        <a href="admin.html" class="btn btn-primary" style="margin-top: 15px;">
-                                            <span class="material-icons">add_circle</span>
-                                            <span>Add New Project</span>
-                                        </a>
-                                    </div>
-                                `;
+                                showEmptyProjectsMessage(recentProjectsContainer);
                             }
                         } else {
-                            recentProjectsContainer.innerHTML = `
-                                <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px;">
-                                    <span class="material-icons" style="font-size: 48px; color: #ccc; margin-bottom: 15px;">info</span>
-                                    <p>No projects found. Add your first project to get started!</p>
-                                    <a href="admin.html" class="btn btn-primary" style="margin-top: 15px;">
-                                        <span class="material-icons">add_circle</span>
-                                        <span>Add New Project</span>
-                                    </a>
-                                </div>
-                            `;
+                            showEmptyProjectsMessage(recentProjectsContainer);
                         }
                     })
                     .catch(error => {
-                        console.error("Error loading projects:", error);
-                        showError(`Error loading projects: ${error.message}`);
+                        console.error("Error loading recent projects:", error);
+                        recentProjectsContainer.innerHTML = `<div class="empty-state error">Error loading projects: ${error.message}</div>`;
                     });
+            }
+            
+            // Helper function to show empty projects message
+            function showEmptyProjectsMessage(container) {
+                container.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px;">
+                        <span class="material-icons" style="font-size: 48px; color: #ccc; margin-bottom: 15px;">info</span>
+                        <p>No projects found. Add your first project to get started!</p>
+                        <a href="admin.html" class="btn btn-primary" style="margin-top: 15px;">
+                            <span class="material-icons">add_circle</span>
+                            <span>Add New Project</span>
+                        </a>
+                    </div>
+                `;
+            }
+            
+            // Main function to load all project data and update counters
+            function loadProjects() {
+                if (!db) return;
+                
+                // Load the projects to display
+                loadRecentProjects();
+                
+                // Update the project counter
+                updateProjectCounter();
             }
             
             function createProjectCard(project) {
@@ -723,6 +1282,9 @@
                         .map(tech => `<span class="tag">${tech}</span>`)
                         .join('');
                 }
+                
+                // Debug: Log screenshots array from Firebase
+                console.log('Project screenshots from Firebase:', project.screenshots);
                 
                 card.innerHTML = `
                     <div class="card-image">
@@ -755,7 +1317,7 @@
                 
                 if (editBtn) {
                     editBtn.addEventListener('click', () => {
-                        window.location.href = `manage-projects.html?edit=${project.id}`;
+                        openEditModal(project);
                     });
                 }
                 
@@ -820,6 +1382,658 @@
                 }, 3000);
             }
             
+            // Edit Modal Functions
+            const editModal = document.getElementById('editProjectModal');
+            const closeModalBtn = editModal.querySelector('.modal-close');
+            const cancelEditBtn = document.getElementById('cancelEditBtn');
+            const saveProjectBtn = document.getElementById('saveProjectBtn');
+            const projectForm = document.getElementById('editProjectForm');
+            const projectIdInput = document.getElementById('projectId');
+            const projectTitleInput = document.getElementById('projectTitle');
+            const projectDescriptionInput = document.getElementById('projectDescription');
+            const projectPlatformInput = document.getElementById('projectPlatform');
+            const projectImageUrlInput = document.getElementById('projectImageUrl');
+            const imagePreview = document.getElementById('imagePreview');
+            const fetchImageBtn = document.getElementById('fetchImageBtn');
+            const uploadImageBtn = document.getElementById('uploadImageBtn');
+            const mainImageUpload = document.getElementById('mainImageUpload');
+            const uploadStatus = document.getElementById('uploadStatus');
+            const screenshotsContainer = document.getElementById('screenshotsContainer');
+            const uploadScreenshotBtn = document.getElementById('uploadScreenshotBtn');
+            const screenshotUpload = document.getElementById('screenshotUpload');
+            const screenshotUploadStatus = document.getElementById('screenshotUploadStatus');
+            const technologiesContainer = document.getElementById('technologiesContainer');
+            const tagInput = document.getElementById('tagInput');
+            const keywordsContainer = document.getElementById('keywordsContainer');
+            const keywordInput = document.getElementById('keywordInput');
+            const tagButtons = document.querySelectorAll('.tag-btn');
+            const projectProblemInput = document.getElementById('projectProblem');
+            const projectSolutionInput = document.getElementById('projectSolution');
+            const githubLinkInput = document.getElementById('githubLink');
+            const playStoreLinkInput = document.getElementById('playStoreLink');
+            const appStoreLinkInput = document.getElementById('appStoreLink');
+            const demoLinkInput = document.getElementById('demoLink');
+            
+            // Keep track of current technologies and screenshots
+            let currentTags = [];
+            let currentKeywords = [];
+            let currentScreenshots = [];
+            
+            function openEditModal(project) {
+                // Reset form
+                projectForm.reset();
+                technologiesContainer.innerHTML = '';
+                technologiesContainer.appendChild(tagInput);
+                keywordsContainer.innerHTML = '';
+                keywordsContainer.appendChild(keywordInput);
+                screenshotsContainer.innerHTML = '';
+                currentTags = [];
+                currentKeywords = [];
+                currentScreenshots = [];
+                
+                // Fill form with project data
+                projectIdInput.value = project.id;
+                projectTitleInput.value = project.title || '';
+                projectDescriptionInput.value = project.description || '';
+                projectPlatformInput.value = project.platform || 'App Inventor';
+                projectImageUrlInput.value = project.imageUrl || '';
+                projectProblemInput.value = project.problem || '';
+                projectSolutionInput.value = project.solution || '';
+                githubLinkInput.value = project.githubLink || '';
+                playStoreLinkInput.value = project.playStoreLink || '';
+                appStoreLinkInput.value = project.appStoreLink || '';
+                demoLinkInput.value = project.demoLink || '';
+                
+                // Update image preview
+                if (project.imageUrl) {
+                    imagePreview.src = project.imageUrl;
+                    imagePreview.style.display = 'block';
+                } else {
+                    imagePreview.style.display = 'none';
+                }
+                
+                // Add technologies tags
+                if (project.technologies && Array.isArray(project.technologies)) {
+                    project.technologies.forEach(tech => addTag(tech));
+                }
+                
+                // Add keywords
+                if (project.keywords && Array.isArray(project.keywords)) {
+                    project.keywords.forEach(keyword => addKeyword(keyword));
+                }
+                
+                // Add screenshots
+                screenshotsContainer.innerHTML = ''; // Clear any existing screenshots
+                // Add empty state placeholder
+                screenshotsContainer.innerHTML = `
+                    <div class="empty-screenshots" id="emptyScreenshots">
+                        <div class="empty-screenshots-icon">
+                            <span class="material-icons">image</span>
+                        </div>
+                        <p>No screenshots added yet</p>
+                        <p class="help-text">Upload screenshots to showcase your project's features</p>
+                    </div>
+                `;
+                
+                // Check and load existing screenshots
+                if (project.screenshots && Array.isArray(project.screenshots) && project.screenshots.length > 0) {
+                    document.getElementById('emptyScreenshots').style.display = 'none';
+                    project.screenshots.forEach(screenshot => addScreenshot(screenshot));
+                    updateScreenshotCount();
+                } else {
+                    // If no screenshots, create an empty array for the property
+                    currentScreenshots = [];
+                    updateScreenshotCount();
+                }
+                
+                // Show modal
+                editModal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling behind modal
+            }
+            
+            function closeEditModal() {
+                editModal.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+            
+            function addTag(text) {
+                if (!text.trim() || currentTags.includes(text.trim())) return;
+                
+                const tag = document.createElement('div');
+                tag.className = 'tag-item';
+                tag.innerHTML = `
+                    <span>${text.trim()}</span>
+                    <span class="tag-remove">×</span>
+                `;
+                
+                const removeBtn = tag.querySelector('.tag-remove');
+                removeBtn.addEventListener('click', () => {
+                    tag.remove();
+                    currentTags = currentTags.filter(t => t !== text.trim());
+                });
+                
+                currentTags.push(text.trim());
+                technologiesContainer.insertBefore(tag, tagInput);
+            }
+            
+            function saveProjectChanges() {
+                // Validate required fields
+                if (!projectTitleInput.value || !projectDescriptionInput.value) {
+                    showError('Title and description are required');
+                    return;
+                }
+                
+                const projectId = projectIdInput.value;
+                if (!projectId) {
+                    showError('Project ID is missing');
+                    return;
+                }
+                
+                // Make sure we have a valid primary image
+                if (!projectImageUrlInput.value && currentScreenshots.length > 0) {
+                    // If no primary image is set but we have screenshots, use the first one
+                    projectImageUrlInput.value = currentScreenshots[0];
+                    showSuccess('First screenshot set as primary image');
+                }
+                
+                // Filter out any empty or invalid URLs from screenshots
+                const validScreenshots = currentScreenshots.filter(url => url && url.trim());
+                
+                // Log what we're saving
+                console.log('Saving project with screenshots:', validScreenshots);
+                
+                // Gather form data
+                const projectData = {
+                    title: projectTitleInput.value,
+                    description: projectDescriptionInput.value,
+                    platform: projectPlatformInput.value,
+                    imageUrl: projectImageUrlInput.value,
+                    technologies: currentTags,
+                    keywords: currentKeywords,
+                    screenshots: validScreenshots,
+                    problem: projectProblemInput.value,
+                    solution: projectSolutionInput.value,
+                    githubLink: githubLinkInput.value,
+                    playStoreLink: playStoreLinkInput.value,
+                    appStoreLink: appStoreLinkInput.value,
+                    demoLink: demoLinkInput.value,
+                    lastUpdated: Date.now()
+                };
+                
+                // Update in Firebase
+                db.ref(`apps/${projectId}`).update(projectData)
+                    .then(() => {
+                        showSuccess('Project updated successfully!');
+                        closeEditModal();
+                        loadProjects(); // Reload projects to show changes
+                    })
+                    .catch(error => {
+                        console.error('Error updating project:', error);
+                        showError(`Error updating project: ${error.message}`);
+                    });
+            }
+            
+            // Image preview functionality
+            projectImageUrlInput.addEventListener('input', function() {
+                const imageUrl = this.value.trim();
+                if (imageUrl) {
+                    imagePreview.src = imageUrl;
+                    imagePreview.onload = function() {
+                        imagePreview.style.display = 'block';
+                    };
+                    imagePreview.onerror = function() {
+                        imagePreview.style.display = 'none';
+                    };
+                } else {
+                    imagePreview.style.display = 'none';
+                }
+            });
+            
+            // Function to add a keyword
+            function addKeyword(text) {
+                if (!text.trim() || currentKeywords.includes(text.trim())) return;
+                
+                const keyword = document.createElement('div');
+                keyword.className = 'tag-item';
+                keyword.innerHTML = `
+                    <span>${text.trim()}</span>
+                    <span class="tag-remove">×</span>
+                `;
+                
+                const removeBtn = keyword.querySelector('.tag-remove');
+                removeBtn.addEventListener('click', () => {
+                    keyword.remove();
+                    currentKeywords = currentKeywords.filter(k => k !== text.trim());
+                });
+                
+                currentKeywords.push(text.trim());
+                keywordsContainer.insertBefore(keyword, keywordInput);
+            }
+            
+            // Function to add a screenshot
+            function addScreenshot(url) {
+                if (!url || !url.trim()) return;
+                
+                const trimmedUrl = url.trim();
+                // Skip duplicates - only if the exact same URL is already in the array
+                if (currentScreenshots.includes(trimmedUrl)) return;
+                
+                // Hide empty state if visible
+                const emptyScreenshots = document.getElementById('emptyScreenshots');
+                if (emptyScreenshots) {
+                    emptyScreenshots.style.display = 'none';
+                }
+                
+                const screenshotItem = document.createElement('div');
+                screenshotItem.className = 'screenshot-item';
+                screenshotItem.dataset.url = trimmedUrl; // Store URL in the element for reference
+                screenshotItem.innerHTML = `
+                    <img src="${trimmedUrl}" alt="Screenshot">
+                    <div class="screenshot-actions">
+                        <button type="button" class="screenshot-remove" title="Remove">×</button>
+                        <button type="button" class="screenshot-make-primary" title="Make Primary Image">
+                            <span class="material-icons">star</span>
+                        </button>
+                        <a href="${trimmedUrl}" class="screenshot-download" title="Download Image" download target="_blank">
+                            <span class="material-icons">download</span>
+                        </a>
+                    </div>
+                `;
+                
+                // Add remove button functionality
+                const removeBtn = screenshotItem.querySelector('.screenshot-remove');
+                removeBtn.addEventListener('click', () => {
+                    if (confirm('Are you sure you want to remove this screenshot?')) {
+                        screenshotItem.remove();
+                        currentScreenshots = currentScreenshots.filter(s => s !== trimmedUrl);
+                        updateScreenshotCount();
+                        
+                        // Show empty state if no screenshots left
+                        if (currentScreenshots.length === 0 && emptyScreenshots) {
+                            emptyScreenshots.style.display = 'flex';
+                        }
+                        
+                        showScreenshotStatus('Screenshot removed', 'success');
+                    }
+                });
+                
+                // Add make primary button functionality
+                const makePrimaryBtn = screenshotItem.querySelector('.screenshot-make-primary');
+                makePrimaryBtn.addEventListener('click', () => {
+                    // Set this image as the main project image
+                    projectImageUrlInput.value = trimmedUrl;
+                    imagePreview.src = trimmedUrl;
+                    imagePreview.style.display = 'block';
+                    
+                    // Visual feedback
+                    showScreenshotStatus('Image set as primary', 'success');
+                    highlightPrimaryImage(trimmedUrl);
+                });
+                
+                // Check if this image is the primary image and add a visual indicator
+                if (trimmedUrl === projectImageUrlInput.value.trim()) {
+                    screenshotItem.classList.add('is-primary');
+                }
+                
+                currentScreenshots.push(trimmedUrl);
+                screenshotsContainer.appendChild(screenshotItem);
+                updateScreenshotCount();
+            }
+            
+            // Update screenshot count display
+            function updateScreenshotCount() {
+                const screenshotCount = document.getElementById('screenshotCount');
+                if (screenshotCount) {
+                    screenshotCount.textContent = `${currentScreenshots.length} screenshot${currentScreenshots.length !== 1 ? 's' : ''}`;
+                }
+            }
+            
+            // Helper function to show upload status
+            function showScreenshotStatus(message, type = 'info') {
+                const statusEl = document.getElementById('screenshotUploadStatus');
+                if (statusEl) {
+                    statusEl.className = 'upload-status';
+                    statusEl.classList.add(type);
+                    statusEl.textContent = message;
+                    
+                    // Auto-clear status after 3 seconds unless it's a progress message
+                    if (type !== 'progress') {
+                        setTimeout(() => {
+                            statusEl.textContent = '';
+                            statusEl.className = 'upload-status';
+                        }, 3000);
+                    }
+                }
+            }
+            
+            // Highlight the primary image in the screenshots list
+            function highlightPrimaryImage(primaryUrl) {
+                // Remove highlight from all screenshots
+                document.querySelectorAll('.screenshot-item').forEach(item => {
+                    item.classList.remove('is-primary');
+                });
+                
+                // Add highlight to the matching screenshot
+                document.querySelectorAll('.screenshot-item').forEach(item => {
+                    const imgSrc = item.querySelector('img')?.src;
+                    if (imgSrc && imgSrc === primaryUrl) {
+                        item.classList.add('is-primary');
+                    }
+                });
+            }
+            
+            // Image upload functionality
+            uploadImageBtn.addEventListener('click', function() {
+                mainImageUpload.click();
+            });
+            
+            mainImageUpload.addEventListener('change', function(e) {
+                if (e.target.files.length > 0) {
+                    uploadStatus.textContent = 'Uploading...';
+                    const file = e.target.files[0];
+                    const fileName = `project_images/${Date.now()}_${file.name}`;
+                    
+                    // Create a storage reference
+                    const storageRef = firebase.storage().ref(fileName);
+                    
+                    // Upload the file
+                    const uploadTask = storageRef.put(file);
+                    
+                    // Monitor upload progress
+                    uploadTask.on('state_changed', 
+                        (snapshot) => {
+                            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                            uploadStatus.textContent = `Uploading: ${Math.round(progress)}%`;
+                        },
+                        (error) => {
+                            uploadStatus.textContent = 'Upload failed';
+                            console.error('Upload failed:', error);
+                        },
+                        () => {
+                            // Upload completed successfully, get download URL
+                            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                                projectImageUrlInput.value = downloadURL;
+                                imagePreview.src = downloadURL;
+                                imagePreview.style.display = 'block';
+                                uploadStatus.textContent = 'Upload complete!';
+                                
+                                // Clear after 3 seconds
+                                setTimeout(() => {
+                                    uploadStatus.textContent = '';
+                                }, 3000);
+                            });
+                        }
+                    );
+                }
+            });
+            
+            // Fetch image button
+            fetchImageBtn.addEventListener('click', function() {
+                const imageUrl = projectImageUrlInput.value.trim();
+                if (imageUrl) {
+                    imagePreview.src = imageUrl;
+                    imagePreview.onload = function() {
+                        imagePreview.style.display = 'block';
+                    };
+                    imagePreview.onerror = function() {
+                        imagePreview.style.display = 'none';
+                        showError('Could not load image from URL');
+                    };
+                }
+            });
+            
+            // Screenshot upload functionality
+            uploadScreenshotBtn.addEventListener('click', function() {
+                screenshotUpload.click();
+            });
+            
+            screenshotUpload.addEventListener('change', function(e) {
+                if (e.target.files.length > 0) {
+                    showScreenshotStatus(`Uploading ${e.target.files.length} images...`, 'progress');
+                    
+                    let uploadedCount = 0;
+                    let failedCount = 0;
+                    
+                    Array.from(e.target.files).forEach(file => {
+                        const fileName = `project_screenshots/${Date.now()}_${file.name}`;
+                        const storageRef = firebase.storage().ref(fileName);
+                        
+                        // Upload the file
+                        const uploadTask = storageRef.put(file);
+                        
+                        // Monitor upload progress
+                        uploadTask.on('state_changed', 
+                            (snapshot) => {
+                                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                                showScreenshotStatus(`Uploading images: ${Math.round(progress)}%`, 'progress');
+                            },
+                            (error) => {
+                                failedCount++;
+                                console.error('Screenshot upload failed:', error);
+                                updateStatus();
+                            },
+                            () => {
+                                // Upload completed, get download URL
+                                uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                                    uploadedCount++;
+                                    addScreenshot(downloadURL);
+                                    updateStatus();
+                                });
+                            }
+                        );
+                    });
+                    
+                    function updateStatus() {
+                        const total = e.target.files.length;
+                        if (uploadedCount + failedCount === total) {
+                            if (failedCount > 0) {
+                                showScreenshotStatus(`Uploaded ${uploadedCount}/${total} images (${failedCount} failed)`, 
+                                    failedCount === total ? 'error' : 'success');
+                            } else {
+                                showScreenshotStatus(`Successfully uploaded ${uploadedCount} images`, 'success');
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Clear all screenshots button
+            const clearScreenshotsBtn = document.getElementById('clearScreenshotsBtn');
+            clearScreenshotsBtn.addEventListener('click', function() {
+                if (currentScreenshots.length === 0) {
+                    showScreenshotStatus('No screenshots to clear', 'info');
+                    return;
+                }
+                
+                if (confirm('Are you sure you want to remove all screenshots? This cannot be undone.')) {
+                    screenshotsContainer.innerHTML = '';
+                    const emptyScreenshots = document.getElementById('emptyScreenshots');
+                    if (emptyScreenshots) {
+                        screenshotsContainer.appendChild(emptyScreenshots);
+                        emptyScreenshots.style.display = 'flex';
+                    }
+                    currentScreenshots = [];
+                    updateScreenshotCount();
+                    showScreenshotStatus('All screenshots cleared', 'success');
+                }
+            });
+            
+            // Add screenshot by URL
+            const screenshotUrlInput = document.getElementById('screenshotUrlInput');
+            const addScreenshotUrlBtn = document.getElementById('addScreenshotUrlBtn');
+            
+            addScreenshotUrlBtn.addEventListener('click', function() {
+                const url = screenshotUrlInput.value.trim();
+                if (!url) {
+                    showScreenshotStatus('Please enter a valid image URL', 'error');
+                    return;
+                }
+                
+                showScreenshotStatus('Adding image...', 'progress');
+                
+                // Check if the URL is valid
+                const testImage = new Image();
+                testImage.onload = function() {
+                    addScreenshot(url);
+                    screenshotUrlInput.value = '';
+                    showScreenshotStatus('Image added successfully', 'success');
+                };
+                testImage.onerror = function() {
+                    showScreenshotStatus('Invalid image URL or image not accessible', 'error');
+                };
+                testImage.src = url;
+            });
+            
+            // Drag and drop functionality
+            const dragDropArea = document.getElementById('dragDropArea');
+            
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                dragDropArea.addEventListener(eventName, preventDefaults, false);
+            });
+            
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dragDropArea.addEventListener(eventName, highlight, false);
+            });
+            
+            ['dragleave', 'drop'].forEach(eventName => {
+                dragDropArea.addEventListener(eventName, unhighlight, false);
+            });
+            
+            function highlight() {
+                dragDropArea.classList.add('drag-over');
+            }
+            
+            function unhighlight() {
+                dragDropArea.classList.remove('drag-over');
+            }
+            
+            dragDropArea.addEventListener('drop', handleDrop, false);
+            
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                
+                if (files.length > 0) {
+                    handleFiles(files);
+                }
+            }
+            
+            function handleFiles(files) {
+                if (files.length === 0) return;
+                
+                showScreenshotStatus(`Processing ${files.length} images...`, 'progress');
+                
+                let uploadedCount = 0;
+                let failedCount = 0;
+                
+                Array.from(files).forEach(file => {
+                    // Only process image files
+                    if (!file.type.match('image.*')) {
+                        failedCount++;
+                        console.warn('Skipped non-image file:', file.name);
+                        updateDropStatus();
+                        return;
+                    }
+                    
+                    const fileName = `project_screenshots/${Date.now()}_${file.name}`;
+                    const storageRef = firebase.storage().ref(fileName);
+                    
+                    // Upload the file
+                    const uploadTask = storageRef.put(file);
+                    
+                    // Monitor upload progress
+                    uploadTask.on('state_changed', 
+                        (snapshot) => {
+                            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                            showScreenshotStatus(`Uploading: ${Math.round(progress)}%`, 'progress');
+                        },
+                        (error) => {
+                            failedCount++;
+                            console.error('Screenshot upload failed:', error);
+                            updateDropStatus();
+                        },
+                        () => {
+                            // Upload completed, get download URL
+                            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                                uploadedCount++;
+                                addScreenshot(downloadURL);
+                                updateDropStatus();
+                            });
+                        }
+                    );
+                });
+                
+                function updateDropStatus() {
+                    const total = files.length;
+                    if (uploadedCount + failedCount === total) {
+                        if (failedCount > 0) {
+                            showScreenshotStatus(`Uploaded ${uploadedCount}/${total} images (${failedCount} failed)`, 
+                                failedCount === total ? 'error' : 'success');
+                        } else {
+                            showScreenshotStatus(`Successfully uploaded ${uploadedCount} images`, 'success');
+                        }
+                    }
+                }
+            }
+            
+            // Click on drag drop area to select files
+            dragDropArea.addEventListener('click', function() {
+                screenshotUpload.click();
+            });
+            
+            // Tag buttons functionality
+            tagButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tagValue = this.getAttribute('data-tag');
+                    if (tagValue && !currentTags.includes(tagValue)) {
+                        addTag(tagValue);
+                    }
+                });
+            });
+            
+            // Tag input functionality
+            tagInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ',') {
+                    e.preventDefault();
+                    const text = this.value.trim();
+                    if (text) {
+                        addTag(text);
+                        this.value = '';
+                    }
+                }
+            });
+            
+            // Keyword input functionality
+            keywordInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ',') {
+                    e.preventDefault();
+                    const text = this.value.trim();
+                    if (text) {
+                        addKeyword(text);
+                        this.value = '';
+                    }
+                }
+            });
+            
+            // Modal close events
+            closeModalBtn.addEventListener('click', closeEditModal);
+            cancelEditBtn.addEventListener('click', closeEditModal);
+            
+            // Save changes
+            saveProjectBtn.addEventListener('click', saveProjectChanges);
+            
+            // Close modal when clicking outside
+            editModal.addEventListener('click', function(e) {
+                if (e.target === editModal) {
+                    closeEditModal();
+                }
+            });
+            
             // Refresh button
             const refreshBtn = document.getElementById('refresh-data');
             if (refreshBtn) {
@@ -827,5 +2041,161 @@
             }
         });
     </script>
+    
+    <!-- Edit Project Modal Dialog -->
+    <div id="editProjectModal" class="modal-overlay">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit Project</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editProjectForm">
+                    <input type="hidden" id="projectId">
+                    
+                    <div class="form-row">
+                        <label for="projectTitle" class="form-label">Project Title</label>
+                        <input type="text" id="projectTitle" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <label for="projectDescription" class="form-label">Description</label>
+                        <textarea id="projectDescription" class="form-control" rows="4" required></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <label for="projectPlatform" class="form-label">Platform</label>
+                        <select id="projectPlatform" class="form-control">
+                            <option value="App Inventor">App Inventor</option>
+                            <option value="Kodular">Kodular</option>
+                            <option value="Flutter">Flutter</option>
+                            <option value="Web">Web</option>
+                            <option value="Extension">Extension</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-row">
+                        <label class="form-label">Main Image</label>
+                        <div class="image-upload-container">
+                            <div class="url-input-row">
+                                <input type="url" id="projectImageUrl" class="form-control" placeholder="Enter image URL or upload below">
+                                <button type="button" class="btn btn-secondary" id="fetchImageBtn">Fetch</button>
+                            </div>
+                            <div class="upload-row" style="margin-top: 10px;">
+                                <input type="file" id="mainImageUpload" accept="image/*" style="display: none;">
+                                <button type="button" class="btn btn-secondary" id="uploadImageBtn">Upload Image</button>
+                                <span id="uploadStatus" style="margin-left: 10px; font-size: 14px;"></span>
+                            </div>
+                            <div id="imagePreviewContainer" style="margin-top: 10px;">
+                                <img id="imagePreview" class="image-preview" src="" alt="Preview" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <label class="form-label">Additional Screenshots</label>
+                        <div class="screenshots-header">
+                            <div class="screenshots-info">
+                                <span class="screenshot-count" id="screenshotCount">0 screenshots</span>
+                                <span class="help-text">Upload multiple screenshots to showcase different aspects of your project</span>
+                            </div>
+                            <div class="screenshots-actions">
+                                <input type="file" id="screenshotUpload" accept="image/*" style="display: none;" multiple>
+                                <button type="button" class="btn btn-secondary btn-sm" id="uploadScreenshotBtn">Add Screenshots</button>
+                                <button type="button" class="btn btn-danger btn-sm" id="clearScreenshotsBtn">Clear All</button>
+                            </div>
+                        </div>
+                        
+                        <div id="screenshotUploadStatus" class="upload-status"></div>
+                        
+                        <div id="screenshotsContainer" class="screenshots-grid">
+                            <!-- Screenshots will be added here dynamically -->
+                            <div class="empty-screenshots" id="emptyScreenshots">
+                                <div class="empty-screenshots-icon">
+                                    <span class="material-icons">image</span>
+                                </div>
+                                <p>No screenshots added yet</p>
+                                <p class="help-text">Upload screenshots to showcase your project's features</p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row url-screenshot-row">
+                            <input type="url" id="screenshotUrlInput" class="form-control" placeholder="Or enter image URL here">
+                            <button type="button" class="btn btn-secondary" id="addScreenshotUrlBtn">Add URL</button>
+                        </div>
+                        
+                        <div class="drag-drop-area" id="dragDropArea">
+                            <div class="drag-drop-content">
+                                <span class="material-icons">upload_file</span>
+                                <p>Drag & Drop images here</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <label class="form-label">Technologies</label>
+                        <div class="tags-input" id="technologiesContainer">
+                            <input type="text" id="tagInput" class="tag-input" placeholder="Add technology and press Enter">
+                        </div>
+                        <div class="quick-tags" style="margin-top: 10px;">
+                            <span>Quick add:</span>
+                            <button type="button" class="tag-btn" data-tag="Flutter">Flutter</button>
+                            <button type="button" class="tag-btn" data-tag="Firebase">Firebase</button>
+                            <button type="button" class="tag-btn" data-tag="App Inventor">App Inventor</button>
+                            <button type="button" class="tag-btn" data-tag="Kodular">Kodular</button>
+                            <button type="button" class="tag-btn" data-tag="JavaScript">JavaScript</button>
+                            <button type="button" class="tag-btn" data-tag="React">React</button>
+                            <button type="button" class="tag-btn" data-tag="Android">Android</button>
+                            <button type="button" class="tag-btn" data-tag="iOS">iOS</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <label class="form-label">Keywords (for search)</label>
+                        <div class="tags-input" id="keywordsContainer">
+                            <input type="text" id="keywordInput" class="tag-input" placeholder="Add keyword and press Enter">
+                        </div>
+                        <small class="help-text">Add relevant keywords to help users find your project</small>
+                    </div>
+                    
+                    <div class="form-row">
+                        <label for="projectProblem" class="form-label">The Problem</label>
+                        <textarea id="projectProblem" class="form-control" rows="3" placeholder="Describe the problem this project solves"></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <label for="projectSolution" class="form-label">The Solution</label>
+                        <textarea id="projectSolution" class="form-control" rows="3" placeholder="Describe your solution"></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <label class="form-label">Links</label>
+                        <div class="nested-fields">
+                            <div class="form-row">
+                                <label for="githubLink" class="form-label">GitHub</label>
+                                <input type="url" id="githubLink" class="form-control" placeholder="https://github.com/username/repo">
+                            </div>
+                            <div class="form-row">
+                                <label for="playStoreLink" class="form-label">Google Play</label>
+                                <input type="url" id="playStoreLink" class="form-control" placeholder="https://play.google.com/store/apps/details?id=com.example">
+                            </div>
+                            <div class="form-row">
+                                <label for="appStoreLink" class="form-label">App Store</label>
+                                <input type="url" id="appStoreLink" class="form-control" placeholder="https://apps.apple.com/app/id123456789">
+                            </div>
+                            <div class="form-row">
+                                <label for="demoLink" class="form-label">Demo</label>
+                                <input type="url" id="demoLink" class="form-control" placeholder="https://example.com/demo">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelEditBtn">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveProjectBtn">Save Changes</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
