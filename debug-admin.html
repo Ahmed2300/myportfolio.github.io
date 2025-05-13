@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admin dashboard for managing portfolio projects">
+    <title>Portfolio Admin - Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Direct embedded styles to avoid any CSS conflicts */
+        :root {
+            --primary: #4759FB;
+            --primary-dark: #3748E5;
+            --secondary: #79B6C9;
+            --accent: #FF7B54;
+            --success: #20C997;
+            --info: #4CC9F0;
+            --warning: #FAC748;
+            --danger: #F25767;
+            --light: #F8F9FE;
+            --dark: #2D3748;
+            --text: #4A5568;
+            --text-light: #718096;
+            --border: #E2E8F0;
+            --shadow: 0 5px 15px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+            color: var(--text);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(at top left, rgba(71, 89, 251, 0.05), transparent 50%),
+                radial-gradient(at bottom right, rgba(255, 123, 84, 0.06), transparent 50%);
+        }
+        
+        .admin-top-bar {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .admin-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        .admin-nav {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .nav-button {
+            background-color: rgba(255,255,255,0.15);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            backdrop-filter: blur(5px);
+        }
+        
+        .nav-button:hover {
+            background-color: rgba(255,255,255,0.25);
+        }
+        
+        .content-area {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .panel {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        
+        .panel:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+        
+        .panel-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .card {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .card-image {
+            height: 180px;
+            overflow: hidden;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .card:hover .card-image img {
+            transform: scale(1.05);
+        }
+        
+        .card-content {
+            padding: 15px;
+            flex: 1;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            margin: 0 0 10px 0;
+        }
+        
+        .card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            border-radius: 4px;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(71, 89, 251, 0.2);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(to right, var(--primary-dark), var(--primary-dark));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(71, 89, 251, 0.3);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(to right, var(--danger), #e74c3c);
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(242, 87, 103, 0.2);
+        }
+        
+        .btn-danger:hover {
+            background: linear-gradient(to right, #e74c3c, #e74c3c);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(242, 87, 103, 0.3);
+        }
+        
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 12px;
+            font-size: 12px;
+            border-radius: 20px;
+            background-color: rgba(71, 89, 251, 0.1);
+            color: var(--primary);
+            margin-right: 5px;
+            margin-bottom: 5px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .tag:hover {
+            background-color: rgba(71, 89, 251, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        
+        /* Stats grid styling */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .stat-icon-container {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(71, 89, 251, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .stat-icon-container .material-icons {
+            font-size: 30px;
+            color: var(--primary);
+        }
+        
+        .stat-content {
+            flex: 1;
+        }
+        
+        .stat-content h3 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .stat-content p {
+            margin: 5px 0 0 0;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        
+        .stat-circle {
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background-color: rgba(71, 89, 251, 0.05);
+            top: -40px;
+            right: -40px;
+            z-index: 0;
+        }
+        
+        /* Action buttons styling */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .action-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 20px;
+            border-radius: 12px;
+            min-width: 200px;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+        
+        .action-button:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .action-button.primary {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+        }
+        
+        .action-button.secondary {
+            background: linear-gradient(to right, var(--secondary), #5AA0B8);
+        }
+        
+        .action-button.accent {
+            background: linear-gradient(to right, var(--accent), #E56B48);
+        }
+        
+        @media (max-width: 768px) {
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-nav {
+                display: none;
+            }
+            
+            .admin-mobile-nav {
+                display: block;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-top-bar">
+        <div class="admin-title">
+            <span class="material-icons">admin_panel_settings</span>
+            <span>Admin Dashboard</span>
+        </div>
+        
+        <div class="admin-nav">
+            <a href="index.html" class="nav-button">
+                <span class="material-icons">home</span>
+                <span>Portfolio</span>
+            </a>
+            <a href="debug-admin.html" class="nav-button" style="background-color: rgba(255,255,255,0.3);">
+                <span class="material-icons">dashboard</span>
+                <span>Dashboard</span>
+            </a>
+            <a href="admin-simple.html" class="nav-button">
+                <span class="material-icons">add_circle</span>
+                <span>Add New</span>
+            </a>
+            <a href="manage-projects.html" class="nav-button">
+                <span class="material-icons">edit</span>
+                <span>Manage Projects</span>
+            </a>
+        </div>
+    </div>
+    
+    <div class="content-area">
+        <div class="panel">
+            <div class="flex-between">
+                <h2 class="panel-title">
+                    <span class="material-icons">dashboard</span>
+                    <span>Dashboard</span>
+                </h2>
+                <button class="btn btn-primary" id="refresh-data">
+                    <span class="material-icons">refresh</span>
+                    <span>Refresh Data</span>
+                </button>
+            </div>
+            
+            <p>Welcome to your portfolio admin panel. Here you can manage your projects, add new ones, or make changes to existing ones.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card" style="--stat-color: var(--primary);">
+                    <div class="stat-icon-container">
+                        <span class="material-icons">apps</span>
+                    </div>
+                    <div class="stat-content">
+                        <h3>0</h3>
+                        <p>Total Projects</p>
+                    </div>
+                    <div class="stat-circle"></div>
+                </div>
+                
+                <div class="stat-card" style="--stat-color: var(--success);">
+                    <div class="stat-icon-container">
+                        <span class="material-icons">visibility</span>
+                    </div>
+                    <div class="stat-content">
+                        <h3>0</h3>
+                        <p>Total Views</p>
+                    </div>
+                    <div class="stat-circle"></div>
+                </div>
+                
+                <div class="stat-card" style="--stat-color: var(--warning);">
+                    <div class="stat-icon-container">
+                        <span class="material-icons">star</span>
+                    </div>
+                    <div class="stat-content">
+                        <h3>0</h3>
+                        <p>Total Ratings</p>
+                    </div>
+                    <div class="stat-circle"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel">
+            <h2 class="panel-title">
+                <span class="material-icons">apps</span>
+                <span>Recent Projects</span>
+            </h2>
+            
+            <div class="grid-3" id="recent-projects">
+                <!-- Projects will load here -->
+                <div class="card">
+                    <div class="card-image">
+                        <img src="https://placehold.co/600x400/4759FB/ffffff?text=Project+Preview" alt="Project Image">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Sample Project</h3>
+                        <p>This is a sample project card. Your actual projects will be loaded from Firebase.</p>
+                        <div class="tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Firebase</span>
+                            <span class="tag">Mobile</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn btn-primary">
+                                <span class="material-icons">edit</span>
+                                <span>Edit</span>
+                            </button>
+                            <button class="btn btn-danger">
+                                <span class="material-icons">delete</span>
+                                <span>Delete</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-image">
+                        <img src="https://placehold.co/600x400/4759FB/ffffff?text=Project+Preview" alt="Project Image">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Sample Project 2</h3>
+                        <p>This is another sample project card to illustrate the layout.</p>
+                        <div class="tags">
+                            <span class="tag">Flutter</span>
+                            <span class="tag">Dart</span>
+                            <span class="tag">iOS/Android</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn btn-primary">
+                                <span class="material-icons">edit</span>
+                                <span>Edit</span>
+                            </button>
+                            <button class="btn btn-danger">
+                                <span class="material-icons">delete</span>
+                                <span>Delete</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel">
+            <h2 class="panel-title">
+                <span class="material-icons">build</span>
+                <span>Quick Actions</span>
+            </h2>
+            
+            <div class="action-buttons">
+                <a href="admin-simple.html" class="action-button primary">
+                    <span class="material-icons">add_circle</span>
+                    <span>Add New Project</span>
+                </a>
+                
+                <a href="manage-projects.html" class="action-button secondary">
+                    <span class="material-icons">edit</span>
+                    <span>Manage Projects</span>
+                </a>
+                
+                <a href="index.html" class="action-button accent">
+                    <span class="material-icons">visibility</span>
+                    <span>View Portfolio</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    
+    <!-- Firebase Configuration -->
+    <script src="firebase-config.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Firebase
+            let db;
+            if (typeof firebase !== 'undefined' && firebase.apps.length > 0) {
+                console.log("Firebase initialized for debug admin");
+                db = firebase.database();
+                loadProjects();
+            } else {
+                console.error("Firebase not initialized");
+                showError("Firebase initialization failed. Check your firebase-config.js file.");
+            }
+            
+            function loadProjects() {
+                if (!db) return;
+                
+                const recentProjectsContainer = document.getElementById('recent-projects');
+                const statsElements = document.querySelectorAll('.stats h3');
+                
+                // Clear existing content
+                recentProjectsContainer.innerHTML = '';
+                
+                // Reference to apps in Firebase
+                db.ref('apps').limitToLast(4).once('value')
+                    .then(snapshot => {
+                        if (snapshot.exists()) {
+                            let projects = [];
+                            let count = 0;
+                            
+                            snapshot.forEach(childSnapshot => {
+                                const project = childSnapshot.val();
+                                project.id = childSnapshot.key;
+                                projects.push(project);
+                                count++;
+                            });
+                            
+                            // Update stats
+                            if (statsElements.length > 0) {
+                                statsElements[0].textContent = count;
+                            }
+                            
+                            // Sort projects by timestamp (newest first)
+                            projects.sort((a, b) => {
+                                const timestampA = a.timestamp || 0;
+                                const timestampB = b.timestamp || 0;
+                                return timestampB - timestampA;
+                            });
+                            
+                            // Render projects
+                            projects.forEach(project => {
+                                const card = createProjectCard(project);
+                                recentProjectsContainer.appendChild(card);
+                            });
+                            
+                            if (projects.length === 0) {
+                                recentProjectsContainer.innerHTML = `
+                                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px;">
+                                        <span class="material-icons" style="font-size: 48px; color: #ccc; margin-bottom: 15px;">info</span>
+                                        <p>No projects found. Add your first project to get started!</p>
+                                        <a href="admin.html" class="btn btn-primary" style="margin-top: 15px;">
+                                            <span class="material-icons">add_circle</span>
+                                            <span>Add New Project</span>
+                                        </a>
+                                    </div>
+                                `;
+                            }
+                        } else {
+                            recentProjectsContainer.innerHTML = `
+                                <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px;">
+                                    <span class="material-icons" style="font-size: 48px; color: #ccc; margin-bottom: 15px;">info</span>
+                                    <p>No projects found. Add your first project to get started!</p>
+                                    <a href="admin.html" class="btn btn-primary" style="margin-top: 15px;">
+                                        <span class="material-icons">add_circle</span>
+                                        <span>Add New Project</span>
+                                    </a>
+                                </div>
+                            `;
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error loading projects:", error);
+                        showError(`Error loading projects: ${error.message}`);
+                    });
+            }
+            
+            function createProjectCard(project) {
+                const card = document.createElement('div');
+                card.className = 'card';
+                
+                // Create technologies HTML
+                let technologiesHTML = '';
+                if (project.technologies && Array.isArray(project.technologies)) {
+                    technologiesHTML = project.technologies
+                        .map(tech => `<span class="tag">${tech}</span>`)
+                        .join('');
+                }
+                
+                card.innerHTML = `
+                    <div class="card-image">
+                        <img src="${project.imageUrl || 'https://placehold.co/600x400/4759FB/ffffff?text=Project+Preview'}" 
+                             alt="${project.title || 'Untitled Project'}" 
+                             onerror="this.src='https://placehold.co/600x400/4759FB/ffffff?text=Project+Preview'">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">${project.title || 'Untitled Project'}</h3>
+                        <p>${project.description || 'No description provided.'}</p>
+                        <div class="tags">
+                            ${technologiesHTML}
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn btn-primary edit-btn" data-id="${project.id}">
+                                <span class="material-icons">edit</span>
+                                <span>Edit</span>
+                            </button>
+                            <button class="btn btn-danger delete-btn" data-id="${project.id}">
+                                <span class="material-icons">delete</span>
+                                <span>Delete</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                // Add event listeners to buttons
+                const editBtn = card.querySelector('.edit-btn');
+                const deleteBtn = card.querySelector('.delete-btn');
+                
+                if (editBtn) {
+                    editBtn.addEventListener('click', () => {
+                        window.location.href = `manage-projects.html?edit=${project.id}`;
+                    });
+                }
+                
+                if (deleteBtn) {
+                    deleteBtn.addEventListener('click', () => {
+                        if (confirm(`Are you sure you want to delete "${project.title}"? This cannot be undone.`)) {
+                            deleteProject(project.id);
+                        }
+                    });
+                }
+                
+                return card;
+            }
+            
+            function deleteProject(projectId) {
+                if (!db) return;
+                
+                db.ref(`apps/${projectId}`).remove()
+                    .then(() => {
+                        showSuccess('Project deleted successfully!');
+                        loadProjects(); // Reload the projects list
+                    })
+                    .catch(error => {
+                        console.error("Error deleting project:", error);
+                        showError(`Error deleting project: ${error.message}`);
+                    });
+            }
+            
+            function showError(message) {
+                const alertDiv = document.createElement('div');
+                alertDiv.style.cssText = 'position: fixed; top: 20px; right: 20px; background-color: #f8d7da; color: #721c24; padding: 15px 20px; border-radius: 5px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); z-index: 1000; max-width: 400px;';
+                alertDiv.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span class="material-icons">error</span>
+                        <span>${message}</span>
+                    </div>
+                `;
+                document.body.appendChild(alertDiv);
+                
+                setTimeout(() => {
+                    alertDiv.style.opacity = '0';
+                    alertDiv.style.transition = 'opacity 0.5s';
+                    setTimeout(() => alertDiv.remove(), 500);
+                }, 5000);
+            }
+            
+            function showSuccess(message) {
+                const alertDiv = document.createElement('div');
+                alertDiv.style.cssText = 'position: fixed; top: 20px; right: 20px; background-color: #d4edda; color: #155724; padding: 15px 20px; border-radius: 5px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); z-index: 1000; max-width: 400px;';
+                alertDiv.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span class="material-icons">check_circle</span>
+                        <span>${message}</span>
+                    </div>
+                `;
+                document.body.appendChild(alertDiv);
+                
+                setTimeout(() => {
+                    alertDiv.style.opacity = '0';
+                    alertDiv.style.transition = 'opacity 0.5s';
+                    setTimeout(() => alertDiv.remove(), 500);
+                }, 3000);
+            }
+            
+            // Refresh button
+            const refreshBtn = document.getElementById('refresh-data');
+            if (refreshBtn) {
+                refreshBtn.addEventListener('click', loadProjects);
+            }
+        });
+    </script>
+</body>
+</html>
