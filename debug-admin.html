@@ -363,25 +363,97 @@
         }
         
         @media (max-width: 768px) {
-            .grid-3 {
-                grid-template-columns: 1fr;
+            .admin-top-bar {
+                flex-direction: column;
+                padding: 15px 10px;
+                gap: 15px;
             }
             
             .admin-nav {
-                display: none;
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
             }
             
-            .admin-mobile-nav {
-                display: block;
+            .nav-button {
+                flex: 1 0 calc(50% - 10px);
+                justify-content: center;
+                text-align: center;
+                padding: 10px 5px;
+            }
+            
+            .panel-title {
+                font-size: 18px;
+            }
+            
+            .content-area {
+                margin: 20px auto;
             }
             
             .stats-grid {
                 grid-template-columns: 1fr;
             }
             
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            
             .action-button {
                 width: 100%;
             }
+        }
+        
+        @media (max-width: 480px) {
+            .admin-title {
+                font-size: 16px;
+            }
+            
+            .nav-button {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            
+            .panel {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .stat-value {
+                font-size: 28px;
+            }
+            
+            .stat-name {
+                font-size: 14px;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+            
+            .card-title {
+                font-size: 16px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            
+            .stat-icon-container {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .stat-icon {
+                font-size: 24px;
+            }
+        }
+        
+        /* Fix for mobile overflow issues */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
         }
     </style>
 </head>
