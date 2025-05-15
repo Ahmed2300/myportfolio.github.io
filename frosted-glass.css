@@ -1,0 +1,196 @@
+/* Enhanced Frosted Glass Effects for Portfolio Website */
+
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 255, 255, 0.25);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    --glass-blur: 12px;
+    --glass-hover-bg: rgba(255, 255, 255, 0.25);
+    --glass-hover-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    --glass-border-radius: 16px;
+    
+    /* Text colors that work in both light and dark mode */
+    --glass-text-primary: #2D3748;
+    --glass-text-secondary: #4A5568;
+}
+
+/* Dark mode variables */
+[data-theme="dark"] {
+    --glass-bg: rgba(23, 25, 35, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+    --glass-hover-bg: rgba(30, 33, 45, 0.8);
+    --glass-hover-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    
+    /* Text colors for dark mode */
+    --glass-text-primary: #E2E8F0;
+    --glass-text-secondary: #A0AEC0;
+}
+
+/* Apply to header */
+.sticky-header {
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(var(--glass-blur)) !important;
+    -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
+    border-bottom: 1px solid var(--glass-border) !important;
+    box-shadow: var(--glass-shadow) !important;
+}
+
+/* Apply to cards */
+.platform-card, .app-item, .skill-card, .panel, .skill-item {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(var(--glass-blur)) !important;
+    -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: var(--glass-shadow) !important;
+    border-radius: var(--glass-border-radius) !important;
+    transition: all 0.3s ease !important;
+    overflow: hidden !important;
+    color: var(--glass-text-primary) !important;
+}
+
+/* Ensure platform card text colors adjust for dark mode */
+.platform-card h3, .app-item h3, .skill-card h3, .panel h3 {
+    color: var(--glass-text-primary) !important;
+    transition: color 0.3s ease !important;
+}
+
+.platform-card p, .app-item p, .skill-card p, .panel p {
+    color: var(--glass-text-secondary) !important;
+    transition: color 0.3s ease !important;
+}
+
+.platform-card:hover, .app-item:hover, .skill-card:hover, .panel:hover {
+    background: rgba(255, 255, 255, 0.25) !important;
+    transform: translateY(-5px) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Apply to buttons */
+.btn-primary, .btn-secondary, .nav-link, .action-button {
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(var(--glass-blur)) !important;
+    -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: var(--glass-shadow) !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-primary:hover, .btn-secondary:hover, .nav-link:hover, .action-button:hover {
+    background: rgba(255, 255, 255, 0.25) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Apply to sections */
+.section-header, .about-container, .contact-form {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border-radius: 16px !important;
+    padding: 20px !important;
+    border: 1px solid var(--glass-border) !important;
+}
+
+/* Apply to modal */
+.modal-content {
+    background: rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    border: 1px solid var(--glass-border) !important;
+}
+
+/* Page background */
+body {
+    background-image: 
+        radial-gradient(at 10% 10%, rgba(64, 84, 178, 0.25), transparent 50%),
+        radial-gradient(at 90% 90%, rgba(120, 67, 189, 0.2), transparent 50%),
+        radial-gradient(at 40% 70%, rgba(249, 115, 22, 0.15), transparent 40%),
+        radial-gradient(at 70% 20%, rgba(79, 209, 197, 0.1), transparent 45%) !important;
+    position: relative;
+    z-index: 0;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.4);
+    z-index: -1;
+}
+
+/* Expertise tags */
+.expertise-tag, .tag, .tech-badge {
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border: 1px solid var(--glass-border) !important;
+}
+
+/* Improved scrollbar for glass effect */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Additional glass effects for skill bars */
+.skill-bar {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(5px) !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+}
+
+.skill-progress {
+    background: linear-gradient(90deg, rgba(71, 89, 251, 0.7), rgba(120, 67, 189, 0.7)) !important;
+    backdrop-filter: blur(5px) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 2px 4px rgba(71, 89, 251, 0.3) !important;
+}
+
+/* Enhanced hero section */
+.hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    right: -10%;
+    width: 60%;
+    height: 70%;
+    background: radial-gradient(circle, rgba(71, 89, 251, 0.15), transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: -10%;
+    left: -10%;
+    width: 60%;
+    height: 70%;
+    background: radial-gradient(circle, rgba(249, 115, 22, 0.1), transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+}
