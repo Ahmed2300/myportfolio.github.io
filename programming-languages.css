@@ -66,11 +66,11 @@
   object-fit: contain;
 }
 
-/* JavaScript Text Icon */
+/* JavaScript Icon */
 .js-icon {
-  font-family: 'Courier New', monospace;
+  font-family: Arial, sans-serif;
   font-weight: bold;
-  font-size: 26px;
+  font-size: 22px;
   color: #000;
   background-color: #F7DF1E;
   width: 40px;
@@ -78,7 +78,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: 50%;
 }
 
 .language-card:hover .language-icon {
