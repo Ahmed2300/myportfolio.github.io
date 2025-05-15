@@ -1,0 +1,318 @@
+/* Modern About Me Section - Enhanced 2025 Design */
+
+/* New Modern Color Palette - Clean & Cool */
+:root {
+  /* Primary Colors */
+  --primary-blue: #2D46B9;        /* Rich royal blue - primary color */
+  --primary-indigo: #1E3A8A;      /* Deep indigo - primary dark */
+  --primary-periwinkle: #818CF8;  /* Periwinkle - primary light */
+  
+  /* Secondary Colors */
+  --secondary-teal: #0EA5E9;      /* Bright teal - vibrant accent */
+  --secondary-purple: #8B5CF6;    /* Soft purple - complementary accent */
+  --secondary-mint: #A7F3D0;      /* Fresh mint - light accent */
+  
+  /* Neutral Colors */
+  --neutral-white: #FFFFFF;       /* Pure white */
+  --neutral-snow: #F8FAFC;        /* Snow white - subtle off-white */
+  --neutral-ice: #EFF6FF;         /* Ice blue - very light blue tint */
+  --neutral-silver: #E2E8F0;      /* Silver - light gray for borders */
+  --neutral-slate: #94A3B8;       /* Slate - medium gray for secondary text */
+  --neutral-charcoal: #334155;    /* Charcoal - dark gray for primary text */
+  --neutral-midnight: #0F172A;    /* Midnight - near black */
+  
+  /* Glass Effect Colors */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+  
+  /* Gradients */
+  --gradient-blue: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+  --gradient-purple: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
+  --gradient-cool: linear-gradient(135deg, var(--secondary-teal), var(--secondary-mint));
+  
+  /* Shadows */
+  --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.03), 0 6px 12px rgba(0, 0, 0, 0.05);
+  --hover-shadow: 0 14px 30px rgba(0, 0, 0, 0.07), 0 10px 15px rgba(0, 0, 0, 0.06);
+  --text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  /* Borders */
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 16px;
+  --border-radius-xl: 24px;
+  --border-radius-full: 9999px;
+}
+
+/* Enhanced About Section */
+#about {
+  padding: 5rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Cool Background Elements */
+#about::before {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: var(--gradient-cool);
+  top: -300px;
+  right: -300px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.15;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#about::after {
+  content: "";
+  position: absolute;
+  width:
+  500px;
+  height: 500px;
+  background: var(--gradient-purple);
+  bottom: -250px;
+  left: -250px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.1;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Modern About Container */
+.about-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 992px) {
+  .about-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Enhanced About Content */
+.about-content {
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--card-shadow);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-content:hover {
+  box-shadow: var(--hover-shadow);
+  transform: translateY(-5px);
+}
+
+/* Stylish Info Icon */
+.about-content::before {
+  content: "info";
+  font-family: 'Material Icons';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  font-size: 120px;
+  opacity: 0.03;
+  color: var(--primary-blue);
+  z-index: 0;
+}
+
+/* About Text Styling */
+.about-intro {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--primary-blue);
+  position: relative;
+  display: inline-block;
+}
+
+.about-content p {
+  color: var(--neutral-charcoal);
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Skills Container */
+.skills-container {
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--card-shadow);
+  transition: all 0.4s ease;
+}
+
+.skills-container:hover {
+  box-shadow: var(--hover-shadow);
+  transform: translateY(-5px);
+}
+
+.skills-container h3 {
+  font-size: 1.5rem;
+  color: var(--primary-blue);
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.skills-container h3::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60%;
+  height: 3px;
+  background: var(--gradient-blue);
+  border-radius: var(--border-radius-full);
+}
+
+/* Modern Skill Grid */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+/* Skill Item */
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skill-name {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  color: var(--neutral-charcoal);
+}
+
+.skill-name::after {
+  content: attr(data-level) "%";
+  color: var(--secondary-teal);
+  font-weight: 600;
+}
+
+/* Modern Progress Bar */
+.skill-bar {
+  height: 8px;
+  background-color: var(--neutral-silver);
+  border-radius: var(--border-radius-full);
+  overflow: hidden;
+  position: relative;
+}
+
+.skill-progress {
+  height: 100%;
+  border-radius: var(--border-radius-full);
+  background: var(--gradient-blue);
+  position: relative;
+  transition: width 1.5s ease-in-out;
+}
+
+/* Add animated shimmer effect to progress bars */
+.skill-progress::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Section Title Enhancement */
+#about h2 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+  color: var(--primary-blue);
+}
+
+#about h2 .material-icons {
+  background: var(--primary-blue);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  box-shadow: 0 4px 15px rgba(45, 70, 185, 0.25);
+}
+
+/* Dark Theme Adjustments */
+body.dark-theme #about {
+  background-color: var(--dark-bg);
+}
+
+body.dark-theme .about-content,
+body.dark-theme .skills-container {
+  background: rgba(43, 55, 75, 0.7);
+  border-color: rgba(61, 90, 128, 0.3);
+}
+
+body.dark-theme .about-intro {
+  color: var(--accent-blue-hover);
+}
+
+body.dark-theme .about-content p {
+  color: var(--dark-text);
+}
+
+body.dark-theme .skill-name {
+  color: var(--dark-text-secondary);
+}
+
+body.dark-theme .skill-name::after {
+  color: var(--accent-blue-hover);
+}
+
+body.dark-theme .skill-bar {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme #about h2 {
+  color: var(--dark-text);
+}
+
+body.dark-theme #about h2 .material-icons {
+  background: var(--accent-blue);
+  box-shadow: 0 4px 15px rgba(95, 137, 167, 0.3);
+}

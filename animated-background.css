@@ -1,0 +1,172 @@
+/* Animated Background with Colorful Blobs and Enhanced Frosted Glass Effect */
+
+/* Blob Animation Container */
+.blob-animation-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -2;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Individual Blobs */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.6;
+  animation: float 20s ease-in-out infinite;
+}
+
+.blob-1 {
+  width: 600px;
+  height: 600px;
+  background: linear-gradient(45deg, #2D46B9, #0EA5E9);
+  top: -200px;
+  right: -100px;
+  animation-delay: 0s;
+  animation-duration: 25s;
+}
+
+.blob-2 {
+  width: 500px;
+  height: 500px;
+  background: linear-gradient(45deg, #8B5CF6, #A7F3D0);
+  bottom: -150px;
+  left: -100px;
+  animation-delay: -5s;
+  animation-duration: 30s;
+}
+
+.blob-3 {
+  width: 450px;
+  height: 450px;
+  background: linear-gradient(45deg, #0EA5E9, #A7F3D0);
+  top: 40%;
+  right: 10%;
+  animation-delay: -10s;
+  animation-duration: 22s;
+}
+
+.blob-4 {
+  width: 380px;
+  height: 380px;
+  background: linear-gradient(45deg, #1E3A8A, #8B5CF6);
+  top: 60%;
+  left: 15%;
+  animation-delay: -15s;
+  animation-duration: 28s;
+}
+
+/* Enhanced Frosted Glass Effect */
+.frosted-glass {
+  background: rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15) !important;
+}
+
+/* Frosted Glass Header */
+.sticky-header {
+  background: rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 4px 20px rgba(31, 38, 135, 0.1) !important;
+  transition: all 0.3s ease;
+}
+
+.sticky-header:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Dark Theme Adjustments */
+body.dark-theme .frosted-glass {
+  background: rgba(20, 30, 60, 0.3) !important;
+  border: 1px solid rgba(60, 70, 120, 0.2) !important;
+}
+
+body.dark-theme .sticky-header {
+  background: rgba(20, 30, 60, 0.4) !important;
+  border-bottom: 1px solid rgba(61, 90, 128, 0.3) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
+}
+
+body.dark-theme .sticky-header:hover {
+  background: rgba(20, 30, 60, 0.5) !important;
+}
+
+/* Floating Animation for Blobs */
+@keyframes float {
+  0% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1) rotate(120deg);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9) rotate(240deg);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1) rotate(360deg);
+  }
+}
+
+/* Background Modifications for About Section */
+#about {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Subtle background pattern for more texture */
+#about::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+  opacity: 0.2;
+  z-index: -1;
+  pointer-events: none;
+}
+
+body.dark-theme #about::before {
+  background-image: 
+    radial-gradient(rgba(100, 150, 255, 0.1) 1px, transparent 1px),
+    radial-gradient(rgba(100, 150, 255, 0.1) 1px, transparent 1px);
+}
+
+/* Enhanced Card Transitions */
+.about-content,
+.skills-container {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease !important;
+}
+
+.about-content:hover,
+.skills-container:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 
+    0 14px 30px rgba(0, 0, 0, 0.07), 
+    0 10px 15px rgba(0, 0, 0, 0.06),
+    0 0 20px rgba(14, 165, 233, 0.15) !important;
+}
+
+body.dark-theme .about-content:hover,
+body.dark-theme .skills-container:hover {
+  box-shadow: 
+    0 14px 30px rgba(0, 0, 0, 0.2), 
+    0 10px 15px rgba(0, 0, 0, 0.1),
+    0 0 25px rgba(95, 137, 167, 0.2) !important;
+}
