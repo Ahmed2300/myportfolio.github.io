@@ -3,40 +3,52 @@
 
 /* Dark Theme Color Variables */
 :root {
-  /* Base Colors - Modern Deep Blues */
-  --dark-bg-primary: #0F172A;       /* Deep navy background */
-  --dark-bg-secondary: #1E293B;     /* Slightly lighter navy for cards */
-  --dark-bg-tertiary: #334155;      /* Medium slate for hover states */
-  
+  /* Base Colors - User Custom Palette */
+  --dark-bg-primary: #132433;
+  /* Darker Navy Background */
+  --dark-bg-secondary: #223c50;
+  /* Deep Navy for cards */
+  --dark-bg-tertiary: #355872;
+  /* Navy for hover states */
+
   /* Text Colors */
-  --dark-text-primary: #F8FAFC;     /* Bright white for primary text */
-  --dark-text-secondary: #CBD5E1;   /* Light gray for secondary text */
-  --dark-text-muted: #94A3B8;       /* Muted gray for tertiary text */
-  
-  /* Vibrant Accent Colors */
-  --dark-accent-blue: #38BDF8;      /* Bright sky blue */
-  --dark-accent-purple: #A855F7;    /* Vibrant purple */
-  --dark-accent-pink: #EC4899;      /* Rich pink */
-  --dark-accent-teal: #2DD4BF;      /* Vivid teal */
-  --dark-accent-indigo: #818CF8;    /* Soft indigo */
-  --dark-accent-yellow: #FACC15;    /* Bright yellow */
-  
+  --dark-text-primary: #F7F8F0;
+  /* Off-white */
+  --dark-text-secondary: #9CD5FF;
+  /* Light blue text */
+  --dark-text-muted: #7AAACE;
+  /* Medium blue muted */
+
+  /* Vibrant Accent Colors mapped to user palette */
+  --dark-accent-blue: #9CD5FF;
+  /* Light blue */
+  --dark-accent-purple: #7AAACE;
+  /* Medium blue */
+  --dark-accent-pink: #9CD5FF;
+  /* Light blue */
+  --dark-accent-teal: #7AAACE;
+  /* Medium blue */
+  --dark-accent-indigo: #9CD5FF;
+  /* Light blue */
+  --dark-accent-yellow: #F7F8F0;
+  /* Off-white */
+
   /* Gradient Combinations */
-  --dark-gradient-blue: linear-gradient(135deg, #0EA5E9, #38BDF8);
-  --dark-gradient-purple: linear-gradient(135deg, #8B5CF6, #A855F7);
-  --dark-gradient-pink: linear-gradient(135deg, #DB2777, #EC4899);
-  --dark-gradient-mixed: linear-gradient(135deg, #38BDF8, #A855F7);
-  --dark-gradient-cool: linear-gradient(135deg, #2DD4BF, #38BDF8);
-  
+  --dark-gradient-blue: linear-gradient(135deg, #7AAACE, #9CD5FF);
+  --dark-gradient-purple: linear-gradient(135deg, #355872, #7AAACE);
+  --dark-gradient-pink: linear-gradient(135deg, #7AAACE, #9CD5FF);
+  --dark-gradient-mixed: linear-gradient(135deg, #9CD5FF, #7AAACE);
+  --dark-gradient-cool: linear-gradient(135deg, #7AAACE, #9CD5FF);
+
   /* UI Effects */
   --dark-card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
-  --dark-glow-blue: 0 0 20px rgba(56, 189, 248, 0.35);
-  --dark-glow-purple: 0 0 20px rgba(168, 85, 247, 0.35);
-  --dark-glow-teal: 0 0 20px rgba(45, 212, 191, 0.35);
-  
+  --dark-glow-blue: 0 0 20px rgba(156, 213, 255, 0.35);
+  --dark-glow-purple: 0 0 20px rgba(122, 170, 206, 0.35);
+  --dark-glow-teal: 0 0 20px rgba(122, 170, 206, 0.35);
+
   /* Borders */
-  --dark-border-subtle: rgba(148, 163, 184, 0.1);
-  --dark-border-accent: rgba(56, 189, 248, 0.3);
+  --dark-border-subtle: rgba(156, 213, 255, 0.1);
+  --dark-border-accent: rgba(156, 213, 255, 0.3);
 }
 
 /* Body Background with Enhanced Colors */

@@ -1,13 +1,19 @@
 /* Admin Panel Styles */
 :root {
-    --admin-primary: #6366F1;
-    --admin-secondary: #14B8A6;
-    --admin-success: #10B981;
-    --admin-warning: #F59E0B;
-    --admin-danger: #EF4444;
+    /* Custom User Color Palette */
+    --admin-primary: #355872;
+    /* Navy */
+    --admin-secondary: #7AAACE;
+    /* Medium blue */
+    --admin-success: #9CD5FF;
+    /* Light blue */
+    --admin-warning: #F4A261;
+    --admin-danger: #E76F51;
     --admin-section-bg: #FFFFFF;
-    --admin-form-bg: #F9FAFB;
-    --admin-border: #E5E7EB;
+    --admin-form-bg: #F7F8F0;
+    /* Off-white */
+    --admin-border: #dce0d1;
+    /* Light slate */
 }
 
 /* Admin Header */
@@ -69,7 +75,8 @@
     background: rgba(255, 255, 255, 0.2);
 }
 
-#admin-panel, #project-manager {
+#admin-panel,
+#project-manager {
     padding: 30px 20px;
     max-width: 1400px;
     margin: 20px auto;
@@ -80,6 +87,9 @@
     min-height: 300px;
     position: relative;
     z-index: 1;
+    /* Override global section animations from style.css */
+    opacity: 1 !important;
+    transform: none !important;
 }
 
 .admin-container {
@@ -394,7 +404,9 @@
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* Responsive Styles */
@@ -403,34 +415,34 @@
         flex-direction: column;
         align-items: stretch;
     }
-    
-    .search-container, 
+
+    .search-container,
     .filter-container,
     .refresh-container {
         width: 100%;
     }
-    
+
     .form-actions {
         flex-direction: column;
     }
-    
+
     .form-actions button {
         width: 100%;
     }
-    
+
     .preview-container {
         position: static;
     }
-    
+
     .modal-content {
         margin: 20% auto;
         width: 95%;
     }
-    
+
     .projects-list {
         grid-template-columns: 1fr;
     }
-    
+
     .edit-form-container .admin-form {
         margin: 20px auto;
     }
@@ -595,7 +607,8 @@
     margin-top: auto;
 }
 
-.btn-edit, .btn-delete {
+.btn-edit,
+.btn-delete {
     display: inline-flex;
     align-items: center;
     gap: 5px;
@@ -627,7 +640,9 @@
     background-color: #dc2626;
 }
 
-.no-projects, .no-results, .error-message {
+.no-projects,
+.no-results,
+.error-message {
     grid-column: 1 / -1;
     text-align: center;
     padding: 50px 20px;
@@ -636,7 +651,7 @@
     border: 1px solid var(--admin-border);
 }
 
-.no-projects .material-icons, 
+.no-projects .material-icons,
 .no-results .material-icons,
 .error-message .material-icons {
     font-size: 48px;
@@ -873,6 +888,7 @@
         opacity: 0;
         transform: translateY(-30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);

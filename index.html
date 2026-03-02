@@ -1,542 +1,1204 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Professional mobile app portfolio showcasing Flutter, Android, and iOS applications with detailed case studies and project insights.">
+    <meta name="description"
+        content="Professional mobile app portfolio showcasing Flutter, Android, and iOS applications with detailed case studies and project insights.">
     <meta name="keywords" content="mobile app, developer portfolio, Flutter, Android, iOS, app development">
     <meta property="og:title" content="Ahmed's Mobile App Portfolio">
-    <meta property="og:description" content="Explore a showcase of innovative mobile applications built with Flutter, Firebase, and modern development practices.">
+    <meta property="og:description"
+        content="Explore a showcase of innovative mobile applications built with Flutter, Firebase, and modern development practices.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yourportfolio.dev">
     <meta property="og:image" content="images/portfolio-preview.jpg">
     <meta name="twitter:card" content="summary_large_image">
-    <title>Ahmed — Flutter & Android Developer Portfolio</title>
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f4f9fc',
+                            100: '#e6f2fa',
+                            200: '#c5e4f7',
+                            300: '#9CD5FF', // User light blue
+                            400: '#8bc4ee',
+                            500: '#7AAACE', // User medium blue
+                            600: '#5b8cae',
+                            700: '#446e8e',
+                            800: '#355872', // User navy
+                            900: '#274459',
+                            950: '#182b3a',
+                        },
+                        slate: {
+                            50: '#F7F8F0',  // User off-white
+                            100: '#eef0e6',
+                            200: '#dce0d1',
+                            300: '#c1c9b6',
+                            400: '#9eb0a4',
+                            500: '#7f9693',
+                            600: '#60797b',
+                            700: '#4a6064',
+                            800: '#355872',  // User navy
+                            900: '#223c50',  // Dark mode bg (based on navy)
+                            950: '#132433',
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Legacy CSS (Kept temporarily to avoid breaking unmodified sections) -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="fullscreen-slider.css">
-    <link rel="stylesheet" href="modern-theme.css">
-    <link rel="stylesheet" href="modern-about.css">
-    <link rel="stylesheet" href="animated-background.css">
     <link rel="stylesheet" href="empty-projects.css">
-    <link rel="stylesheet" href="enhanced-sections.css">
-    <link rel="stylesheet" href="modern-dark-theme.css">
     <link rel="stylesheet" href="image-enhancements.css">
-    <link rel="stylesheet" href="enhanced-buttons.css">
     <link rel="stylesheet" href="programming-languages.css">
-    <link rel="stylesheet" href="creative-hero.css">
-    <link rel="stylesheet" href="ai-tools-section.css">
-    <link rel="stylesheet" href="modern-footer.css">
-    <link rel="stylesheet" href="enhanced-responsive.css">
+    <link rel="stylesheet" href="modern-dark-theme.css">
+
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 </head>
-<body>
-    <!-- Animated Background Blobs -->
-    <div class="blob-animation-container">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-        <div class="blob blob-4"></div>
+
+<body
+    class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-200 font-sans antialiased transition-colors duration-300 selection:bg-brand-500 selection:text-white">
+    <!-- Ambient Floating Particles -->
+    <canvas id="ambient-particles"></canvas>
+
+    <!-- Main App Content -->
+    <div id="main-content" class="w-full transition-opacity duration-300 relative z-10">
+        <!-- Animated Background Blobs -->
+        <div class="blob-animation-container">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+            <div class="blob blob-4"></div>
+        </div>
+        <!-- Navigation -->
+        <header
+            class="fixed top-0 w-full z-50 transition-all duration-300 backdrop-blur-md bg-white/70 dark:bg-slate-900/70 border-b border-slate-200/50 dark:border-slate-800/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-20">
+                    <!-- Logo -->
+                    <a href="#home" class="flex items-center gap-2 group">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-brand-800 flex items-center justify-center text-white shadow-lg group-hover:shadow-brand-500/30 transition-shadow">
+                            <span class="material-icons text-xl">code</span>
+                        </div>
+                        <span
+                            class="font-display font-bold text-xl tracking-tight text-slate-900 dark:text-white group-hover:text-brand-600 transition-colors">Ahmed
+                            Azam</span>
+                    </a>
+
+                    <!-- Desktop Nav -->
+                    <nav class="hidden md:flex items-center gap-8">
+                        <a href="#home"
+                            class="nav-link relative text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-brand-600 dark:hover:text-brand-300 transition-colors after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-0.5 after:bg-brand-500 after:transition-all hover:after:w-full">Home</a>
+                        <a href="#projects"
+                            class="nav-link relative text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-brand-600 dark:hover:text-brand-300 transition-colors after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-0.5 after:bg-brand-500 after:transition-all hover:after:w-full">Projects</a>
+                        <a href="#about"
+                            class="nav-link relative text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-brand-600 dark:hover:text-brand-300 transition-colors after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-0.5 after:bg-brand-500 after:transition-all hover:after:w-full">About</a>
+                        <a href="#contact"
+                            class="nav-link relative text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-brand-600 dark:hover:text-brand-300 transition-colors after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-0.5 after:bg-brand-500 after:transition-all hover:after:w-full">Contact</a>
+
+                        <div class="h-6 w-px bg-slate-200 dark:bg-slate-700 mx-1"></div>
+
+                        <!-- Interactive Rope Theme Toggle -->
+                        <div
+                            class="relative h-20 w-12 flex justify-center theme-rope-container cursor-grab active:cursor-grabbing group">
+                            <!-- Cord -->
+                            <div
+                                class="absolute top-0 w-1 bg-slate-300 dark:bg-slate-600 transition-colors origin-top theme-cord">
+                            </div>
+                            <!-- Handle / Bulb -->
+                            <div
+                                class="absolute w-8 h-8 rounded-full bg-white dark:bg-slate-800 shadow-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center transition-colors theme-handle z-10">
+                                <span
+                                    class="material-icons text-lg text-slate-500 dark:text-brand-400 rope-icon transition-transform duration-300">dark_mode</span>
+                            </div>
+                            <!-- Glow effect -->
+                            <div
+                                class="absolute w-12 h-12 rounded-full bg-brand-400/0 dark:bg-brand-400/20 blur-md transition-all duration-500 theme-glow z-0 pointer-events-none">
+                            </div>
+                        </div>
+
+                    </nav>
+
+                    <!-- Mobile Menu Button -->
+                    <div class="flex items-center gap-4 md:hidden">
+                        <!-- Mobile Interactive Rope Theme Toggle -->
+                        <div
+                            class="relative h-16 w-10 flex justify-center theme-rope-container-mobile cursor-grab active:cursor-grabbing">
+                            <!-- Cord -->
+                            <div
+                                class="absolute top-0 w-1 bg-slate-300 dark:bg-slate-600 transition-colors origin-top theme-cord-mobile">
+                            </div>
+                            <!-- Handle / Bulb -->
+                            <div
+                                class="absolute w-8 h-8 rounded-full bg-white dark:bg-slate-800 shadow-md border border-slate-200 dark:border-slate-700 flex items-center justify-center transition-colors theme-handle-mobile z-10">
+                                <span
+                                    class="material-icons text-base text-slate-500 dark:text-brand-400 rope-icon-mobile transition-transform duration-300">dark_mode</span>
+                            </div>
+                        </div>
+                        <button id="mobileMenuBtn"
+                            class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none transition-colors">
+                            <span class="material-icons h-6 w-6 flex items-center justify-center pointer-events-none"
+                                id="mobileMenuIcon">menu</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Panel -->
+            <div id="mobileMenuPanel"
+                class="md:hidden hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 absolute w-full shadow-lg origin-top transform transition-all duration-300 ease-in-out opacity-0 -translate-y-2">
+                <div class="px-4 pt-2 pb-6 space-y-1">
+                    <a href="#home"
+                        class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:text-brand-600 dark:hover:text-brand-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">Home</a>
+                    <a href="#projects"
+                        class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:text-brand-600 dark:hover:text-brand-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">Projects</a>
+                    <a href="#about"
+                        class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:text-brand-600 dark:hover:text-brand-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">About</a>
+                    <a href="#contact"
+                        class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:text-brand-600 dark:hover:text-brand-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">Contact</a>
+
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Hero Section -->
+            <section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+                <!-- Gradient Mesh Background -->
+                <div class="gradient-mesh"></div>
+                <!-- Noise Texture Overlay -->
+                <div class="noise-overlay"></div>
+
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+                        <!-- Text Content -->
+                        <div class="flex flex-col gap-6 text-center lg:text-left order-2 lg:order-1 pt-10 lg:pt-0">
+                            <div
+                                class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 text-sm font-medium w-fit mx-auto lg:mx-0 border border-brand-100 dark:border-brand-800/50">
+                                <span class="relative flex h-2 w-2">
+                                    <span
+                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
+                                </span>
+                                Available for new projects
+                            </div>
+
+                            <h1
+                                class="font-display text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.1]">
+                                Crafting <span
+                                    class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-brand-800">Digital</span>
+                                <br>Experiences
+                            </h1>
+
+                            <p
+                                class="text-lg sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+                                Hi, I'm <strong class="font-semibold text-slate-900 dark:text-white">Ahmed
+                                    Azam</strong>.
+                                Professional developer & Physics Teacher with +7 years of experience building innovative
+                                mobile applications and AI-driven solutions.
+                            </p>
+
+                            <div
+                                class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start mt-4">
+                                <a href="#projects"
+                                    class="w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 font-medium transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                                    <span class="material-icons text-sm">rocket_launch</span>
+                                    View My Work
+                                </a>
+                                <a href="#contact"
+                                    class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-medium transition-all shadow-md hover:shadow-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center gap-2">
+                                    <span class="material-icons text-sm">mail</span>
+                                    Contact Me
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Profile Image / Graphic -->
+                        <div class="order-1 lg:order-2 flex justify-center lg:justify-end relative">
+                            <div class="relative w-72 h-72 sm:w-96 sm:h-96">
+                                <!-- Decor ring -->
+                                <div
+                                    class="absolute inset-0 rounded-full border-2 border-dashed border-slate-300 dark:border-slate-700 animate-[spin_30s_linear_infinite]">
+                                </div>
+                                <!-- Decor circle -->
+                                <div
+                                    class="absolute -inset-4 rounded-full bg-gradient-to-tr from-brand-100 to-brand-50 dark:from-brand-900/20 dark:to-brand-900/20 blur-xl">
+                                </div>
+
+                                <!-- Profile picture -->
+                                <div
+                                    class="relative w-full h-full rounded-full border-4 border-white dark:border-slate-800 overflow-hidden shadow-2xl z-10 bg-slate-100 dark:bg-slate-800">
+                                    <img width="800" height="800" src="images/developer-profile.jpg" alt="Ahmed Azam"
+                                        class="w-full h-full object-cover"
+                                        onerror="this.src='https://placehold.co/800x800/e2e8f0/475569?text=Ahmed+Azam'">
+                                </div>
+
+                                <!-- Floating badges -->
+                                <div
+                                    class="absolute -right-4 top-10 bg-white dark:bg-slate-800 p-3 rounded-2xl shadow-xl z-20 animate-bounce flex items-center gap-2 border border-slate-100 dark:border-slate-700 backdrop-blur-md">
+                                    <img width="32" height="32" src="images/icons8-flutter-48.png"
+                                        class="w-8 h-8 object-contain" alt="Flutter">
+                                    <div class="hidden sm:block">
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">Flutter</p>
+                                        <p class="text-[10px] text-slate-500">Expert</p>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="absolute -left-6 bottom-20 bg-white dark:bg-slate-800 p-3 rounded-2xl shadow-xl z-20 animate-[bounce_2s_infinite_1s] flex items-center gap-2 border border-slate-100 dark:border-slate-700 backdrop-blur-md">
+                                    <img width="32" height="32" src="https://iili.io/3gDlYCX.png"
+                                        class="w-8 h-8 object-contain" alt="Gemini AI">
+                                    <div class="hidden sm:block">
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">AI APIs</p>
+                                        <p class="text-[10px] text-slate-500">Integrated</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scroll down indicator -->
+                <div
+                    class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-pulse text-slate-400 dark:text-slate-500">
+                    <span class="text-xs font-medium uppercase tracking-widest">Scroll</span>
+                    <span class="material-icons text-xl">keyboard_arrow_down</span>
+                </div>
+            </section>
+
+            <!-- Platforms Section: Tools & Environments -->
+            <section id="platforms" class="py-24 bg-white dark:bg-slate-900 relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <h2
+                            class="font-display text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4 flex items-center justify-center gap-3">
+                            <span class="material-icons text-brand-500 text-4xl">developer_mode</span>
+                            Platforms & Environments
+                        </h2>
+                        <p class="text-lg text-slate-600 dark:text-slate-400 font-light">
+                            Specialized expertise in mobile app development platforms and extension creation.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Kodular -->
+                        <div
+                            class="group relative bg-slate-50 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 hover:border-brand-500/50 dark:hover:border-brand-500/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                            <div
+                                class="w-16 h-16 rounded-2xl bg-white dark:bg-slate-800 shadow-md flex items-center justify-center mb-6 p-3">
+                                <img width="48" height="48" src="https://iili.io/dfBxlCx.png" alt="Kodular Logo"
+                                    class="w-full h-full object-contain" loading="lazy">
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Kodular</h3>
+                            <p class="text-slate-600 dark:text-slate-400 mb-6 font-light leading-relaxed">
+                                Expert in developing comprehensive mobile applications using Kodular's advanced
+                                components
+                                and extensions.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mt-auto">
+                                <span
+                                    class="px-3 py-1 text-xs font-medium rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-800/50">UI
+                                    Design</span>
+                                <span
+                                    class="px-3 py-1 text-xs font-medium rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-800/50">Firebase</span>
+                                <span
+                                    class="px-3 py-1 text-xs font-medium rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-800/50">APIs</span>
+                            </div>
+                        </div>
+
+                        <!-- App Inventor -->
+                        <div
+                            class="group relative bg-slate-50 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 hover:border-brand-500/50 dark:hover:border-brand-500/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                            <div
+                                class="w-16 h-16 rounded-2xl bg-white dark:bg-slate-800 shadow-md flex items-center justify-center mb-6 p-3">
+                                <img width="48" height="48" src="https://iili.io/dfBx14V.png" alt="App Inventor Logo"
+                                    class="w-full h-full object-contain" loading="lazy">
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">App Inventor</h3>
+                            <p class="text-slate-600 dark:text-slate-400 mb-6 font-light leading-relaxed">
+                                Skilled in creating versatile applications through MIT App Inventor's block-based
+                                programming environment.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mt-auto">
+                                <span
+                                    class="px-3 py-1 text-xs font-medium rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-800/50">Block
+                                    Logic</span>
+                                <span
+                                    class="px-3 py-1 text-xs font-medium rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-800/50">Databases</span>
+                                <span
+                                    class="px-3 py-1 text-xs font-medium rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-800/50">Web
+                                    APIs</span>
+                            </div>
+                        </div>
+
+                        <!-- Extension Developer -->
+                        <div
+                            class="group relative bg-slate-50 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 hover:border-brand-500/50 dark:hover:border-brand-500/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                            <div class="flex gap-2 mb-6">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-white dark:bg-slate-800 shadow-md flex items-center justify-center p-2">
+                                    <img width="32" height="32"
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
+                                        alt="Java Logo" class="w-full h-full object-contain">
+                                </div>
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-white dark:bg-slate-800 shadow-md flex items-center justify-center p-2">
+                                    <img width="32" height="32"
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg"
+                                        alt="Kotlin Logo" class="w-full h-full object-contain">
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Extension Developer</h3>
+                            <p class="text-slate-600 dark:text-slate-400 mb-6 font-light leading-relaxed">
+                                Custom extensions for App Inventor & Kodular using Java and Kotlin, enabling advanced
+                                functionality.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mt-auto">
+                                <span
+                                    class="px-3 py-1 text-xs font-medium rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-800/50">Java</span>
+                                <span
+                                    class="px-3 py-1 text-xs font-medium rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-800/50">Kotlin</span>
+                                <span
+                                    class="px-3 py-1 text-xs font-medium rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-800/50">Android
+                                    SDK</span>
+                            </div>
+                        </div>
+
+                        <!-- Android Studio -->
+                        <div
+                            class="group relative bg-slate-50 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 hover:border-brand-500/50 dark:hover:border-brand-500/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                            <div
+                                class="w-16 h-16 rounded-2xl bg-white dark:bg-slate-800 shadow-md flex items-center justify-center mb-6 p-3">
+                                <img width="48" height="48"
+                                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg"
+                                    alt="Android Studio Logo" class="w-full h-full object-contain" loading="lazy">
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Android Studio</h3>
+                            <p class="text-slate-600 dark:text-slate-400 mb-6 font-light leading-relaxed">
+                                Native Android development using Android Studio for high-performance mobile
+                                applications.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mt-auto">
+                                <span
+                                    class="px-3 py-1 text-xs font-medium rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-800/50">UI/UX
+                                    Design</span>
+                                <span
+                                    class="px-3 py-1 text-xs font-medium rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-800/50">Material
+                                    Design</span>
+                                <span
+                                    class="px-3 py-1 text-xs font-medium rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-800/50">Jetpack</span>
+                            </div>
+                        </div>
+
+                        <!-- VS Code -->
+                        <div
+                            class="group relative bg-slate-50 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 hover:border-brand-500/50 dark:hover:border-brand-500/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                            <div
+                                class="w-16 h-16 rounded-2xl bg-white dark:bg-slate-800 shadow-md flex items-center justify-center mb-6 p-3">
+                                <img width="48" height="48"
+                                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg"
+                                    alt="Visual Studio Code Logo" class="w-full h-full object-contain" loading="lazy">
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">VS Code</h3>
+                            <p class="text-slate-600 dark:text-slate-400 mb-6 font-light leading-relaxed">
+                                Proficient with Visual Studio Code for efficient development across multiple languages
+                                and
+                                stacks.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mt-auto">
+                                <span
+                                    class="px-3 py-1 text-xs font-medium rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-800/50">JavaScript</span>
+                                <span
+                                    class="px-3 py-1 text-xs font-medium rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-800/50">Python</span>
+                                <span
+                                    class="px-3 py-1 text-xs font-medium rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-800/50">Web
+                                    Dev</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Wave Divider: Platforms → AI Tools -->
+            <div class="relative">
+                <div class="wave-divider bottom text-slate-50 dark:text-slate-800/50">
+                    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path class="wave-fill"
+                            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C57.1,82.36,126.22,71.51,192.05,57.5Z">
+                        </path>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- AI Tools Section -->
+            <section id="ai-tools" class="py-24 bg-slate-50 dark:bg-slate-800/50 relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <h2
+                            class="font-display text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4 flex items-center justify-center gap-3">
+                            <span class="material-icons text-brand-500 text-4xl">smart_toy</span>
+                            AI Tools I Master
+                        </h2>
+                        <p class="text-lg text-slate-600 dark:text-slate-400 font-light">
+                            Leveraging cutting-edge AI technologies to enhance development workflows and create
+                            intelligent
+                            solutions.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                        <!-- ChatGPT Card -->
+                        <div
+                            class="group relative bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 hover:border-brand-500/50 dark:hover:border-brand-500/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                            <div
+                                class="w-16 h-16 rounded-2xl bg-slate-50 dark:bg-slate-800 shadow-md flex items-center justify-center mb-6 p-3">
+                                <img width="48" height="48"
+                                    src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg"
+                                    alt="ChatGPT Logo" class="w-full h-full object-contain" loading="lazy">
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">ChatGPT</h3>
+                            <p class="text-slate-600 dark:text-slate-400 mb-6 font-light leading-relaxed">
+                                Expert in using ChatGPT for advanced prompt engineering, content creation, and
+                                integrating
+                                OpenAI APIs into applications for intelligent features.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mt-auto">
+                                <span
+                                    class="px-3 py-1 text-xs font-medium rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-800/50">Prompt
+                                    Engineering</span>
+                                <span
+                                    class="px-3 py-1 text-xs font-medium rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-800/50">OpenAI
+                                    API</span>
+                                <span
+                                    class="px-3 py-1 text-xs font-medium rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-800/50">NLP
+                                    Integration</span>
+                            </div>
+                        </div>
+
+                        <!-- Gemini Card -->
+                        <div
+                            class="group relative bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 hover:border-brand-500/50 dark:hover:border-brand-500/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                            <div
+                                class="w-16 h-16 rounded-2xl bg-slate-50 dark:bg-slate-800 shadow-md flex items-center justify-center mb-6 p-3">
+                                <img width="48" height="48" src="https://iili.io/3gDlYCX.png" alt="Gemini Logo"
+                                    class="w-full h-full object-contain" loading="lazy">
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Gemini</h3>
+                            <p class="text-slate-600 dark:text-slate-400 mb-6 font-light leading-relaxed">
+                                Skilled in utilizing Google's Gemini AI for multimodal applications, connecting Gemini
+                                API
+                                to mobile and web applications for enhanced user experiences.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mt-auto">
+                                <span
+                                    class="px-3 py-1 text-xs font-medium rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-800/50">Multimodal
+                                    AI</span>
+                                <span
+                                    class="px-3 py-1 text-xs font-medium rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-800/50">Google
+                                    AI Studio</span>
+                                <span
+                                    class="px-3 py-1 text-xs font-medium rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-800/50">API
+                                    Integration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Programming Languages Section -->
+            <section id="languages" class="py-24 bg-white dark:bg-slate-900 relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <h2
+                            class="font-display text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4 flex items-center justify-center gap-3">
+                            <span class="material-icons text-brand-500 text-4xl">code</span>
+                            Programming Languages
+                        </h2>
+                        <p class="text-lg text-slate-600 dark:text-slate-400 font-light">
+                            Technical skills and programming languages I use to develop amazing applications.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Dart -->
+                        <div
+                            class="group relative bg-slate-50 dark:bg-slate-800/50 rounded-3xl p-6 border border-slate-200 dark:border-slate-700 hover:border-brand-500/50 dark:hover:border-brand-500/50 transition-all duration-300">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-white dark:bg-slate-800 shadow-sm flex items-center justify-center p-2">
+                                    <img width="32" height="32" src="https://iili.io/3gZYqhu.png" alt="Dart Logo"
+                                        class="w-full h-full object-contain">
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">Dart</h3>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium tracking-wide">
+                                        Flutter
+                                        Development</p>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span
+                                        class="text-sm font-medium text-slate-700 dark:text-slate-300">Proficiency</span>
+                                    <span class="text-sm font-bold text-brand-600 dark:text-brand-400">90%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
+                                    <div
+                                        class="bg-gradient-to-r from-brand-500 to-brand-700 h-2 rounded-full group-hover:block transition-all duration-1000 ease-out w-[90%]">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- HTML -->
+                        <div
+                            class="group relative bg-slate-50 dark:bg-slate-800/50 rounded-3xl p-6 border border-slate-200 dark:border-slate-700 hover:border-brand-500/50 dark:hover:border-brand-500/50 transition-all duration-300">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-white dark:bg-slate-800 shadow-sm flex items-center justify-center p-2">
+                                    <img width="32" height="32"
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+                                        alt="HTML5 Logo" class="w-full h-full object-contain">
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">HTML5</h3>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium tracking-wide">Web
+                                        Structure</p>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span
+                                        class="text-sm font-medium text-slate-700 dark:text-slate-300">Proficiency</span>
+                                    <span class="text-sm font-bold text-brand-600 dark:text-brand-400">95%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
+                                    <div
+                                        class="bg-gradient-to-r from-brand-500 to-brand-700 h-2 rounded-full group-hover:block transition-all duration-1000 ease-out w-[95%]">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CSS -->
+                        <div
+                            class="group relative bg-slate-50 dark:bg-slate-800/50 rounded-3xl p-6 border border-slate-200 dark:border-slate-700 hover:border-brand-500/50 dark:hover:border-brand-500/50 transition-all duration-300">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-white dark:bg-slate-800 shadow-sm flex items-center justify-center p-2">
+                                    <img width="32" height="32"
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+                                        alt="CSS3 Logo" class="w-full h-full object-contain">
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">CSS3</h3>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium tracking-wide">
+                                        Styling
+                                        & Design</p>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span
+                                        class="text-sm font-medium text-slate-700 dark:text-slate-300">Proficiency</span>
+                                    <span class="text-sm font-bold text-brand-600 dark:text-brand-400">92%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
+                                    <div
+                                        class="bg-gradient-to-r from-brand-500 to-brand-700 h-2 rounded-full group-hover:block transition-all duration-1000 ease-out w-[92%]">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- JavaScript -->
+                        <div
+                            class="group relative bg-slate-50 dark:bg-slate-800/50 rounded-3xl p-6 border border-slate-200 dark:border-slate-700 hover:border-brand-500/50 dark:hover:border-brand-500/50 transition-all duration-300">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-white dark:bg-slate-800 shadow-sm flex items-center justify-center p-2">
+                                    <img width="32" height="32"
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                                        alt="JavaScript Logo" class="w-full h-full object-contain">
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">JavaScript</h3>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium tracking-wide">Web
+                                        Interactivity</p>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span
+                                        class="text-sm font-medium text-slate-700 dark:text-slate-300">Proficiency</span>
+                                    <span class="text-sm font-bold text-brand-600 dark:text-brand-400">88%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
+                                    <div
+                                        class="bg-gradient-to-r from-brand-500 to-brand-700 h-2 rounded-full group-hover:block transition-all duration-1000 ease-out w-[88%]">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- JSON / APIs -->
+                        <div
+                            class="group relative bg-slate-50 dark:bg-slate-800/50 rounded-3xl p-6 border border-slate-200 dark:border-slate-700 hover:border-brand-500/50 dark:hover:border-brand-500/50 transition-all duration-300">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-white dark:bg-slate-800 shadow-sm flex items-center justify-center p-2">
+                                    <span class="material-icons text-3xl text-slate-700 dark:text-slate-300">api</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">JSON / APIs</h3>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium tracking-wide">Data
+                                        Integration</p>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span
+                                        class="text-sm font-medium text-slate-700 dark:text-slate-300">Proficiency</span>
+                                    <span class="text-sm font-bold text-brand-600 dark:text-brand-400">94%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
+                                    <div
+                                        class="bg-gradient-to-r from-brand-500 to-brand-700 h-2 rounded-full group-hover:block transition-all duration-1000 ease-out w-[94%]">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Java -->
+                        <div
+                            class="group relative bg-slate-50 dark:bg-slate-800/50 rounded-3xl p-6 border border-slate-200 dark:border-slate-700 hover:border-brand-500/50 dark:hover:border-brand-500/50 transition-all duration-300">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-white dark:bg-slate-800 shadow-sm flex items-center justify-center p-2">
+                                    <img width="32" height="32"
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
+                                        alt="Java Logo" class="w-full h-full object-contain">
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">Java</h3>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium tracking-wide">
+                                        Enterprise & Android</p>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span
+                                        class="text-sm font-medium text-slate-700 dark:text-slate-300">Proficiency</span>
+                                    <span class="text-sm font-bold text-brand-600 dark:text-brand-400">85%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
+                                    <div
+                                        class="bg-gradient-to-r from-brand-500 to-brand-700 h-2 rounded-full group-hover:block transition-all duration-1000 ease-out w-[85%]">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Wave Divider: Languages → Projects -->
+            <div class="relative">
+                <div class="wave-divider bottom text-white dark:text-slate-900">
+                    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path class="wave-fill"
+                            d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V120H0Z">
+                        </path>
+                    </svg>
+                </div>
+            </div>
+
+            <section id="projects" class="py-24 relative overflow-hidden">
+                <div
+                    class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brand-50/50 dark:from-brand-900/10 to-transparent pointer-events-none">
+                </div>
+                <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+                    <div class="text-center max-w-2xl mx-auto mb-16">
+                        <div
+                            class="inline-flex items-center justify-center gap-2 px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 text-sm font-semibold tracking-wide mb-4">
+                            <span class="material-icons text-sm">apps</span>
+                            Portfolio
+                        </div>
+                        <h2
+                            class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6 font-outfit tracking-tight">
+                            Featured <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-brand-800 dark:from-brand-400 dark:to-brand-300">Projects</span>
+                        </h2>
+                        <p class="text-lg text-slate-600 dark:text-slate-400">Here are some of my highlighted App
+                            Inventor
+                            and Kodular projects with over 7 years of professional development experience.</p>
+                    </div>
+
+                    <!-- Dynamic apps grid -->
+                    <div class="app-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- App items will be dynamically loaded from JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Wave Divider: Projects → About -->
+            <div class="relative">
+                <div class="wave-divider bottom text-slate-50/50 dark:text-slate-900/50">
+                    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path class="wave-fill"
+                            d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-58,11.73-114.16,31.07-172,41.86C253.67,71.51,184.59,82.36,127.5,95.8L0,120H1200V3c-67.81,23.12-144.29,44.51-214.34,3Z">
+                        </path>
+                    </svg>
+                </div>
+            </div>
+
+            <section id="about"
+                class="py-24 relative bg-slate-50/50 dark:bg-slate-900/50 border-y border-slate-200 dark:border-slate-800">
+                <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                    <div class="text-center max-w-2xl mx-auto mb-16">
+                        <div
+                            class="inline-flex items-center justify-center gap-2 px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 text-sm font-semibold tracking-wide mb-4">
+                            <span class="material-icons text-sm">info</span>
+                            Background
+                        </div>
+                        <h2
+                            class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6 font-outfit tracking-tight">
+                            About <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-brand-800 dark:from-brand-400 dark:to-brand-300">Me</span>
+                        </h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                        <div
+                            class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl rounded-3xl p-8 lg:p-10 border border-slate-200 dark:border-slate-700 shadow-xl shadow-slate-200/50 dark:shadow-none">
+                            <p class="text-xl text-slate-800 dark:text-slate-200 font-medium mb-6 leading-relaxed">
+                                Hello!
+                                I'm Ahmed Azam, a Physics teacher, mobile app developer, and AI
+                                specialist with over 7 years of professional experience.</p>
+                            <div class="space-y-4 text-slate-600 dark:text-slate-400 leading-relaxed">
+                                <p>I specialize in creating efficient, user-friendly mobile applications using App
+                                    Inventor,
+                                    Kodular, and Flutter that solve real-world problems. My expertise includes
+                                    developing
+                                    custom
+                                    solutions, implementing complex functionalities, and delivering polished
+                                    applications
+                                    that
+                                    exceed client expectations.</p>
+                                <p>In addition to my mobile development skills, I'm a qualified Physics teacher bringing
+                                    analytical
+                                    thinking to my tech projects. I'm also an experienced prompt engineer and AI tool
+                                    expert,
+                                    helping businesses leverage the latest AI technologies for innovative solutions.</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl rounded-3xl p-8 lg:p-10 border border-slate-200 dark:border-slate-700 shadow-xl shadow-slate-200/50 dark:shadow-none">
+                            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-8">Technical Skills</h3>
+                            <div class="space-y-6">
+                                <!-- Skill 1 -->
+                                <div class="group">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-sm font-bold text-slate-700 dark:text-slate-300">App
+                                            Inventor</span>
+                                        <span class="text-sm font-bold text-brand-600 dark:text-brand-400">98%</span>
+                                    </div>
+                                    <div
+                                        class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
+                                        <div
+                                            class="bg-gradient-to-r from-brand-500 to-brand-700 h-2.5 rounded-full transition-all duration-1000 ease-out w-[98%]">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Skill 2 -->
+                                <div class="group">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span
+                                            class="text-sm font-bold text-slate-700 dark:text-slate-300">Kodular</span>
+                                        <span class="text-sm font-bold text-brand-600 dark:text-brand-400">95%</span>
+                                    </div>
+                                    <div
+                                        class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
+                                        <div
+                                            class="bg-gradient-to-r from-brand-500 to-brand-700 h-2.5 rounded-full transition-all duration-1000 ease-out w-[95%]">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Skill 3 -->
+                                <div class="group">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-sm font-bold text-slate-700 dark:text-slate-300">Flutter
+                                            Development</span>
+                                        <span class="text-sm font-bold text-brand-600 dark:text-brand-400">90%</span>
+                                    </div>
+                                    <div
+                                        class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
+                                        <div
+                                            class="bg-gradient-to-r from-brand-500 to-brand-700 h-2.5 rounded-full transition-all duration-1000 ease-out w-[90%]">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Skill 4 -->
+                                <div class="group">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-sm font-bold text-slate-700 dark:text-slate-300">Physics
+                                            Teaching</span>
+                                        <span class="text-sm font-bold text-brand-600 dark:text-brand-400">95%</span>
+                                    </div>
+                                    <div
+                                        class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
+                                        <div
+                                            class="bg-gradient-to-r from-brand-500 to-brand-700 h-2.5 rounded-full transition-all duration-1000 ease-out w-[95%]">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Skill 5 -->
+                                <div class="group">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-sm font-bold text-slate-700 dark:text-slate-300">Prompt
+                                            Engineering</span>
+                                        <span class="text-sm font-bold text-brand-600 dark:text-brand-400">92%</span>
+                                    </div>
+                                    <div
+                                        class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
+                                        <div
+                                            class="bg-gradient-to-r from-brand-500 to-brand-700 h-2.5 rounded-full transition-all duration-1000 ease-out w-[92%]">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Skill 6 -->
+                                <div class="group">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-sm font-bold text-slate-700 dark:text-slate-300">AI Tools
+                                            Expert</span>
+                                        <span class="text-sm font-bold text-brand-600 dark:text-brand-400">94%</span>
+                                    </div>
+                                    <div
+                                        class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
+                                        <div
+                                            class="bg-gradient-to-r from-brand-500 to-brand-700 h-2.5 rounded-full transition-all duration-1000 ease-out w-[94%]">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Skill 7 -->
+                                <div class="group">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-sm font-bold text-slate-700 dark:text-slate-300">Firebase
+                                            Integration</span>
+                                        <span class="text-sm font-bold text-brand-600 dark:text-brand-400">92%</span>
+                                    </div>
+                                    <div
+                                        class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
+                                        <div
+                                            class="bg-gradient-to-r from-brand-500 to-brand-700 h-2.5 rounded-full transition-all duration-1000 ease-out w-[92%]">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Skill 8 -->
+                                <div class="group">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-sm font-bold text-slate-700 dark:text-slate-300">UI/UX
+                                            Design</span>
+                                        <span class="text-sm font-bold text-brand-600 dark:text-brand-400">90%</span>
+                                    </div>
+                                    <div
+                                        class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
+                                        <div
+                                            class="bg-gradient-to-r from-brand-500 to-brand-700 h-2.5 rounded-full transition-all duration-1000 ease-out w-[90%]">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="py-24 relative">
+                <div
+                    class="absolute inset-0 bg-brand-50 dark:bg-brand-900/10 skew-y-3 transform origin-bottom-right -z-10">
+                </div>
+                <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+                    <div class="text-center max-w-2xl mx-auto mb-16">
+                        <div
+                            class="inline-flex items-center justify-center gap-2 px-3 py-1 rounded-full bg-brand-100 dark:bg-brand-900/30 text-brand-700 dark:text-brand-400 text-sm font-semibold tracking-wide mb-4">
+                            <span class="material-icons text-sm">send</span>
+                            Connect
+                        </div>
+                        <h2
+                            class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6 font-outfit tracking-tight">
+                            Get in <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-brand-800 dark:from-brand-400 dark:to-brand-300">Touch</span>
+                        </h2>
+                    </div>
+
+                    <div
+                        class="grid grid-cols-1 lg:grid-cols-5 gap-12 bg-white dark:bg-slate-800 rounded-3xl shadow-xl shadow-slate-200/50 dark:shadow-none overflow-hidden border border-slate-100 dark:border-slate-700">
+                        <div class="lg:col-span-2 bg-slate-900 p-10 text-white relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-br from-brand-600/20 to-brand-800/20 z-0"></div>
+                            <div
+                                class="absolute top-0 right-0 w-64 h-64 bg-brand-500/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3">
+                            </div>
+                            <div
+                                class="absolute bottom-0 left-0 w-64 h-64 bg-brand-500/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3">
+                            </div>
+
+                            <div class="relative z-10 h-full flex flex-col">
+                                <h3 class="text-2xl font-bold mb-6 font-outfit">Contact Information</h3>
+                                <p class="text-slate-300 mb-12 leading-relaxed">Ready to bring your app idea to life?
+                                    With
+                                    over 7 years of professional experience, I can help turn your concept into reality.
+                                </p>
+
+                                <div class="space-y-6 flex-grow">
+                                    <div class="flex items-start gap-4">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                                            <i class="fas fa-phone text-brand-400"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm text-slate-400 mb-1">Phone / WhatsApp</p>
+                                            <p class="font-medium">+201016693794</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                                            <i class="fas fa-envelope text-brand-400"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm text-slate-400 mb-1">Email</p>
+                                            <a href="mailto:ahmedazaki0125@gmail.com"
+                                                class="font-medium hover:text-brand-400 transition-colors">ahmedazaki0125@gmail.com</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex gap-4 mt-12 pt-8 border-t border-white/10">
+                                    <a href="https://www.facebook.com/ahmed.azam.52" target="_blank"
+                                        class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-500 hover:text-white transition-all duration-300"
+                                        aria-label="Facebook">
+                                        <i class="fab fa-facebook-f relative z-10"></i>
+                                    </a>
+                                    <a href="https://linkedin.com/in/ahmed-azam-320a98200" target="_blank"
+                                        class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-500 hover:text-white transition-all duration-300"
+                                        aria-label="LinkedIn">
+                                        <i class="fab fa-linkedin-in relative z-10"></i>
+                                    </a>
+                                    <a href="https://github.com/Ahmed2300" target="_blank"
+                                        class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-500 hover:text-white transition-all duration-300"
+                                        aria-label="GitHub">
+                                        <i class="fab fa-github relative z-10"></i>
+                                    </a>
+                                    <a href="https://wa.me/201016693794" target="_blank"
+                                        class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-500 hover:text-white transition-all duration-300"
+                                        aria-label="WhatsApp">
+                                        <i class="fab fa-whatsapp relative z-10"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-3 p-10">
+                            <form id="contact-form" class="space-y-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="name"
+                                            class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Name</label>
+                                        <input type="text" id="name" name="name" placeholder="John Doe" required
+                                            class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all outline-none">
+                                    </div>
+                                    <div>
+                                        <label for="email"
+                                            class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Email</label>
+                                        <input type="email" id="email" name="email" placeholder="john@example.com"
+                                            required
+                                            class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all outline-none">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="message"
+                                        class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Message</label>
+                                    <textarea id="message" name="message" placeholder="How can I help you today?"
+                                        rows="5" required
+                                        class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all outline-none resize-none"></textarea>
+                                </div>
+
+                                <!-- Optimistic UI states placeholder for JS to toggle -->
+                                <div
+                                    class="hidden p-4 rounded-xl bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 text-sm flex items-center gap-2">
+                                    <span class="material-icons text-green-500">check_circle</span>
+                                    Message sent successfully! I'll get back to you soon.
+                                </div>
+
+                                <button type="submit"
+                                    class="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold tracking-wide transition-all shadow-lg hover:shadow-brand-500/30 flex items-center justify-center gap-2">
+                                    <span class="material-icons text-sm">send</span>
+                                    Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-slate-900 border-t border-slate-800 pt-16 pb-8 relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-brand-900/10 to-brand-900/10 z-0"></div>
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-16">
+
+                    <!-- Branding -->
+                    <div class="md:col-span-12 lg:col-span-5 space-y-6">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-brand-800 flex items-center justify-center text-white font-bold text-xl font-outfit shadow-lg shadow-brand-500/20">
+                                A
+                            </div>
+                            <span
+                                class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400 font-outfit tracking-tight">Ahmed
+                                Azam</span>
+                        </div>
+                        <p class="text-slate-400 text-lg max-w-md leading-relaxed">
+                            App Inventor, Flutter & AI Expert. Crafting digital experiences that merge beautiful design
+                            with
+                            powerful engineering.
+                        </p>
+                        <div class="flex gap-4 pt-4">
+                            <a href="https://www.facebook.com/ahmed.azam.52" target="_blank"
+                                aria-label="Facebook Profile"
+                                class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-brand-500 hover:text-white transition-all duration-300 hover:-translate-y-1 shadow-md">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://linkedin.com/in/ahmed-azam-320a98200" target="_blank"
+                                aria-label="LinkedIn Profile"
+                                class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-brand-500 hover:text-white transition-all duration-300 hover:-translate-y-1 shadow-md">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://github.com/Ahmed2300" target="_blank" aria-label="GitHub Profile"
+                                class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-brand-500 hover:text-white transition-all duration-300 hover:-translate-y-1 shadow-md">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="md:col-span-6 lg:col-span-3 lg:col-start-7">
+                        <h4 class="text-white font-semibold mb-6 flex items-center gap-2 font-outfit text-lg">
+                            <span class="w-2 h-2 rounded-full bg-brand-500"></span>
+                            Navigation
+                        </h4>
+                        <ul class="space-y-4">
+                            <li>
+                                <a href="#home"
+                                    class="text-slate-400 hover:text-brand-400 transition-colors flex items-center gap-2 group">
+                                    <span
+                                        class="material-icons text-[16px] opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all text-brand-500">chevron_right</span>
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#projects"
+                                    class="text-slate-400 hover:text-brand-400 transition-colors flex items-center gap-2 group">
+                                    <span
+                                        class="material-icons text-[16px] opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all text-brand-500">chevron_right</span>
+                                    Projects
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#about"
+                                    class="text-slate-400 hover:text-brand-400 transition-colors flex items-center gap-2 group">
+                                    <span
+                                        class="material-icons text-[16px] opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all text-brand-500">chevron_right</span>
+                                    About
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="md:col-span-6 lg:col-span-3">
+                        <h4 class="text-white font-semibold mb-6 flex items-center gap-2 font-outfit text-lg">
+                            <span class="w-2 h-2 rounded-full bg-brand-500"></span>
+                            Contact
+                        </h4>
+                        <ul class="space-y-4">
+                            <li>
+                                <a href="mailto:ahmedazaki0125@gmail.com"
+                                    class="text-slate-400 hover:text-brand-400 transition-colors flex items-center gap-3">
+                                    <div
+                                        class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-brand-400">
+                                        <i class="fas fa-envelope text-sm"></i>
+                                    </div>
+                                    <span class="truncate">Email Me</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://wa.me/201016693794" target="_blank"
+                                    class="text-slate-400 hover:text-brand-400 transition-colors flex items-center gap-3">
+                                    <div
+                                        class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-green-400">
+                                        <i class="fab fa-whatsapp text-sm"></i>
+                                    </div>
+                                    <span>WhatsApp</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Bottom Bar -->
+                <div
+                    class="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
+                    <p>&copy;
+                        <script>document.write(new Date().getFullYear())</script> Ahmed Azam. All rights reserved.
+                    </p>
+                    <div class="flex items-center gap-2">
+                        <span>Designed & Built with</span>
+                        <span class="material-icons text-red-500 text-sm animate-pulse">favorite</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
-    <header class="sticky-header">
-        <div class="header-container">
-            <div class="header-left">
-                <a href="#home" class="logo">
-                    <span class="logo-icon">
-                        <span class="material-icons">code</span>
-                    </span>
-                    <span class="logo-text">Ahmed Azam</span>
-                </a>
-            </div>
-            
-            <nav class="header-nav">
-                <ul class="nav-list">
-                    <li class="nav-item"><a href="#home" class="nav-link"><span class="material-icons">home</span><span>Home</span></a></li>
-                    <li class="nav-item"><a href="#projects" class="nav-link"><span class="material-icons">apps</span><span>Projects</span></a></li>
-                    <li class="nav-item"><a href="#about" class="nav-link"><span class="material-icons">person</span><span>About</span></a></li>
-                    <li class="nav-item"><a href="#contact" class="nav-link"><span class="material-icons">email</span><span>Contact</span></a></li>
-                </ul>
-            </nav>
-            
-            <div class="header-right">
-                <!-- Mobile menu button removed as requested -->
-            </div>
-        </div>
-    </header>
-
-    <main>
-        <section id="home" class="hero">
-            <!-- Decorative Background Elements -->
-            <div class="hero-background">
-                <div class="hero-decoration hero-decoration-1"></div>
-                <div class="hero-decoration hero-decoration-2"></div>
-                <div class="geometric-shape geo-1"></div>
-                <div class="geometric-shape geo-2"></div>
-                <div class="geometric-shape geo-3"></div>
-            </div>
-            
-            <div class="hero-content">
-                <!-- Text Content -->
-                <div class="hero-text">
-                    <h1>Ahmed Azam</h1>
-                    <h2>App Inventor, Flutter & AI Expert</h2>
-                    <p>Professional developer and Physics teacher with +7 years of experience building innovative mobile applications and AI solutions</p>
-                    <div class="hero-buttons">
-                        <a href="#projects" class="hero-btn hero-btn-primary">
-                            <span class="material-icons">apps</span> View My Work
-                        </a>
-                        <a href="#contact" class="hero-btn hero-btn-secondary">
-                            <span class="material-icons">email</span> Contact Me
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Creative Image Frame -->
-                <div class="hero-image-container">
-                    <div class="hero-image-frame">
-                        <img src="images/developer-profile.jpg" alt="Ahmed Azam - App Developer">
-                    </div>
-                    <div class="hero-image-accent"></div>
-                </div>
-            </div>
-            
-            <!-- Creative Scroll Indicator -->
-            <div class="scroll-indicator">
-                <div class="scroll-text">Scroll Down</div>
-                <div class="scroll-icon"></div>
-            </div>
-        </section>
-
-        <!-- Platforms Section: Kodular & App Inventor -->
-        <section id="platforms" class="platforms-section">
-            <div class="section-header">
-                <h2><span class="material-icons">developer_mode</span> Platforms I Work With</h2>
-                <p class="section-subtitle">Specialized expertise in mobile app development platforms and extension creation</p>
-            </div>
-            
-            <div class="platforms-container">
-                <div class="platform-card">
-                    <div class="platform-card-inner">
-                        <div class="platform-icon-wrapper">
-                            <img src="https://iili.io/dfBxlCx.png" alt="Kodular Logo" class="platform-icon" loading="lazy">
-                        </div>
-                        <div class="platform-content">
-                            <h3 class="platform-title">Kodular</h3>
-                            <p class="platform-description">Expert in developing comprehensive mobile applications using Kodular's advanced components and extensions.</p>
-                            <div class="platform-expertise">
-                                <span class="expertise-tag">UI Design</span>
-                                <span class="expertise-tag">Firebase</span>
-                                <span class="expertise-tag">APIs</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="platform-card">
-                    <div class="platform-card-inner">
-                        <div class="platform-icon-wrapper">
-                            <img src="https://iili.io/dfBx14V.png" alt="App Inventor Logo" class="platform-icon" loading="lazy">
-                        </div>
-                        <div class="platform-content">
-                            <h3 class="platform-title">App Inventor</h3>
-                            <p class="platform-description">Skilled in creating versatile applications through MIT App Inventor's block-based programming environment.</p>
-                            <div class="platform-expertise">
-                                <span class="expertise-tag">Block Logic</span>
-                                <span class="expertise-tag">Databases</span>
-                                <span class="expertise-tag">Web APIs</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="platform-card">
-                    <div class="platform-card-inner">
-                        <div class="platform-icon-wrapper dual-icons">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java Logo" class="platform-icon small">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin Logo" class="platform-icon small">
-                        </div>
-                        <div class="platform-content">
-                            <h3 class="platform-title">Extension Developer</h3>
-                            <p class="platform-description">I develop custom extensions for App Inventor & Kodular using Java and Kotlin, enabling advanced functionality beyond built-in components.</p>
-                            <div class="platform-expertise">
-                                <span class="expertise-tag">Java</span>
-                                <span class="expertise-tag">Kotlin</span>
-                                <span class="expertise-tag">Android SDK</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Android Studio Card -->
-                <div class="platform-card">
-                    <div class="platform-card-inner">
-                        <div class="platform-icon-wrapper">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" alt="Android Studio Logo" class="platform-icon" loading="lazy">
-                        </div>
-                        <div class="platform-content">
-                            <h3 class="platform-title">Android Studio</h3>
-                            <p class="platform-description">Proficient in native Android development using Android Studio for creating high-performance and feature-rich mobile applications.</p>
-                            <div class="platform-expertise">
-                                <span class="expertise-tag">UI/UX Design</span>
-                                <span class="expertise-tag">Material Design</span>
-                                <span class="expertise-tag">Jetpack</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Visual Studio Code Card -->
-                <div class="platform-card">
-                    <div class="platform-card-inner">
-                        <div class="platform-icon-wrapper">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="Visual Studio Code Logo" class="platform-icon" loading="lazy">
-                        </div>
-                        <div class="platform-content">
-                            <h3 class="platform-title">VS Code</h3>
-                            <p class="platform-description">Proficient with Visual Studio Code for efficient development, utilizing extensions and integrated tools to enhance productivity across multiple languages.</p>
-                            <div class="platform-expertise">
-                                <span class="expertise-tag">JavaScript</span>
-                                <span class="expertise-tag">Python</span>
-                                <span class="expertise-tag">Web Dev</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- AI Tools Section -->
-        <section id="ai-tools" class="platforms-section ai-tools-section">
-            <div class="section-header">
-                <h2><span class="material-icons">smart_toy</span> AI Tools I Master</h2>
-                <p class="section-subtitle">Leveraging cutting-edge AI technologies to enhance development workflows and create intelligent solutions</p>
-            </div>
-            
-            <div class="platforms-container">
-                <!-- ChatGPT Card -->
-                <div class="platform-card">
-                    <div class="platform-card-inner">
-                        <div class="platform-icon-wrapper">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT Logo" class="platform-icon" loading="lazy">
-                        </div>
-                        <div class="platform-content">
-                            <h3 class="platform-title">ChatGPT</h3>
-                            <p class="platform-description">Expert in using ChatGPT for advanced prompt engineering, content creation, and integrating OpenAI APIs into applications for intelligent features.</p>
-                            <div class="platform-expertise">
-                                <span class="expertise-tag">Prompt Engineering</span>
-                                <span class="expertise-tag">OpenAI API</span>
-                                <span class="expertise-tag">NLP Integration</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Gemini Card -->
-                <div class="platform-card">
-                    <div class="platform-card-inner">
-                        <div class="platform-icon-wrapper">
-                            <img src="https://iili.io/3gDlYCX.png" alt="Gemini Logo" class="platform-icon" loading="lazy">
-                        </div>
-                        <div class="platform-content">
-                            <h3 class="platform-title">Gemini</h3>
-                            <p class="platform-description">Skilled in utilizing Google's Gemini AI for multimodal applications, connecting Gemini API to mobile and web applications for enhanced user experiences.</p>
-                            <div class="platform-expertise">
-                                <span class="expertise-tag">Multimodal AI</span>
-                                <span class="expertise-tag">Google AI Studio</span>
-                                <span class="expertise-tag">API Integration</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Programming Languages Section -->
-        <section id="languages" class="languages-section">
-            <div class="section-header">
-                <h2><span class="material-icons">code</span> Programming Languages</h2>
-                <p class="section-subtitle">Technical skills and programming languages I use to develop amazing applications</p>
-            </div>
-            
-            <div class="languages-container">
-                <!-- Dart Language Card -->
-                <div class="language-card dart">
-                    <div class="language-icon">
-                        <img src="https://iili.io/3gZYqhu.png" alt="Dart programming language" class="dart-icon">
-                    </div>
-                    <h3 class="language-title">Dart</h3>
-                    <p class="language-description">Used for Flutter development and modern, efficient applications.</p>
-                    <div class="skill-level">
-                        <div class="level-text">
-                            <span class="label">Proficiency</span>
-                            <span class="value">90%</span>
-                        </div>
-                        <div class="level-bar">
-                            <div class="level-fill" style="width: 90%"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- HTML Language Card -->
-                <div class="language-card html">
-                    <div class="language-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-                            <path d="M9.032 2l10.005 112.093 44.896 12.401 45.02-12.387L118.968 2H9.032zm89.126 26.539l-.627 7.172L97.255 39H44.59l1.257 14h50.156l-.336 3.471-3.233 36.119-.238 2.27L64 102.609v.002l-.034.018-28.177-7.423L33.876 74h13.815l.979 10.919L63.957 89H64v-.546l15.355-3.875L80.959 67H33.261l-3.383-38.117L29.549 25h68.939l-.33 3.539z" fill="#fff"/>
-                        </svg>
-                    </div>
-                    <h3 class="language-title">HTML</h3>
-                    <p class="language-description">The foundation of web development for creating structured content.</p>
-                    <div class="skill-level">
-                        <div class="level-text">
-                            <span class="label">Proficiency</span>
-                            <span class="value">95%</span>
-                        </div>
-                        <div class="level-bar">
-                            <div class="level-fill" style="width: 95%"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- CSS Language Card -->
-                <div class="language-card css">
-                    <div class="language-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-                            <path d="M8.76 1l10.055 112.883 45.118 12.58 45.244-12.626L119.24 1H8.76zm89.591 25.862l-3.347 37.605.01.203-.014.467v-.004l-2.378 26.294-.262 2.336L64 101.607v.001l-.022.019-28.311-7.888L33.75 72h13.883l.985 11.054 15.386 4.17-.004.008v-.002l15.443-4.229L81.075 65H48.792l-.277-3.043-.631-7.129L47.553 51h34.749l1.264-14H30.64l-.277-3.041-.63-7.131L29.401 23h69.281l-.331 3.862z" fill="#fff"/>
-                        </svg>
-                    </div>
-                    <h3 class="language-title">CSS</h3>
-                    <p class="language-description">Styling language that brings design and visual appeal to web applications.</p>
-                    <div class="skill-level">
-                        <div class="level-text">
-                            <span class="label">Proficiency</span>
-                            <span class="value">92%</span>
-                        </div>
-                        <div class="level-bar">
-                            <div class="level-fill" style="width: 92%"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- JavaScript Language Card -->
-                <div class="language-card javascript">
-                    <div class="language-icon">
-                        <div class="js-icon">JS</div>
-                    </div>
-                    <h3 class="language-title">JavaScript</h3>
-                    <p class="language-description">Dynamic programming language that adds interactivity to web applications.</p>
-                    <div class="skill-level">
-                        <div class="level-text">
-                            <span class="label">Proficiency</span>
-                            <span class="value">88%</span>
-                        </div>
-                        <div class="level-bar">
-                            <div class="level-fill" style="width: 88%"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- JSON Language Card -->
-                <div class="language-card json">
-                    <div class="language-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M5,3H7V5H5V10A2,2 0 0,1 3,12A2,2 0 0,1 5,14V19H7V21H5C3.93,20.73 3,20.1 3,19V15A2,2 0 0,0 1,13H0V11H1A2,2 0 0,0 3,9V5A2,2 0 0,1 5,3M19,3A2,2 0 0,1 21,5V9A2,2 0 0,0 23,11H24V13H23A2,2 0 0,0 21,15V19A2,2 0 0,1 19,21H17V19H19V14A2,2 0 0,1 21,12A2,2 0 0,1 19,10V5H17V3H19M12,15A1,1 0 0,1 13,16A1,1 0 0,1 12,17A1,1 0 0,1 11,16A1,1 0 0,1 12,15M8,15A1,1 0 0,1 9,16A1,1 0 0,1 8,17A1,1 0 0,1 7,16A1,1 0 0,1 8,15M16,15A1,1 0 0,1 17,16A1,1 0 0,1 16,17A1,1 0 0,1 15,16A1,1 0 0,1 16,15Z" fill="#fff"/>
-                        </svg>
-                    </div>
-                    <h3 class="language-title">JSON</h3>
-                    <p class="language-description">Lightweight data interchange format for APIs and configuration files.</p>
-                    <div class="skill-level">
-                        <div class="level-text">
-                            <span class="label">Proficiency</span>
-                            <span class="value">94%</span>
-                        </div>
-                        <div class="level-bar">
-                            <div class="level-fill" style="width: 94%"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Java Language Card -->
-                <div class="language-card java">
-                    <div class="language-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-                            <path fill="#fff" d="M47.617 98.12s-4.767 2.774 3.397 3.71c9.892 1.13 14.947.968 25.845-1.092 0 0 2.871 1.795 6.873 3.351-24.439 10.47-55.308-.607-36.115-5.969zm-2.988-13.665s-5.348 3.959 2.823 4.805c10.567 1.091 18.91 1.18 33.354-1.6 0 0 1.993 2.025 5.132 3.131-29.542 8.64-62.446.68-41.309-6.336z"/><path fill="#fff" d="M69.802 61.271c6.025 6.935-1.58 13.17-1.58 13.17s15.289-7.891 8.269-17.777c-6.559-9.215-11.587-13.792 15.635-29.58 0 .001-42.731 10.67-22.324 34.187z"/><path fill="#fff" d="M102.123 108.229s3.529 2.91-3.888 5.159c-14.102 4.272-58.706 5.56-71.094.171-4.451-1.938 3.899-4.625 6.526-5.192 2.739-.593 4.303-.485 4.303-.485-4.953-3.487-32.013 6.85-13.743 9.815 49.821 8.076 90.817-3.637 77.896-9.468zM49.912 70.294s-22.686 5.389-8.033 7.348c6.188.828 18.518.638 30.011-.326 9.39-.789 18.813-2.474 18.813-2.474s-3.308 1.419-5.704 3.053c-23.042 6.061-67.544 3.238-54.731-2.958 10.832-5.239 19.644-4.643 19.644-4.643zm40.697 22.747c23.421-12.167 12.591-23.86 5.032-22.285-1.848.385-2.677.72-2.677.72s.688-1.079 2-1.543c14.953-5.255 26.451 15.503-4.823 23.725 0-.002.359-.327.468-.617z"/><path fill="#fff" d="M76.491 1.587S89.459 14.563 64.188 34.51c-20.266 16.006-4.621 25.13-.007 35.559-11.831-10.673-20.509-20.07-14.688-28.815C58.041 28.42 81.722 22.195 76.491 1.587z"/><path fill="#fff" d="M52.214 126.021c22.476 1.437 57-.8 57.817-11.436 0 0-1.571 4.032-18.577 7.231-19.186 3.612-42.854 3.191-56.887.874 0 .001 2.875 2.381 17.647 3.331z"/>                        </svg>
-                    </div>
-                    <h3 class="language-title">Java</h3>
-                    <p class="language-description">Versatile programming language for enterprise applications and Android development.</p>
-                    <div class="skill-level">
-                        <div class="level-text">
-                            <span class="label">Proficiency</span>
-                            <span class="value">85%</span>
-                        </div>
-                        <div class="level-bar">
-                            <div class="level-fill" style="width: 85%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects">
-            <h2><span class="material-icons">apps</span> Featured Projects</h2>
-            <p class="section-intro">Here are some of my highlighted App Inventor and Kodular projects with over 7 years of professional development experience.</p>
-            
-            <!-- Dynamic apps grid -->
-            <div class="app-grid">
-                <!-- App items will be dynamically loaded from JavaScript -->
-            </div>
-        </section>
-
-        <section id="about">
-            <h2><span class="material-icons">info</span> About Me</h2>
-            <div class="about-container">
-                <div class="about-content frosted-glass">
-                    <p class="about-intro">Hello! I'm Ahmed Azam, a Physics teacher, mobile app developer, and AI specialist with over 7 years of professional experience.</p>
-                    <p>I specialize in creating efficient, user-friendly mobile applications using App Inventor, Kodular, and Flutter that solve real-world problems. My expertise includes developing custom solutions, implementing complex functionalities, and delivering polished applications that exceed client expectations.</p>
-                    <p>In addition to my mobile development skills, I'm a qualified Physics teacher bringing analytical thinking to my tech projects. I'm also an experienced prompt engineer and AI tool expert, helping businesses leverage the latest AI technologies for innovative solutions.</p>
-                </div>
-                
-                <div class="skills-container frosted-glass">
-                    <h3>Technical Skills</h3>
-                    <div class="skills-grid">
-                        <div class="skill-item">
-                            <div class="skill-name" data-level="98">App Inventor</div>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 98%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name" data-level="95">Kodular</div>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 95%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name" data-level="90">Flutter Development</div>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name" data-level="95">Physics Teaching</div>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 95%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name" data-level="92">Prompt Engineering</div>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 92%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name" data-level="94">AI Tools Expert</div>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 94%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name" data-level="92">Firebase Integration</div>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 92%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name" data-level="90">UI/UX Design</div>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact">
-            <h2><span class="material-icons">send</span> Get in Touch</h2>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <p class="contact-intro">Ready to bring your app idea to life? With over 7 years of professional experience, I can help turn your concept into reality.</p>
-                    <div class="contact-details">
-                        <p><i class="fas fa-phone"></i> +201016693794</p>
-                        <p><i class="fas fa-envelope"></i> ahmedazaki0125@gmail.com</p>
-                    </div>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/ahmed.azam.52" target="_blank" class="social-link" aria-label="Facebook Profile">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="https://linkedin.com/in/ahmed-azam-320a98200" target="_blank" class="social-link" aria-label="LinkedIn Profile">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://github.com/Ahmed2300" target="_blank" class="social-link" aria-label="GitHub Profile">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="mailto:ahmedazaki0125@gmail.com" class="social-link" aria-label="Email Address">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                        <a href="https://wa.me/201016693794" target="_blank" class="social-link" aria-label="WhatsApp Contact">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <form id="contact-form" class="contact-form">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" placeholder="Your name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Your email address" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" placeholder="How can I help with your project?" rows="5" required></textarea>
-                    </div>
-                    <div class="form-feedback">
-                        <div class="success-message">Thanks! Your message has been sent successfully.</div>
-                        <div class="error-message">Oops! Something went wrong. Please try again.</div>
-                    </div>
-                    <button type="submit" class="btn-submit"><span class="material-icons">send</span> Send Message</button>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <footer class="modern-footer">
-        <div class="footer-container">
-            <div class="footer-branding">
-                <div class="footer-logo">Ahmed Azam</div>
-                <p class="footer-tagline">App Inventor, Flutter & AI Expert</p>
-            </div>
-            
-            <div class="footer-navigation">
-                <h4>Navigation</h4>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-connect">
-                <h4>Connect</h4>
-                <div class="footer-social">
-                    <a href="https://www.facebook.com/ahmed.azam.52" target="_blank" aria-label="Facebook Profile" class="social-icon">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-                    <a href="https://linkedin.com/in/ahmed-azam-320a98200" target="_blank" aria-label="LinkedIn Profile" class="social-icon">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="https://twitter.com/YourTwitterHandle" target="_blank" aria-label="Twitter Profile" class="social-icon">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="mailto:ahmedazaki0125@gmail.com" aria-label="Email Address" class="social-icon">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                    <a href="https://wa.me/201016693794" target="_blank" aria-label="WhatsApp Contact" class="social-icon">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2025 Ahmed Azam's Portfolio. All rights reserved.</p>
-            <div class="footer-legal">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Use</a>
-            </div>
-        </div>
-    </footer>
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -550,92 +1212,151 @@
 
     <!-- Main Script -->
     <script src="script.js"></script>
-    
+
     <!-- Fullscreen Slider Script -->
     <script src="fullscreen-slider.js"></script>
-    
-    <!-- Modern Theme Toggle Script -->
-    <script src="theme-toggle.js"></script>
 
-    <!-- Project Detail Modal -->
-    <div id="projectDetailModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <div class="modal-header">
-                <h2 id="modalProjectName">Project Name</h2>
-                <p id="modalProjectPlatform">Platform: N/A</p>
-            </div>
-            
-            <div class="project-carousel">
-                <div id="modalImageGallery" class="image-gallery">
-                    <!-- Detail images will be populated here by JavaScript -->
-                </div>
-                <div class="carousel-controls">
-                    <button class="carousel-control prev"><i class="material-icons">arrow_back</i></button>
-                    <div class="carousel-indicators"></div>
-                    <button class="carousel-control next"><i class="material-icons">arrow_forward</i></button>
-                </div>
-            </div>
-            
-            <div class="project-sections">
-                <div class="project-section">
-                    <h3>The Challenge</h3>
-                    <p id="modalProjectProblem">Problem statement goes here.</p>
-                </div>
-                
-                <div class="project-section">
-                    <h3>The Solution</h3>
-                    <p id="modalProjectSolution">Solution description goes here.</p>
-                </div>
-                
-                <div class="project-section">
-                    <h3>Key Features</h3>
-                    <ul id="modalProjectFeatures" class="feature-list">
-                        <!-- Features will be populated here by JavaScript -->
-                    </ul>
-                </div>
-                
-                <div class="project-section">
-                    <h3>Technologies Used</h3>
-                    <div id="modalProjectTech" class="tech-stack modal-tech-stack">
-                        <!-- Tech badges will be populated here by JavaScript -->
+    <!-- Modern Theme Toggle Script -->
+    <!-- Project Detail SPA View -->
+    <div id="project-view-container" class="hidden min-h-[100dvh] bg-slate-50 dark:bg-slate-900 w-full relative z-50">
+        <!-- Header / Hero Section -->
+        <div class="relative w-full aspect-[16/9] md:aspect-[21/9] lg:aspect-[24/9] bg-slate-900 overflow-hidden">
+            <img id="pvHeroImage" src="" alt="Project Hero"
+                class="w-full h-full object-cover opacity-80 mix-blend-overlay">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
+
+            <!-- Back Button & Title Container -->
+            <div class="absolute bottom-0 left-0 w-full p-6 md:p-12 lg:px-24 flex flex-col justify-end">
+                <button onclick="closeProjectView()"
+                    class="group flex items-center gap-3 text-white/80 hover:text-white mb-6 md:mb-10 w-fit transition-all duration-300">
+                    <div
+                        class="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center group-hover:bg-brand-500 group-hover:border-transparent group-hover:-translate-x-1 transition-all">
+                        <i class="material-icons text-xl">arrow_back</i>
+                    </div>
+                    <span class="font-medium tracking-wide uppercase text-sm">Back to Home</span>
+                </button>
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div>
+                        <h1 id="pvTitle"
+                            class="text-4xl md:text-5xl lg:text-7xl font-display font-bold text-white tracking-tight mb-3 font-outfit"
+                            style="font-size: clamp(2.5rem, 5vw + 1.5rem, 5rem); line-height: 1.1;">Project Name</h1>
+                        <p id="pvPlatform"
+                            class="text-brand-400 font-medium text-lg md:text-xl flex items-center gap-3">
+                            <span
+                                class="w-2.5 h-2.5 rounded-full bg-brand-500 shadow-[0_0_10px_rgba(122,170,206,0.6)]"></span>
+                            <span id="pvPlatformText">Flutter App</span>
+                        </p>
+                    </div>
+                    <div id="pvLinksHeader" class="flex flex-wrap gap-3 pb-2">
+                        <!-- Links populated by JS -->
                     </div>
                 </div>
             </div>
-            
-            <div class="project-links">
-                <a id="modalGithubLink" href="#" target="_blank" class="project-link">
-                    <i class="fab fa-github"></i> View on GitHub
-                </a>
-                <a id="modalPlayStoreLink" href="#" target="_blank" class="project-link">
-                    <i class="fab fa-google-play"></i> Google Play
-                </a>
-                <a id="modalAppStoreLink" href="#" target="_blank" class="project-link">
-                    <i class="fab fa-app-store-ios"></i> App Store
-                </a>
-                <a id="modalDemoLink" href="#" target="_blank" class="project-link">
-                    <i class="fas fa-external-link-alt"></i> Live Demo
-                </a>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-16 md:py-24">
+            <div class="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-16 lg:gap-24">
+
+                <!-- Left Column: Reading Content -->
+                <div class="space-y-20">
+                    <!-- Problem & Solution -->
+                    <div class="prose prose-lg dark:prose-invert prose-slate max-w-none">
+                        <h2
+                            class="text-3xl font-display font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-4">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 dark:bg-brand-500/10 flex items-center justify-center">
+                                <i class="material-icons text-lg">psychology</i>
+                            </div>
+                            The Challenge
+                        </h2>
+                        <p id="pvProblem" class="text-slate-600 dark:text-slate-400 leading-relaxed text-lg md:text-xl">
+                            Problem statement goes here.</p>
+
+                        <div class="h-4"></div> <!-- Spacer -->
+
+                        <h2
+                            class="text-3xl font-display font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-4">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 dark:bg-brand-500/10 flex items-center justify-center">
+                                <i class="material-icons text-lg">lightbulb</i>
+                            </div>
+                            The Solution
+                        </h2>
+                        <p id="pvSolution"
+                            class="text-slate-600 dark:text-slate-400 leading-relaxed text-lg md:text-xl">Solution
+                            description goes here.</p>
+                    </div>
+
+                    <!-- Image Layout (Masonry) -->
+                    <div>
+                        <h2
+                            class="text-3xl font-display font-bold text-slate-900 dark:text-white mb-8 flex items-center gap-4">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 dark:bg-brand-500/10 flex items-center justify-center">
+                                <i class="material-icons text-lg">dashboard</i>
+                            </div>
+                            Gallery
+                        </h2>
+                        <div id="pvGallery" class="columns-1 md:columns-2 gap-8 space-y-8">
+                            <!-- Detail images will be populated here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Sticky Metadata Sidebar -->
+                <div class="relative">
+                    <div class="sticky top-24 space-y-8">
+                        <!-- Technologies -->
+                        <div
+                            class="bg-white dark:bg-slate-800/40 rounded-3xl p-8 border border-slate-200 dark:border-slate-700/50 shadow-sm backdrop-blur-xl">
+                            <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-6">Technologies
+                            </h3>
+                            <div id="pvTech" class="flex flex-wrap gap-2">
+                                <!-- Tech badges will be populated here by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Key Features -->
+                        <div
+                            class="bg-white dark:bg-slate-800/40 rounded-3xl p-8 border border-slate-200 dark:border-slate-700/50 shadow-sm backdrop-blur-xl">
+                            <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-6">Key Features
+                            </h3>
+                            <ul id="pvFeatures" class="space-y-4">
+                                <!-- Features populated by JS -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
     <!-- Full Screen Image Slider Gallery -->
     <div id="fullScreenSlider" class="fullscreen-slider">
         <div class="slider-close"><span class="material-icons">close</span></div>
-        
+
         <div class="slider-container">
             <div class="slider-content">
                 <!-- Images will be dynamically added here -->
             </div>
-            
+
             <div class="slider-controls">
                 <button class="slider-nav prev"><span class="material-icons">arrow_back_ios</span></button>
                 <div class="slider-indicators"></div>
                 <button class="slider-nav next"><span class="material-icons">arrow_forward_ios</span></button>
             </div>
-            
+
             <div class="slider-counter">1 / 1</div>
         </div>
     </div>
+    </div>
+
+    <!-- Lenis Smooth Scrolling -->
+    <script src="https://unpkg.com/lenis@1.1.17/dist/lenis.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="script.js"></script>
 </body>
+
 </html>
