@@ -1,0 +1,313 @@
+/* Programming Languages Showcase Section - 2025 Modern Design */
+
+.languages-section {
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Container for language cards */
+.languages-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+}
+
+/* Programming Language Card */
+.language-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.language-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  border-color: rgba(45, 70, 185, 0.2);
+}
+
+/* Language Icon */
+.language-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.language-icon svg {
+  width: 40px;
+  height: 40px;
+}
+
+/* Dart Icon Image */
+.dart-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+/* JavaScript Icon */
+.js-icon {
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: 22px;
+  color: #000;
+  background-color: #F7DF1E;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.language-card:hover .language-icon {
+  transform: scale(1.1);
+  box-shadow: 0 10px 20px rgba(45, 70, 185, 0.15);
+}
+
+.language-icon img,
+.language-icon svg {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Language Title and Description */
+.language-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--primary-color, #3D5A80);
+  text-align: center;
+}
+
+.language-description {
+  font-size: 0.9rem;
+  color: var(--text-color, #3D5A80);
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  opacity: 0.9;
+}
+
+/* Skill Level Indicator */
+.skill-level {
+  width: 90%;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.level-text {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+}
+
+.level-text .value {
+  font-weight: 600;
+  color: var(--primary-color, #3D5A80);
+}
+
+.level-bar {
+  height: 6px;
+  background: rgba(220, 225, 235, 0.6);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.level-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 1.5s ease-in-out;
+  background: linear-gradient(to right, var(--primary-color, #3D5A80), var(--secondary-color, #79B6C9));
+}
+
+/* Language specific color themes */
+.language-card.dart {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(83, 130, 231, 0.1));
+}
+.language-card.dart .language-icon {
+  background: linear-gradient(135deg, #0175C2, #01589B);
+}
+.language-card.dart .language-title {
+  color: #0175C2;
+}
+.language-card.dart .level-fill {
+  background: linear-gradient(to right, #0175C2, #45CAFF);
+}
+
+.language-card.java {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(236, 45, 45, 0.1));
+}
+.language-card.java .language-icon {
+  background: linear-gradient(135deg, #EA2D2E, #A30000);
+}
+.language-card.java .language-title {
+  color: #EA2D2E;
+}
+.language-card.java .level-fill {
+  background: linear-gradient(to right, #EA2D2E, #FF7B7B);
+}
+
+.language-card.html {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(229, 102, 54, 0.1));
+}
+.language-card.html .language-icon {
+  background: linear-gradient(135deg, #E44D26, #F16529);
+}
+.language-card.html .language-title {
+  color: #E44D26;
+}
+.language-card.html .level-fill {
+  background: linear-gradient(to right, #E44D26, #F16529);
+}
+
+.language-card.css {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(38, 131, 212, 0.1));
+}
+.language-card.css .language-icon {
+  background: linear-gradient(135deg, #264DE4, #2965F1);
+}
+.language-card.css .language-title {
+  color: #264DE4;
+}
+.language-card.css .level-fill {
+  background: linear-gradient(to right, #264DE4, #45CAFF);
+}
+
+.language-card.javascript {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(235, 217, 52, 0.1));
+}
+.language-card.javascript .language-icon {
+  background: linear-gradient(135deg, #F7DF1E, #F0DB4F);
+}
+.language-card.javascript .language-title {
+  color: #B0A51F;
+}
+.language-card.javascript .level-fill {
+  background: linear-gradient(to right, #F7DF1E, #F0DB4F);
+}
+
+.language-card.json {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(87, 152, 203, 0.1));
+}
+.language-card.json .language-icon {
+  background: linear-gradient(135deg, #5F5F5F, #808080);
+}
+.language-card.json .language-title {
+  color: #5F5F5F;
+}
+.language-card.json .level-fill {
+  background: linear-gradient(to right, #5F5F5F, #A0A0A0);
+}
+
+/* Dark Mode Theme */
+body.dark-theme .language-card {
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.1);
+  box-shadow: var(--dark-card-shadow, 0 8px 20px rgba(0, 0, 0, 0.15));
+}
+
+body.dark-theme .language-card:hover {
+  border-color: rgba(56, 189, 248, 0.3);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-theme .language-title {
+  color: var(--dark-text-primary, #F8FAFC);
+}
+
+body.dark-theme .language-description {
+  color: var(--dark-text-secondary, #CBD5E1);
+}
+
+body.dark-theme .level-text .value {
+  color: var(--dark-accent-blue, #38BDF8);
+}
+
+body.dark-theme .level-bar {
+  background: rgba(30, 41, 59, 0.6);
+}
+
+/* Responsive Adjustments */
+@media only screen and (max-width: 767px) {
+  .languages-section {
+    padding: 60px 15px;
+  }
+  
+  .languages-container {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    padding: 0;
+  }
+  
+  .language-card {
+    padding: 20px 15px;
+  }
+  
+  .language-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+  }
+  
+  .language-icon img,
+  .language-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .language-title {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+  
+  .language-description {
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+  }
+}
+
+/* Individual Language Icon Styles */
+.language-card.dart .language-icon svg path {
+  fill: white;
+}
+
+.language-card.html .language-icon svg path {
+  fill: white;
+}
+
+.language-card.css .language-icon svg path {
+  fill: white;
+}
+
+.language-card.javascript .language-icon svg path {
+  fill: #000000;
+}
+
+.language-card.json .language-icon svg path {
+  fill: white;
+}

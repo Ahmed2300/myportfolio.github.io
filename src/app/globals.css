@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+canvas#ambient-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Background gradient meshes */
+.gradient-mesh {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(156, 213, 255, 0.15), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(122, 170, 206, 0.1), transparent 25%);
+}
+
+.dark .gradient-mesh {
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(156, 213, 255, 0.05), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(122, 170, 206, 0.03), transparent 25%);
+}
+
+/* Base custom SVG dividers that were in style.css */
+.wave-divider {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 5;
+}
+
+.wave-divider.bottom {
+  bottom: 0;
+}
+
+.wave-divider svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 60px;
+}
+
+@media (min-width: 768px) {
+  .wave-divider svg {
+    height: 120px;
+  }
+}
+
+.wave-divider .wave-fill {
+  fill: currentColor;
+}
+
+/* Noise Texture Overlay */
+.noise-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.04;
+  /* Removed complex gradient causing Next.js syntax errors */
+  background-color: transparent;
+}
+
+/* Lenis Smooth Scroll Required CSS */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}

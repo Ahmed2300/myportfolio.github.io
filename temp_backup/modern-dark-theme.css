@@ -1,0 +1,446 @@
+/* Modern Colorful Dark Theme 2025
+   An enhanced dark mode with vibrant accents and clean UI */
+
+/* Dark Theme Color Variables */
+:root {
+  /* Base Colors - User Custom Palette */
+  --dark-bg-primary: #132433;
+  /* Darker Navy Background */
+  --dark-bg-secondary: #223c50;
+  /* Deep Navy for cards */
+  --dark-bg-tertiary: #355872;
+  /* Navy for hover states */
+
+  /* Text Colors */
+  --dark-text-primary: #F7F8F0;
+  /* Off-white */
+  --dark-text-secondary: #9CD5FF;
+  /* Light blue text */
+  --dark-text-muted: #7AAACE;
+  /* Medium blue muted */
+
+  /* Vibrant Accent Colors mapped to user palette */
+  --dark-accent-blue: #9CD5FF;
+  /* Light blue */
+  --dark-accent-purple: #7AAACE;
+  /* Medium blue */
+  --dark-accent-pink: #9CD5FF;
+  /* Light blue */
+  --dark-accent-teal: #7AAACE;
+  /* Medium blue */
+  --dark-accent-indigo: #9CD5FF;
+  /* Light blue */
+  --dark-accent-yellow: #F7F8F0;
+  /* Off-white */
+
+  /* Gradient Combinations */
+  --dark-gradient-blue: linear-gradient(135deg, #7AAACE, #9CD5FF);
+  --dark-gradient-purple: linear-gradient(135deg, #355872, #7AAACE);
+  --dark-gradient-pink: linear-gradient(135deg, #7AAACE, #9CD5FF);
+  --dark-gradient-mixed: linear-gradient(135deg, #9CD5FF, #7AAACE);
+  --dark-gradient-cool: linear-gradient(135deg, #7AAACE, #9CD5FF);
+
+  /* UI Effects */
+  --dark-card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
+  --dark-glow-blue: 0 0 20px rgba(156, 213, 255, 0.35);
+  --dark-glow-purple: 0 0 20px rgba(122, 170, 206, 0.35);
+  --dark-glow-teal: 0 0 20px rgba(122, 170, 206, 0.35);
+
+  /* Borders */
+  --dark-border-subtle: rgba(156, 213, 255, 0.1);
+  --dark-border-accent: rgba(156, 213, 255, 0.3);
+}
+
+/* Body Background with Enhanced Colors */
+body.dark-theme {
+  background-color: var(--dark-bg-primary);
+  color: var(--dark-text-primary);
+}
+
+/* Enhanced Dark Header with Glass Effect */
+body.dark-theme header.sticky-header {
+  background: rgba(15, 23, 42, 0.7) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid var(--dark-border-accent) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+body.dark-theme .header-container {
+  padding: 1rem 2rem;
+}
+
+body.dark-theme .logo {
+  color: var(--dark-accent-blue);
+  font-weight: 600;
+}
+
+body.dark-theme .logo-icon {
+  background: var(--dark-gradient-blue);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.5rem;
+}
+
+body.dark-theme .logo-text {
+  background: var(--dark-gradient-blue);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+body.dark-theme .nav-link {
+  color: var(--dark-text-secondary);
+  transition: all 0.3s ease;
+}
+
+body.dark-theme .nav-link:hover {
+  color: var(--dark-accent-blue);
+  transform: translateY(-2px);
+}
+
+body.dark-theme .nav-link .material-icons {
+  color: var(--dark-accent-blue);
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+body.dark-theme .nav-link:hover .material-icons {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+/* Enhanced About Section Cards */
+body.dark-theme .about-content,
+body.dark-theme .skills-container {
+  background: rgba(30, 41, 59, 0.7) !important;
+  border: 1px solid rgba(56, 189, 248, 0.1) !important;
+  box-shadow: var(--dark-card-shadow) !important;
+}
+
+body.dark-theme .about-content:hover,
+body.dark-theme .skills-container:hover {
+  border-color: rgba(56, 189, 248, 0.3) !important;
+  box-shadow: var(--dark-glow-blue) !important;
+}
+
+body.dark-theme .about-intro {
+  color: var(--dark-accent-blue);
+  font-weight: 600;
+}
+
+body.dark-theme .about-content p {
+  color: var(--dark-text-secondary);
+}
+
+/* Modern Skill Bars */
+body.dark-theme .skills-container h3 {
+  color: var(--dark-accent-blue);
+}
+
+body.dark-theme .skills-container h3::after {
+  background: var(--dark-gradient-blue);
+}
+
+body.dark-theme .skill-name {
+  color: var(--dark-text-secondary) !important;
+}
+
+body.dark-theme .skill-name::after {
+  color: var(--dark-accent-blue) !important;
+}
+
+body.dark-theme .skill-bar {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+body.dark-theme .skill-progress {
+  background: var(--dark-gradient-mixed) !important;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+/* Section Headings */
+body.dark-theme section h2 {
+  color: var(--dark-text-primary);
+}
+
+/* Platforms Section Dark Mode */
+body.dark-theme .platforms-section {
+  background: var(--dark-bg-primary) !important;
+  background: linear-gradient(to bottom, var(--dark-bg-primary), var(--dark-bg-secondary)) !important;
+  color: var(--dark-text-primary);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+body.dark-theme .section-header h2,
+body.dark-theme .section-header .section-subtitle {
+  color: var(--dark-text-primary);
+}
+
+body.dark-theme .platform-card {
+  background: rgba(30, 41, 59, 0.7) !important;
+  border: 1px solid rgba(56, 189, 248, 0.1) !important;
+  box-shadow: var(--dark-card-shadow) !important;
+}
+
+body.dark-theme .platform-card:hover {
+  border-color: rgba(56, 189, 248, 0.3) !important;
+  box-shadow: var(--dark-glow-blue) !important;
+  transform: translateY(-5px);
+}
+
+body.dark-theme .platform-title {
+  color: var(--dark-text-primary);
+}
+
+body.dark-theme .platform-description {
+  color: var(--dark-text-secondary);
+}
+
+body.dark-theme .expertise-tag {
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--dark-accent-blue);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+body.dark-theme .expertise-tag:hover {
+  background: rgba(56, 189, 248, 0.2);
+  color: var(--dark-text-primary);
+}
+
+body.dark-theme .platforms-section::before,
+body.dark-theme .platforms-section::after {
+  opacity: 0.1;
+}
+
+body.dark-theme section h2 .material-icons {
+  background: var(--dark-gradient-blue);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background-color: rgba(56, 189, 248, 0.1);
+}
+
+/* Projects/Apps Grid Cards */
+body.dark-theme .app-item,
+body.dark-theme .project-item {
+  background: var(--dark-bg-secondary);
+  border: 1px solid var(--dark-border-subtle);
+  box-shadow: var(--dark-card-shadow);
+  transition: all 0.4s ease;
+}
+
+body.dark-theme .app-item:hover,
+body.dark-theme .project-item:hover {
+  transform: translateY(-10px);
+  border-color: var(--dark-border-accent);
+  box-shadow: var(--dark-glow-blue);
+}
+
+body.dark-theme .app-item h3,
+body.dark-theme .project-item h3 {
+  color: var(--dark-text-primary);
+}
+
+body.dark-theme .app-item p,
+body.dark-theme .project-item p {
+  color: var(--dark-text-secondary);
+}
+
+/* Tech Badges */
+body.dark-theme .tech-badge {
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--dark-accent-blue);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+body.dark-theme .tech-badge:hover {
+  background: rgba(56, 189, 248, 0.2);
+  color: var(--dark-text-primary);
+}
+
+/* Buttons */
+body.dark-theme .btn-primary {
+  background: var(--dark-gradient-blue);
+  color: var(--dark-text-primary);
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+body.dark-theme .btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--dark-glow-blue);
+}
+
+body.dark-theme .btn-secondary {
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--dark-accent-blue);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+body.dark-theme .btn-secondary:hover {
+  background: rgba(56, 189, 248, 0.2);
+  color: var(--dark-text-primary);
+}
+
+/* Contact Section */
+body.dark-theme #contact {
+  background: var(--dark-bg-primary) !important;
+  background: linear-gradient(to bottom, var(--dark-bg-primary), var(--dark-bg-secondary)) !important;
+  color: var(--dark-text-primary);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+body.dark-theme .contact-container {
+  background: rgba(30, 41, 59, 0.6) !important;
+  border-radius: var(--border-radius-lg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(56, 189, 248, 0.1);
+  box-shadow: var(--dark-card-shadow);
+  padding: 30px;
+}
+
+body.dark-theme .contact-info {
+  color: var(--dark-text-secondary);
+}
+
+body.dark-theme .contact-intro {
+  color: var(--dark-text-primary);
+  font-weight: 500;
+}
+
+body.dark-theme .contact-details p {
+  color: var(--dark-text-secondary);
+}
+
+body.dark-theme .social-link {
+  background: rgba(30, 41, 59, 0.8);
+  color: var(--dark-accent-blue);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  transition: all 0.3s ease;
+}
+
+body.dark-theme .social-link:hover {
+  background: var(--dark-accent-blue);
+  color: var(--dark-text-primary);
+  transform: translateY(-3px);
+  box-shadow: var(--dark-glow-blue);
+}
+
+/* Contact Form */
+body.dark-theme .contact-form {
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid var(--dark-border-subtle);
+  box-shadow: var(--dark-card-shadow);
+  border-radius: var(--border-radius-md);
+  padding: 25px;
+}
+
+body.dark-theme .form-input,
+body.dark-theme input[type="text"],
+body.dark-theme input[type="email"],
+body.dark-theme textarea {
+  background: rgba(15, 23, 42, 0.5) !important;
+  border: 1px solid rgba(56, 189, 248, 0.15) !important;
+  color: var(--dark-text-primary) !important;
+  border-radius: 8px;
+}
+
+body.dark-theme .form-input:focus,
+body.dark-theme input[type="text"]:focus,
+body.dark-theme input[type="email"]:focus,
+body.dark-theme textarea:focus {
+  border-color: var(--dark-accent-blue) !important;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2) !important;
+  outline: none;
+}
+
+body.dark-theme .form-input::placeholder,
+body.dark-theme input::placeholder,
+body.dark-theme textarea::placeholder {
+  color: var(--dark-text-muted) !important;
+}
+
+body.dark-theme label {
+  color: var(--dark-text-secondary) !important;
+  font-weight: 500;
+}
+
+body.dark-theme .btn-submit {
+  background: var(--dark-gradient-blue) !important;
+  color: var(--dark-text-primary) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 12px 24px !important;
+  font-weight: 500 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s ease !important;
+  box-shadow: var(--dark-card-shadow) !important;
+}
+
+body.dark-theme .btn-submit:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: var(--dark-glow-blue) !important;
+}
+
+/* Enhanced Animated Blobs for Dark Mode */
+body.dark-theme .blob-1 {
+  background: linear-gradient(45deg, var(--dark-accent-blue), var(--dark-accent-teal));
+  opacity: 0.3;
+}
+
+body.dark-theme .blob-2 {
+  background: linear-gradient(45deg, var(--dark-accent-purple), var(--dark-accent-pink));
+  opacity: 0.25;
+}
+
+body.dark-theme .blob-3 {
+  background: linear-gradient(45deg, var(--dark-accent-teal), var(--dark-accent-indigo));
+  opacity: 0.2;
+}
+
+body.dark-theme .blob-4 {
+  background: linear-gradient(45deg, var(--dark-accent-indigo), var(--dark-accent-blue));
+  opacity: 0.15;
+}
+
+/* Footer */
+body.dark-theme footer {
+  background: var(--dark-bg-secondary);
+  border-top: 1px solid var(--dark-border-subtle);
+}
+
+body.dark-theme .footer-branding .footer-logo {
+  color: var(--dark-accent-blue);
+  font-weight: 600;
+}
+
+body.dark-theme .footer-bottom {
+  border-top: 1px solid var(--dark-border-subtle);
+}
+
+/* Scrollbar */
+body.dark-theme::-webkit-scrollbar-track {
+  background: var(--dark-bg-primary);
+}
+
+body.dark-theme::-webkit-scrollbar-thumb {
+  background: var(--dark-bg-tertiary);
+  border-radius: 10px;
+}
+
+body.dark-theme::-webkit-scrollbar-thumb:hover {
+  background: var(--dark-accent-blue);
+}

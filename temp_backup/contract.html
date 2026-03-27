@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عقد مشاركة في الإيرادات وتطوير الأنظمة - سُبُل</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&amp;family=Amiri:wght@400;700&amp;display=swap"
+        rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Amiri', serif;
+            background-color: #ffffff;
+            color: #1f2937;
+            /* Very dark gray, slightly softer than pitch black */
+            line-height: 1.6;
+        }
+
+        .contract-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+            position: relative;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            
+            /* Prevent headings and articles from splitting across pages */
+            .article, table, tr, td, th {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            h3, h4 {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+            
+            p, ul, li {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+        }
+
+        .floating-print-btn {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            background-color: #1f2937;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 50;
+        }
+
+        .floating-print-btn:hover {
+            background-color: #374151;
+        }
+
+        @media (min-width: 768px) {
+            .contract-container {
+                padding: 4rem 3rem;
+            }
+        }
+
+        .logo-wrapper {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-text {
+            font-family: 'Amiri', serif;
+            font-size: 4rem;
+            color: #d1d5db;
+            /* Light gray watermark effect */
+            line-height: 1;
+            font-weight: 700;
+        }
+
+        .main-title {
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .sub-title {
+            text-align: center;
+            font-size: 1.125rem;
+            color: #4b5563;
+            margin-bottom: 2rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .divider {
+            border-bottom: 1px solid #e5e7eb;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .divider span {
+            background: #fff;
+            padding: 0 1rem;
+            position: relative;
+            top: 10px;
+            font-size: 0.875rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .disclaimer {
+            font-size: 0.875rem;
+            color: #4b5563;
+            text-align: justify;
+            margin-bottom: 3rem;
+            border: 1px solid #9ca3af;
+            padding: 1rem;
+        }
+
+        .disclaimer strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #111827;
+        }
+
+        h2 {
+            font-weight: 700;
+            font-size: 1.15rem;
+            margin-bottom: 1.25rem;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.25rem;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+            break-inside: avoid;
+        }
+
+        th,
+        td {
+            border: 1px solid #e5e7eb;
+            padding: 0.75rem 1rem;
+            vertical-align: top;
+            text-align: right;
+        }
+
+        th {
+            font-weight: 600;
+            width: 25%;
+            color: #111827;
+            background-color: #f9fafb;
+        }
+
+        .role-th {
+            width: 35%;
+        }
+
+        .two-columns {
+            columns: 1;
+            column-gap: 4rem;
+        }
+
+        @media (min-width: 768px) {
+            .two-columns {
+                columns: 2;
+            }
+        }
+
+        .article {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+        }
+
+        .article h3 {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .article h4 {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-top: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .article p {
+            font-size: 0.9rem;
+            text-align: justify;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+
+        .article ul {
+            font-size: 0.9rem;
+            list-style-type: none;
+            padding-right: 0;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+
+        .article ul li {
+            position: relative;
+            padding-right: 1rem;
+            margin-bottom: 0.25rem;
+            text-align: justify;
+        }
+
+        .article ul li::before {
+            content: "•";
+            position: absolute;
+            right: 0;
+            color: #6b7280;
+        }
+
+        .signatures {
+            margin-top: 4rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        @media (min-width: 768px) {
+            .signatures {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .signature-block h3 {
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        .signature-line {
+            display: flex;
+            align-items: end;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .line {
+            flex-grow: 1;
+            border-bottom: 1px solid #9ca3af;
+            margin-right: 0.5rem;
+        }
+
+        @media print {
+            @page {
+                size: a4;
+                margin: 2cm;
+            }
+
+            body {
+                background: white;
+                color: black;
+                margin: 0;
+                padding: 0;
+            }
+
+            .contract-container {
+                padding: 0 !important;
+                max-width: none;
+            }
+
+            .two-columns {
+                columns: 1 !important; /* Forces 1 column in print to prevent awkward page flow */
+            }
+
+            .divider:nth-of-type(2) {
+                page-break-before: always;
+                break-before: page;
+                page-break-after: avoid;
+            }
+
+            .article {
+                page-break-before: always;
+                break-before: page;
+            }
+
+            .article:first-child {
+                page-break-before: avoid;
+                break-before: avoid;
+            }
+
+            table {
+                font-size: 0.75rem;
+                border-color: #000;
+            }
+
+            th,
+            td {
+                border-color: #000;
+            }
+
+            .disclaimer {
+                border-color: #000;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contract-container">
+
+        <!-- Print Button -->
+        <button onclick="window.print()" class="floating-print-btn no-print">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path
+                    d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z" />
+                <path
+                    d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" />
+            </svg>
+            تصدير كـ PDF
+        </button>
+
+        <div class="logo-wrapper">
+            <div class="logo-text">سُبُل</div>
+        </div>
+
+        <h1 class="main-title">عقد مشاركة في الإيرادات وتطوير الأنظمة</h1>
+        <div class="sub-title" dir="ltr"><span dir="ltr" class="en-term">Gross Revenue-Sharing and Development
+                Agreement</span></div>
+
+        <div class="divider">
+            <span>شروط وأحكام العقد</span>
+        </div>
+
+        <div class="disclaimer">
+            <strong>تحذير قانوني:</strong>
+            هذا المستند نموذج استرشادي ولا يُغني عن المشورة القانونية المتخصصة. يجب مراجعته وتدقيقه من قبل محامٍ مرخص
+            قبل التوقيع لضمان توافقه مع القوانين السارية وتحقيق المصلحة المشروعة للأطراف.
+        </div>
+
+        <div class="mb-10">
+            <h2>البند التمهيدي (<span dir="ltr" class="en-term">Preamble</span>)</h2>
+            <div class="mb-6 space-y-2 text-sm text-gray-800">
+                <p><strong>أبرم هذا العقد في:</strong> [المدينة، جمهورية مصر العربية]</p>
+                <p><strong>في تاريخ:</strong> _____ / _____ / 2026 م</p>
+                <p class="mt-6 mb-4"><strong>بين:</strong></p>
+            </div>
+
+            <h3 class="font-bold text-sm mb-2">الطرف الأول (صاحب المشروع):</h3>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>الاسم الكامل</th>
+                        <td>[__________]</td>
+                    </tr>
+                    <tr>
+                        <th>الرقم القومي</th>
+                        <td>[__________]</td>
+                    </tr>
+                    <tr>
+                        <th>العنوان</th>
+                        <td>[__________]</td>
+                    </tr>
+                    <tr>
+                        <th>رقم الهاتف</th>
+                        <td>[__________]</td>
+                    </tr>
+                    <tr>
+                        <th>البريد الإلكتروني</th>
+                        <td>[__________]</td>
+                    </tr>
+                    <tr>
+                        <th>السجل التجاري</th>
+                        <td>[__________]</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="text-sm italic text-gray-500 mb-8">(يُشار إليه فيما يلي بـ "صاحب المشروع" أو "الطرف الأول")</p>
+
+            <p class="font-bold text-sm mb-4">و:</p>
+
+            <h3 class="font-bold text-sm mb-2">الطرف الثاني (فريق التطوير):</h3>
+            <p class="text-sm text-gray-800 mb-2">ممثلاً في قائد الفريق المفوض بالتوقيع:</p>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>الاسم الكامل</th>
+                        <td>[__________]</td>
+                    </tr>
+                    <tr>
+                        <th>الرقم القومي</th>
+                        <td>[__________]</td>
+                    </tr>
+                    <tr>
+                        <th>العنوان</th>
+                        <td>[__________]</td>
+                    </tr>
+                    <tr>
+                        <th>رقم الهاتف</th>
+                        <td>[__________]</td>
+                    </tr>
+                    <tr>
+                        <th>البريد الإلكتروني</th>
+                        <td>[__________]</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="text-sm italic text-gray-500 mb-8">(يُشار إليه فيما يلي بـ "الفريق" أو "الطرف الثاني")</p>
+
+            <h3 class="font-bold text-sm mb-3">أعضاء الفريق المشاركون:</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="text-center w-12 text-gray-600">الرقم</th>
+                        <th class="text-gray-600">الاسم الكامل</th>
+                        <th class="text-gray-600">الرقم القومي</th>
+                        <th class="role-th text-gray-600">الدور الوظيفي</th>
+                        <th class="text-center w-32 text-gray-600">نسبة المشاركة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">1</td>
+                        <td>[__________]</td>
+                        <td>[__________]</td>
+                        <td dir="ltr" class="text-right"><span dir="ltr" class="en-term">Lead Developer</span> &amp;
+                            <span dir="ltr" class="en-term">Architect</span>
+                        </td>
+                        <td class="text-center">____%</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">2</td>
+                        <td>[__________]</td>
+                        <td>[__________]</td>
+                        <td>[__________]</td>
+                        <td class="text-center">____%</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">3</td>
+                        <td>[__________]</td>
+                        <td>[__________]</td>
+                        <td>[__________]</td>
+                        <td class="text-center">____%</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">4</td>
+                        <td>[__________]</td>
+                        <td>[__________]</td>
+                        <td>[__________]</td>
+                        <td class="text-center">____%</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">5</td>
+                        <td>[__________]</td>
+                        <td>[__________]</td>
+                        <td>[__________]</td>
+                        <td class="text-center">____%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="mt-8 mb-12 border-l-4 border-gray-300 pl-4 text-sm text-gray-700 bg-gray-50 p-4 rounded-sm">
+                <p class="font-bold mb-3 text-black">حيث أن:</p>
+                <ul class="list-disc pr-6 mb-4 space-y-2">
+                    <li>الطرف الأول يمتلك ويدير منصة تعليمية إلكترونية يُشار إليها بـ ("سُبُل").</li>
+                    <li>الطرف الثاني فريق متخصص في تطوير البرمجيات يضم خمسة (5) أعضاء.</li>
+                    <li>يرغب الطرف الأول في الاستعانة بالطرف الثاني للقيام بأعمال الدعم الفني والتطوير المستمر للمنصة.
+                    </li>
+                    <li>اتفق الطرفان على أن يكون المقابل مالياً عبارة عن نسبة ثابتة من إجمالي إيرادات المنصة وفقاً للشروط والأحكام
+                        الواردة بهذا العقد.</li>
+                </ul>
+                <p class="font-semibold text-black mt-4">لذلك، وبعد الإقرار بالأهلية القانونية الكاملة للأطراف، اتفقوا
+                    على البنود التالية:</p>
+            </div>
+        </div>
+
+        <div class="divider">
+            <span>التفاصيل والأحكام</span>
+        </div>
+
+        <div class="two-columns">
+
+            <div class="article">
+                <h3>المادة الأولى: التعريفات (<span dir="ltr" class="en-term">Definitions</span>)</h3>
+                <p>يقصد بالعبارات والمصطلحات التالية أينما وردت في هذا العقد المعاني المبينة أمام كل منها:</p>
+                <ul>
+                    <li><strong>الإيرادات الإجمالية (<span dir="ltr" class="en-term">Gross Revenue</span>):</strong>
+                        جميع المبالغ المالية التي تدخل إلى حسابات المنصة من الاشتراكات، المبيعات، الإعلانات، وأي مصدر
+                        دخل آخر قبل خصم أي مصاريف.</li>
+                    <li><strong>المصاريف التشغيلية المسموح بها (<span dir="ltr" class="en-term">Allowable Operating
+                                Expenses</span>):</strong> المصاريف الموضحة حصرياً في المادة الرابعة (تُحسب فقط لغايات التقييم والمراجعة المستقبلية للنسبة).</li>
+                    <li><strong>صافي الربح (<span dir="ltr" class="en-term">Net Profit</span>):</strong> الإيرادات
+                        الإجمالية مطروحاً منها المصاريف التشغيلية المسموح بها (ويُستخدم هذا المؤشر فقط عند الرغبة في إعادة التفاوض على نسبة الإيرادات).</li>
+                    <li><strong>فترة الاستحقاق (<span dir="ltr" class="en-term">Vesting Period</span>):</strong> الفترة
+                        الزمنية اللازمة لاستحقاق النسبة الكاملة من الأرباح أو الإيرادات.</li>
+                    <li><strong>السنة المالية (<span dir="ltr" class="en-term">Fiscal Year</span>):</strong> المدة من 1
+                        يناير إلى 31 ديسمبر من كل عام.</li>
+                </ul>
+            </div>
+
+            <div class="article">
+                <h3>المادة الثانية: نطاق العمل والالتزامات</h3>
+                <p>يلتزم الطرف الثاني بتقديم الخدمات التالية بصفة مستمرة:</p>
+
+                <h4>2-1 الدعم الفني المستمر (بدون تفرغ - <span dir="ltr" class="en-term">Part-time</span>):</h4>
+                <ul>
+                    <li>إصلاح الأعطال البرمجية (<span dir="ltr" class="en-term">Bug Fixes</span>) خلال مدة أقصاها 48
+                        ساعة للأخطاء الحرجة <strong>(تُعرّف حصراً بتوقف الخادم، تسريب البيانات، أو تعطل بوابات الدفع)</strong>، و5 أيام عمل للأخطاء العادية.</li>
+                    <li>مراقبة أداء الخوادم والتطبيقات بصفة دورية.</li>
+                    <li>تحديث المكتبات والإطارات البرمجية (<span dir="ltr" class="en-term">Dependencies</span>).</li>
+                    <li>إدارة النسخ الاحتياطية (<span dir="ltr" class="en-term">Backups</span>) والتحقق من سلامتها.</li>
+                </ul>
+
+                <h4>2-2 التطوير المستمر:</h4>
+                <ul>
+                    <li>تطوير ميزات جديدة حسب أولويات يحددها الطرف الأول، <strong>بشرط إعداد "وثيقة نطاق عمل مصغرة" (<span dir="ltr" class="en-term">Mini-Scope</span>) لكل ميزة تُقدر الساعات المطلوبة وتُخصم من الرصيد الشهري للفريق.</strong></li>
+                    <li><strong>تجاوز الرصيد الشهري:</strong> إذا قدرت "وثيقة النطاق المصغرة" خطة عمل تتجاوز الحد الأقصى الشهري للساعات (60 ساعة)، يلتزم الطرف الأول باختيار أحد الحلول الثلاثة التالية:
+                        <ul style="list-style-type: circle; margin-top: 5px; margin-bottom: 5px;">
+                            <li><strong>الترحيل والتجزئة:</strong> تقسيم الميزة للعمل عليها على مدار شهرين أو أكثر.</li>
+                            <li><strong>تقليص النطاق (MVP):</strong> حذف الميزات غير الأساسية لتقليص وقت التطوير ليناسب رصيد الشهر المتاح.</li>
+                            <li><strong>العمل الإضافي المدفوع (Overtime):</strong> إنجاز الميزة بالكامل في نفس الشهر بشرط دفع تعويض مالي إضافي ونقدي فوري لجميع الساعات التي تتجاوز الـ 60 ساعة، بناءً على اتفاق مكتوب ومسبق.</li>
+                        </ul>
+                    </li>
+                    <li>تحسين أداء المنصة، سرعتها، وتجربة المستخدم (<span dir="ltr" class="en-term">UX/UI</span>).</li>
+                    <li>تحسين الأمان وسد الثغرات التقنية.</li>
+                </ul>
+
+                <h4>2-3 الاستشارات التقنية:</h4>
+                <p>تقديم مقترحات تقنية، تقييم الحلول الجديدة، وإعداد تقارير فنية شهرية.</p>
+
+                <h4>2-4 قيود العمل والاستثناءات:</h4>
+                <p>يُتفق صراحة على أن نطاق العمل لا يشمل:</p>
+                <ul>
+                    <li><strong>التسويق الرقمي وتحسين محركات البحث (SEO):</strong> لا يشمل نطاق عمل الطرف الثاني أي مسؤولية عن تسويق المنصة، أو تحسين ترتيبها في محركات البحث، أو إطلاق وإدارة الحملات الإعلانية.</li>
+                    <li><strong>إدارة المحتوى وخدمة العملاء:</strong> لا يتحمل الطرف الثاني مسؤولية إدخال البيانات، إدارة المحتوى التعليمي، أو تقديم الدعم الفني المباشر للمستخدمين النهائيين (الطلاب/المعلمين).</li>
+                    <li>إعادة بناء المنصة بالكامل من الصفر.</li>
+                    <li>الالتزام بالتواجد بدوام كامل (<span dir="ltr" class="en-term">Full-time</span>). العمل يخضع
+                        لنظام الدوام الجزئي المرن.</li>
+                    <li>أي عمل يتجاوز (60) ساعة عمل شهرياً لكل عضو. <strong>يُقر الطرفان باستخدام نظام تتبع وقت تقني (<span dir="ltr" class="en-term">Time-Tracker</span>)، ويتوقف العمل التلقائي عند بلوغ الحد الأقصى للساعات. أي ساعات إضافية تتطلب موافقة كتابية مسبقة، وتُسعر وتُدفع كأجر إضافي بالساعة.</strong></li>
+                </ul>
+
+                <h4>2-5 استقلالية إدارة الفريق واستبدال الأعضاء:</h4>
+                <div class="mt-4 mb-4 border-l-4 border-blue-500 pl-4 text-sm text-gray-800 bg-blue-50 p-4 rounded-sm">
+                    <p><strong>حق الإدارة وتغيير الأعضاء:</strong> يمتلك قائد الفريق (ممثل الطرف الثاني) الصلاحية المطلقة والحق الحصري في إدارة الشؤون الداخلية للفريق، بعد التشاور الداخلي مع أعضاء الفريق، بما في ذلك <strong>حق استبدال، استبعاد، أو إضافة أي عضو</strong> في حال تقصيره أو لظروف قاهرة، دون الحاجة لموافقة مسبقة من الطرف الأول، شريطة ألا يؤثر ذلك بأي شكل على جودة العمل المتفق عليه أو المواعيد النهائية للالتزامات التقنية.</p>
+                </div>
+            </div>
+
+            <div class="article">
+                <h3>المادة الثالثة: المقابل المالي وآلية توزيع الإيرادات</h3>
+
+                <h4>3-1 نسبة المشاركة في الإيرادات الثابتة (<span dir="ltr" class="en-term">Fixed Revenue Share</span>):</h4>
+                <div class="mb-4 border-r-4 border-green-500 pr-4 text-sm text-gray-800 bg-green-50 p-4 rounded-sm">
+                    <p>يستحق الطرف الثاني (فريق التطوير) <strong>نسبة ثابتة قدرها (5%) من الإيرادات الإجمالية</strong> (<span dir="ltr" class="en-term">Gross Revenue</span>) التي تحققها المنصة.</p>
+                    <p>يُعد هذا العائد ثابتاً ومستمراً للفريق <strong>بغض النظر عن حجم تحقيق الأرباح الصافية أو خصم المصاريف التشغيلية للمنصة</strong>، وتُعد هذه النسبة حقوقاً خالصة لـكيان فريق التطوير كوحدة واحدة وليست كأفراد بشكل منفصل.</p>
+                </div>
+
+                <h4>3-2 مراجعة النسبة وعدالة الشراكة (<span dir="ltr" class="en-term">Partnership Fairness</span>):</h4>
+                <div class="mt-4 border-r-4 border-blue-500 pr-4 text-sm text-gray-800 bg-blue-50 p-4 rounded-sm mb-4">
+                    <p>إيماناً من الطرفين بأسس العدالة ومعنى "الشراكة"، وفي حال تبين لاحقاً أن قيمة هذه النسبة (5%) قليلة جداً مقارنةً بحجم الجهد والوقت المستغرق والتعب المبذول من فريق التطوير لتشغيل وتطوير المنصة؛</p>
+                    <p>فإنه <strong>يجوز إعادة النظر في هذه النسبة ورفعها بما يرضي جميع الأطراف</strong>، بشرط التحقق من وجود أرباح صافية جيدة ومستقرة للمنصة تسمح بذلك.</p>
+                </div>
+
+                <h4>3-3 آلية الحساب والدفع:</h4>
+                <ul>
+                    <li>يتم احتساب العائد كنسبة 5% من جميع المبالغ المحصلة كإيرادات إجمالية خلال الشهر قبل أي استقطاعات.</li>
+                    <li>يتم الدفع بشكل <strong>شهري</strong> خلال 5 أيام عمل من نهاية كل شهر ميلادي، لدعم التدفق النقدي للفريق واستقراره.</li>
+                    <li>يحق للفريق في حالة عدم الدفع أو تأخيره ممارسة الحقوق المذكورة في الشروط الجزائية.</li>
+                </ul>
+            </div>
+
+            <div class="article">
+                <h3>المادة الرابعة: المصاريف التشغيلية (<span dir="ltr" class="en-term">Allowable Expenses</span>)</h3>
+                
+                <p class="text-sm text-gray-700 italic border-l-4 border-gray-400 pl-4 py-1 mb-3">ملاحظة: لا يتم خصم هذه المصاريف من نسبة الإيرادات (5%) الخاصة بالفريق. يتم حصرها فقط لغايات تقييم أداء المنصة المالي مستقبلاً، والمساعدة في تفعيل البند (3-2) حال طلب الفريق رفع درجات نسبة الشراكة.</p>
+
+                <h4>4-1 المصاريف المسموح بخصمها (لحساب صافي الربح التقييمي):</h4>
+                <ul>
+                    <li>تكاليف استضافة الخوادم وخدمات السحابة (<span dir="ltr" class="en-term">VPS</span>, <span
+                            dir="ltr" class="en-term">S3</span>, <span dir="ltr" class="en-term">CDN</span>).</li>
+                    <li>رسوم بوابات الدفع الإلكتروني.</li>
+                    <li>تكاليف التراخيص البرمجية وشهادات الأمان (<span dir="ltr" class="en-term">SSL</span>).</li>
+                    <li>تكاليف الرسائل النصية (<span dir="ltr" class="en-term">SMS</span>).</li>
+                    <li>الضرائب الحكومية المباشرة المفروضة على مبيعات المنصة (مثل ضريبة القيمة المضافة VAT إن وجدت). يُستثنى من ذلك <strong>ضريبة الدخل للشركات أو أي أعباء ضريبية شخصية/تجارية خاصة بالكيان القانوني للطرف الأول</strong>، حيث لا يتحمل الفريق التطويري أي أعباء ضريبية تخص شركة الطرف الأول.</li>
+                    <li>مصاريف التسويق الرقمي (بحد أقصى 20% من الإيرادات الإجمالية؛ أي زيادة تتطلب موافقة كتابية مسبقة من الطرفين).</li>
+                </ul>
+
+                <h4>4-2 المصاريف غير المسموح بخصمها (تحفظاً من تضخيم النفقات):</h4>
+                <ul>
+                    <li>رواتب الطرف الأول أو المديرين أو الشركاء.</li>
+                    <li>أتعاب الاستشارات أو الخدمات المُقدمة من أطراف ذات صلة (أقارب أو أصدقاء الطرف الأول).</li>
+                    <li>رواتب أي كوادر إدارية جديدة ما لم تكن ضرورية للعمليات وتتم الموافقة عليها مسبقاً.</li>
+                    <li>المصاريف الشخصية (سيارات، سفر، ضيافة).</li>
+                    <li>إيجارات المكاتب (ما لم تكن ضرورية حصراً للمنصة).</li>
+                    <li>القروض وفوائدها أو الاستثمارات في مشاريع جانبية.</li>
+                    <li>أي مصروف دون فاتورة ضريبية/رسمية موثقة.</li>
+                </ul>
+            </div>
+
+            <div class="article">
+                <h3>المادة الخامسة: الشفافية المالية والمراجعة</h3>
+
+                <h4>5-1 حق الاطلاع:</h4>
+                <p>يلتزم الطرف الأول بتقديم التقارير المالية التالية للطرف الثاني:</p>
+                <ul>
+                    <li>كشف تفصيلي بالإيرادات الإجمالية المحصلة شهرياً خلال 5 أيام من نهاية الشهر، لدعم حساب نسبة الـ 5%.</li>
+                    <li>تقرير صافي الربح ربع سنوي كإجراء تقييمي إضافي.</li>
+                </ul>
+
+                <h4>5-2 حق المراجعة:</h4>
+                <p>يحق للطرف الثاني الاطلاع على لوحات التحكم (<span dir="ltr" class="en-term">Read-only access</span>)
+                    لبوابات الدفع، وطلب مراجعة محاسب مستقل مرة سنوياً. يُعد رفض تقديم البيانات إخلالاً جوهرياً بالعقد.
+                </p>
+            </div>
+
+            <div class="article">
+                <h3>المادة السادسة: الملكية الفكرية (<span dir="ltr" class="en-term">Intellectual Property</span>)</h3>
+
+                <h4>6-1 ملكية الكود المصدري والأصول:</h4>
+                <ul>
+                    <li><strong>نطاق الملكية الخاصة:</strong> تعود الملكية الفكرية الحصرية للعلامة التجارية، وقواعد بيانات المستخدمين، والتصاميم المرئية الخاصة بالمنصة للطرف الأول فقط.</li>
+                    <li><strong>حق المطورين في إعادة الاستخدام:</strong> يمتلك الطرف الثاني حق استخدام وإعادة تدوير "الأكواد العامة والمكتبات البرمجية مفتوحة المصدر" في أي مشاريع أخرى غير منافسة بشكل مباشر.</li>
+                    <li><strong>شروط انتقال الملكية:</strong> لا تنتقل الحقوق الحصرية للكود المخصص بالكامل للطرف الأول إلا بعد <strong>سداد كافة المستحقات المالية</strong> السابقة. في حالة الإخلال المالي من الطرف الأول، يحتفظ الطرف الثاني بحق حجب الكود المصدري أو إيقاف الخدمات حتى إتمام التسوية.</li>
+                </ul>
+
+                <h4>6-2 ملكية الحسابات والبنية التحتية (Infrastructure Accounts):</h4>
+                <ul>
+                    <li><strong>صلاحيات الوصول الجذرية (Root Access):</strong> تُسجل كافة الحسابات الأساسية الخاصة باستضافة السيرفرات (Cloud Hosting)، واسم النطاق (Domain Name)، وأي خدمات بنية تحتية رئيسية <strong>باسم الطرف الأول أو من يفوضه رسمياً</strong>.</li>
+                    <li><strong>تسليم بيانات الدخول:</strong> يلتزم الطرف الثاني بإنشاء هذه الحسابات (إذا لُزم الأمر) لصالح الطرف الأول وتسليمه بيانات الدخول الكاملة (<span dir="ltr" class="en-term">Credentials</span>).</li>
+                    <li><strong>حظر احتجاز الأصول:</strong> لا يحق للطرف الثاني تحت أي ظرف من الظروف (حتى في حالة النزاعات المالية) تغيير كلمات المرور لهذه الحسابات الجذرية أو احتجاز "اسم النطاق" لحرمان الطرف الأول من الوصول المستقل لأصوله الرقمية. في المقابل، يحتفظ الطرف الثاني بحق حجب مسودات أو تحديثات "الكود المصدري" الجديد غير المدفوع كأداة ضغط مشروعة حسب المادة (6-1).</li>
+                </ul>
+
+                <h4>6-3 المكونات السابقة:</h4>
+                <p>تحتفظ الملكية الفكرية للأدوات والمكتبات التي كان يمتلكها الطرف الثاني قبل تاريخ هذا العقد، ويُمنح
+                    الطرف الأول رخصة استخدام غير حصرية.</p>
+            </div>
+
+
+            <div class="article">
+                <h3>المادة السابعة: المدة والتجديد (<span dir="ltr" class="en-term">Duration</span> &amp; <span
+                        dir="ltr" class="en-term">Renewal</span>)</h3>
+
+                <h4>7-1 مدة العقد:</h4>
+                <p>يسري هذا العقد لمدة سنة ميلادية واحدة تبدأ من تاريخ التوقيع.</p>
+
+                <h4>7-2 التجديد:</h4>
+                <p>يتجدد العقد تلقائياً لمدة مماثلة ما لم يُخطر أحد الطرفين الآخر كتابياً برغبته في عدم التجديد أو تعديل
+                    الشروط قبل (60) يوماً من تاريخ الانتهاء.</p>
+            </div>
+
+            <div class="article">
+                <h3>المادة الثامنة: السرية وعدم المنافسة</h3>
+
+                <h4>8-1 السرية:</h4>
+                <p>يلتزم الطرفان بالحفاظ على سرية البيانات المالية، بيانات المستخدمين، الكود المصدري، والخطط التجارية،
+                    ويستمر هذا الالتزام لمدة سنتين بعد انتهاء العقد.</p>
+
+                <h4>8-2 عدم المنافسة:</h4>
+                <p>يلتزم الطرف الثاني بعدم تطوير منصة تعليمية منافسة مباشرة في نفس السوق الجغرافي خلال فترة العقد ولمدة
+                    ستة (6) أشهر <span dir="ltr" class="en-term">subsequent</span> لانتهائه.</p>
+            </div>
+
+            <div class="article">
+                <h3>المادة التاسعة: الإنهاء وحل النزاعات وتسوية الحقوق</h3>
+
+                <h4>9-1 الإنهاء:</h4>
+                <p>يحق لأي طرف إنهاء العقد فوراً في حال الإخلال الجوهري بالالتزامات (مثل تأخر الدفع شهرين متتاليين، أو التوقف عن العمل لمدة 14 يوماً متتالية، <strong>يُشترط أن يكون التوقف دون سبب مشروع أو كنتيجة لتقصير مُثبت من الطرف الثاني</strong>).</p>
+
+                <h4>9-2 فترة الانتقال والتسليم (<span dir="ltr" class="en-term">Transition Period</span>):</h4>
+                <p>في حالة إنهاء العقد لأي سبب، يلتزم الفريق بتسليم العمل ونقل المعرفة للمالك الجديد لمدة لا تتجاوز 30 يوماً، <strong>بشرط أن يُدفع أجر بالساعة (مُتفق عليه مسبقاً) عن أي مهام مطلوبة خلال هذه الفترة الانتقالية. لا يسري التزام النقل أو التسليم إلا بعد سداد كافة المستحقات المتأخرة بالكامل للفريق.</strong></p>
+
+                <h4>9-3 حل النزاعات:</h4>
+                <p>في حالة الخلاف، يلتزم الطرفان بالتفاوض المباشر لمدة 30 يوماً، وفي حالة عدم التوصل لحل، يتم الاحتكام
+                    للمحكمة المختصة في [__________] عملاً بأحكام القانون المصري.</p>
+                
+                <h4>9-4 حفظ الحقوق والتقييم العادل عند عدم الاستمرار:</h4>
+                <div class="mt-4 border-r-4 border-red-500 pr-4 text-sm text-gray-800 bg-red-50 p-4 rounded-sm mb-4">
+                    <p>في حال قرار أي من الطرفين عدم الاستمرار أو في حال فسخ العقد لأي سبب وفي أي وقت كان، يُقر وينص بوضوح على أن <strong>كل إضافة برمجية، ميزة، أو عمل تقني تم تنفيذه من قِبل الطرف الثاني تظل حقوقه ومجهوده فيه محفوظة ومشروعة.</strong></p>
+                    <p class="mt-2 text-red-700 font-bold">ويلتزم الطرفان في هذه الحالة بإجراء تقييم واضح وموثق للعوائد المالية التي استلمها الفريق طوال فترة عمله، ومقارنتها بشكل عادل بحجم الجهد الفعلي المنفذ والأعمال والنظم التي تم تسليمها وتفعيلها، ليتم تسوية وتقدير أي حقوق مالية أو أدبية متبقية للفريق بصورة ترضي الطرفين قبل إنهاء التعاقد المتبادل وتسليم جميع الأكواد المصدرية.</p>
+                </div>
+            </div>
+
+            <div class="article">
+                <h3>المادة العاشرة: الشرط الجزائي والتعويضات</h3>
+
+                <h4>10-1 غرامة التأخير في السداد:</h4>
+                <p>في حال تأخر الطرف الأول عن سداد الدفعات المستحقة (نسبة الإيرادات الثابتة) لمدة تتجاوز (7) أيام عمل من تاريخ الاستحقاق الشهري، تُفرض غرامة تأخير قدرها <strong>5% من قيمة الدفعة المتأخرة عن كل أسبوع تأخير</strong>، وللطرف الثاني الحق في إيقاف العمليات وتجميد المنصة مؤقتاً حتى السداد الجبري.</p>
+
+                <h4>10-2 الفسخ التعسفي أو الإخلال الجوهري:</h4>
+                <p>في حال قام الطرف الأول بإنهاء العقد تعسفياً قبل انتهاء مدته وبدون سبب مشروع، أو ارتكب إخلالاً جوهرياً (مثل حجب المعلومات المالية أو التعنت في الدفع) أدى لفسخ العقد، يلتزم الطرف الأول بدفع <strong>شرط جزائي مقطوع يُعادل متوسط مستحقات إيرادات الفريق الشهرية (بناءً على متوسط آخر 3 أشهر) مضروباً في ثلاثة أشهر سابقة</strong>، أو مبلغ يُتفق عليه بما يعوض الفريق عن الفرص البديلة والجهد، مع احتفاظ الطرف الثاني بالحق الحصري وتجميد النقل في كافة الأكواد المصدرية والمكتبات البرمجية حتى إتمام التخارج النهائي وفق المادة (9-4).</p>
+            </div>
+
+            <div class="article">
+                <h3>المادة الحادية عشرة: التوقيعات (<span dir="ltr" class="en-term">Signatures</span>)</h3>
+                <p>وإثباتاً لما تقدم، قام الطرفان بتوقيع هذا العقد من نسختين أصليتين، تسلم كل طرف نسخة للعمل بموجبها.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="signatures">
+            <div class="signature-block">
+                <h3>الطرف الأول (صاحب المشروع)</h3>
+                <div class="signature-line">
+                    <strong>الاسم:</strong><span class="line"></span>
+                </div>
+                <div class="signature-line">
+                    <strong>التوقيع:</strong><span class="line"></span>
+                </div>
+                <div class="signature-line">
+                    <strong>التاريخ:</strong><span class="line"></span>
+                </div>
+            </div>
+
+            <div class="signature-block">
+                <h3>الطرف الثاني (قائد فريق التطوير)</h3>
+                <div class="signature-line">
+                    <strong>الاسم:</strong><span class="line"></span>
+                </div>
+                <div class="signature-line">
+                    <strong>التوقيع:</strong><span class="line"></span>
+                </div>
+                <div class="signature-line">
+                    <strong>التاريخ:</strong><span class="line"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 border-t border-gray-300 pt-12 signatures">
+            <div class="signature-block">
+                <h3>الشهود (الشاهد الأول)</h3>
+                <div class="signature-line">
+                    <strong>الاسم:</strong><span class="line"></span>
+                </div>
+                <div class="signature-line">
+                    <strong>التوقيع:</strong><span class="line"></span>
+                </div>
+            </div>
+            <div class="signature-block">
+                <h3>الشهود (الشاهد الثاني)</h3>
+                <div class="signature-line">
+                    <strong>الاسم:</strong><span class="line"></span>
+                </div>
+                <div class="signature-line">
+                    <strong>التوقيع:</strong><span class="line"></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
