@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ProjectSchema, type Project } from "@/schemas/project.schema";
 import { createProject, updateProject } from "@/actions/admin.actions";
-import { useState } from "react";
-import { ArrowLeft, Save, Plus, X, Image as ImageIcon } from "lucide-react";
+import { useState, useRef, useCallback } from "react";
+import { ArrowLeft, Save, Plus, X, Image as ImageIcon, Upload, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -13,11 +13,35 @@ interface Props {
   initialData?: Project;
 }
 
+/** Uploads a single file via the /api/upload route handler. */
+async function uploadFile(file: File): Promise<{ url: string; deleteUrl: string } | { error: string }> {
+  const formData = new FormData();
+  formData.append("image", file);
+
+  const res = await fetch("/api/upload", {
+    method: "POST",
+    body: formData,
+  });
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({ error: "Upload failed" }));
+    return { error: (body as { error?: string }).error ?? `Upload failed (HTTP ${res.status})` };
+  }
+
+  return res.json() as Promise<{ url: string; deleteUrl: string }>;
+}
+
 export function ProjectForm({ initialData }: Props) {
   const [isPending, setIsPending] = useState(false);
   const [newImageUrl, setNewImageUrl] = useState("");
+  const [thumbnailUploading, setThumbnailUploading] = useState(false);
+  const [galleryUploading, setGalleryUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
   const router = useRouter();
-  
+
+  const thumbnailFileRef = useRef<HTMLInputElement>(null);
+  const galleryFileRef = useRef<HTMLInputElement>(null);
+
   const form = useForm<Project>({
     resolver: zodResolver(ProjectSchema),
     defaultValues: initialData || {
@@ -75,6 +99,63 @@ export function ProjectForm({ initialData }: Props) {
     form.setValue("detailImages", current.filter((_, i) => i !== indexToRemove));
   };
 
+  /** Upload handler for the thumbnail image. */
+  const handleThumbnailUpload = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setThumbnailUploading(true);
+    setUploadError(null);
+
+    try {
+      const result = await uploadFile(file);
+
+      if ("error" in result) {
+        setUploadError(result.error);
+      } else {
+        form.setValue("imageUrl", result.url);
+      }
+    } catch {
+      setUploadError("Failed to upload image");
+    } finally {
+      setThumbnailUploading(false);
+      if (thumbnailFileRef.current) thumbnailFileRef.current.value = "";
+    }
+  }, [form]);
+
+  /** Upload handler for gallery images (supports multiple files). */
+  const handleGalleryUpload = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    setGalleryUploading(true);
+    setUploadError(null);
+
+    try {
+      const current = form.getValues("detailImages") || [];
+      const newUrls: string[] = [];
+
+      for (const file of Array.from(files)) {
+        const result = await uploadFile(file);
+
+        if ("error" in result) {
+          setUploadError(result.error);
+          break;
+        }
+        newUrls.push(result.url);
+      }
+
+      if (newUrls.length > 0) {
+        form.setValue("detailImages", [...current, ...newUrls]);
+      }
+    } catch {
+      setUploadError("Failed to upload one or more images");
+    } finally {
+      setGalleryUploading(false);
+      if (galleryFileRef.current) galleryFileRef.current.value = "";
+    }
+  }, [form]);
+
   const getArrayString = (arr?: string[]) => arr?.join(", ") || "";
   const parseArrayString = (str: string) => str.split(",").map(s => s.trim()).filter(Boolean);
 
@@ -82,7 +163,35 @@ export function ProjectForm({ initialData }: Props) {
   const parseLinesString = (str: string) => str.split("\n").map(s => s.trim()).filter(Boolean);
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 pb-32 animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <form
+      onSubmit={form.handleSubmit(onSubmit)}
+      onKeyDown={(e) => {
+        // Prevent Enter key from submitting the form — only the Save button should submit
+        if (e.key === "Enter" && (e.target as HTMLElement).tagName !== "TEXTAREA") {
+          e.preventDefault();
+        }
+      }}
+      className="space-y-8 pb-32 animate-in fade-in slide-in-from-bottom-4 duration-500"
+    >
+      {/* Hidden file inputs */}
+      <input
+        ref={thumbnailFileRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={handleThumbnailUpload}
+        aria-label="Upload thumbnail image"
+      />
+      <input
+        ref={galleryFileRef}
+        type="file"
+        accept="image/*"
+        multiple
+        className="hidden"
+        onChange={handleGalleryUpload}
+        aria-label="Upload gallery images"
+      />
+
       <div className="flex items-center justify-between">
         <Link 
           href="/admin/projects"
@@ -100,6 +209,17 @@ export function ProjectForm({ initialData }: Props) {
           {isPending ? "Saving..." : "Save Project"}
         </button>
       </div>
+
+      {/* Upload error banner */}
+      {uploadError && (
+        <div className="flex items-center gap-3 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 px-4 py-3 rounded-xl text-sm">
+          <span className="shrink-0">⚠️</span>
+          <span className="flex-1">{uploadError}</span>
+          <button type="button" onClick={() => setUploadError(null)} className="text-red-500 hover:text-red-700 transition-colors" aria-label="Dismiss error">
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      )}
 
       <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 md:p-8 space-y-8 shadow-sm">
         <h2 className="text-xl font-display font-semibold border-b border-slate-100 dark:border-slate-800 pb-4">Basic Details</h2>
@@ -136,9 +256,11 @@ export function ProjectForm({ initialData }: Props) {
             {form.formState.errors.description && <p className="text-xs text-red-500">{form.formState.errors.description.message}</p>}
           </div>
 
-          <div className="space-y-4">
-            <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Thumbnail Image URL</label>
+          {/* ── Thumbnail Image (URL + Upload) ── */}
+          <div className="space-y-4 md:col-span-2">
+            <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Thumbnail Image</label>
             <div className="flex items-start gap-4">
+              {/* Preview */}
               {form.watch("imageUrl") ? (
                 <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden shrink-0 border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800">
                   <img src={form.watch("imageUrl")} alt="Thumbnail preview" className="w-full h-full object-cover" />
@@ -149,11 +271,30 @@ export function ProjectForm({ initialData }: Props) {
                   <span className="text-[8px] sm:text-[10px] font-medium uppercase tracking-wider">No Image</span>
                 </div>
               )}
+
+              {/* URL input */}
               <input 
                 {...form.register("imageUrl")}
                 className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-brand-500 outline-none dark:text-white"
                 placeholder="https://..." 
               />
+
+              {/* Upload button */}
+              <button
+                type="button"
+                disabled={thumbnailUploading}
+                onClick={() => thumbnailFileRef.current?.click()}
+                className="flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white px-4 py-2.5 rounded-xl font-medium transition-all disabled:opacity-60 disabled:cursor-wait shrink-0 active:scale-95"
+              >
+                {thumbnailUploading ? (
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                ) : (
+                  <Upload className="w-5 h-5" />
+                )}
+                <span className="hidden sm:inline">
+                  {thumbnailUploading ? "Uploading…" : "Upload"}
+                </span>
+              </button>
             </div>
           </div>
 
@@ -237,10 +378,11 @@ export function ProjectForm({ initialData }: Props) {
               onChange={e => form.setValue("features", parseLinesString(e.target.value))}
               className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-brand-500 outline-none dark:text-white resize-y font-mono text-sm leading-relaxed"
               rows={5}
-              placeholder="Real-time chat&#10;Push notifications&#10;Google Sign-In..."
+              placeholder={"Real-time chat\nPush notifications\nGoogle Sign-In..."}
             />
           </div>
 
+          {/* ── Gallery Images (URL + Upload) ── */}
           <div className="space-y-4 md:col-span-2">
             <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Gallery Images</label>
             
@@ -263,16 +405,39 @@ export function ProjectForm({ initialData }: Props) {
                   className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-brand-500 outline-none dark:text-white"
                 />
               </div>
+
               <button
                 type="button"
                 onClick={addImageUrl}
                 disabled={!newImageUrl.trim()}
-                className="flex items-center justify-center gap-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-6 py-2.5 rounded-xl font-medium hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
+                className="flex items-center justify-center gap-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-5 py-2.5 rounded-xl font-medium hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
               >
                 <Plus className="w-5 h-5" />
-                Add Image
+                Add URL
+              </button>
+
+              <button
+                type="button"
+                disabled={galleryUploading}
+                onClick={() => galleryFileRef.current?.click()}
+                className="flex items-center justify-center gap-2 bg-brand-500 hover:bg-brand-600 text-white px-5 py-2.5 rounded-xl font-medium transition-all disabled:opacity-60 disabled:cursor-wait shrink-0 active:scale-95"
+              >
+                {galleryUploading ? (
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                ) : (
+                  <Upload className="w-5 h-5" />
+                )}
+                {galleryUploading ? "Uploading…" : "Upload Files"}
               </button>
             </div>
+
+            {/* Gallery uploading indicator */}
+            {galleryUploading && (
+              <div className="flex items-center gap-3 bg-brand-50 dark:bg-brand-950/20 border border-brand-200 dark:border-brand-800 text-brand-700 dark:text-brand-300 px-4 py-3 rounded-xl text-sm">
+                <Loader2 className="w-4 h-4 animate-spin shrink-0" />
+                <span>Uploading images to ImgBB… This may take a moment.</span>
+              </div>
+            )}
 
             {(form.watch("detailImages") || []).length > 0 && (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-4 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl border border-slate-200 dark:border-slate-700">

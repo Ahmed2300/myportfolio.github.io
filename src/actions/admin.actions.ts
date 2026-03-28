@@ -16,11 +16,28 @@ async function checkAuth() {
 export async function createProject(data: any) {
   await checkAuth();
 
-  // If ID is not provided, generate a URL-friendly slug from the title
-  const id = data.id || data.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+  // Validate title is not empty
+  const title = typeof data.title === "string" ? data.title.trim() : "";
+  if (!title) {
+    throw new Error("Project title is required");
+  }
+
+  // Helper: convert any string to a URL-safe slug
+  const toSlug = (str: string) =>
+    str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+
+  // Always generate a URL-safe slug — even if user typed a custom ID
+  const rawId = (typeof data.id === "string" && data.id.trim()) ? data.id.trim() : title;
+  const id = toSlug(rawId);
+
+  // Safety: never allow empty id (would overwrite entire /apps node)
+  if (!id) {
+    throw new Error("Could not generate a valid project ID");
+  }
   
   const payload = {
     ...data,
+    title, // use the trimmed title
     lastUpdated: Date.now(),
   };
 

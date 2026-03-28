@@ -3,7 +3,8 @@ import { getProjectById } from "@/lib/data";
 import { notFound } from "next/navigation";
 
 export default async function EditProjectPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
+  const { id: rawId } = await params;
+  const id = decodeURIComponent(rawId);
   const project = await getProjectById(id);
 
   if (!project) {
