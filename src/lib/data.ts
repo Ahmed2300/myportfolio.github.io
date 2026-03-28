@@ -75,7 +75,7 @@ export const SKILLS = [
 export const getProjects = async (): Promise<Project[]> => {
   try {
     const res = await fetch('https://wechat-9694d-default-rtdb.firebaseio.com/apps.json', {
-      cache: 'no-store',
+      next: { revalidate: 60 },
     });
     
     if (!res.ok) {
