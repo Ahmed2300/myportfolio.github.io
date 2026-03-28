@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Send, Phone, Mail, Facebook, Linkedin, Github } from "lucide-react";
