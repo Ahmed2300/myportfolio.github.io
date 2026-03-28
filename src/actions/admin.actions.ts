@@ -1,7 +1,6 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
 const FIREBASE_URL = "https://wechat-9694d-default-rtdb.firebaseio.com/apps";
